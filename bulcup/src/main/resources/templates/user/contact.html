@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" txmlns:th="http://www.thymeleaf.org"><!-- Basic -->
+<head th:replace="/user/header.html :: head"></head>
+
+<body>
+	<header th:replace="/user/header.html :: header"></header>
+	<!-- Start All Pages -->
+	<div class="all-page-title page-breadcrumb">
+		<div class="container text-center">
+			<div class="row">
+				<div class="col-lg-12">
+					<h1>문의하기</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End All Pages -->
+
+	<!-- Start Contact -->
+	<div class="contact-box">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<form id="contactForm">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<input type="email" class="form-control" id="name" name="name" placeholder="email" required data-error="email을 입력해주세요">
+									<div class="help-block with-errors"></div>
+								</div>                                 
+							</div>
+							<div class="col-md-12">
+								<div class="form-group"> 
+									<textarea class="form-control" id="message" placeholder="Your Message" rows="4" data-error="Write your message" required></textarea>
+									<div class="help-block with-errors"></div>
+								</div>
+							</div>
+						</div>            
+						<div class="submit-button text-center">
+							<button class="btn btn-common" id="submit" type="submit">Send Message</button>
+							<div id="msgSubmit" class="h3 text-center hidden"></div> 
+							<div class="clearfix"></div> 
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End Contact -->
+	
+		<!-- Start Contact info -->
+	<div class="contact-imfo-box">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4 arrow-right">
+					<i class="fa fa-volume-control-phone"></i>
+					<div class="overflow-hidden">
+						<h4>문의처</h4>
+						<p class="lead">
+							+01 123-456-4590
+						</p>
+					</div>
+				</div>
+				<div class="col-md-4 arrow-right">
+					<i class="fa fa-envelope"></i>
+					<div class="overflow-hidden">
+						<h4>Email</h4>
+						<p class="lead">
+							bulcup3121@gmail.com
+						</p>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<i class="fa fa-map-marker"></i>
+					<div class="overflow-hidden">
+						<h4>Location</h4>
+						<p class="lead">
+							Kosmo Academy, Seoul, ROK
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End Contact info -->
+	
+	<!--Map-->
+	<div class="map-full"></div>
+	<!--End Map-->
+
+    <script>
+		$('.map-full').mapify({
+			points: [
+				{
+					lat: 40.7143528,
+					lng: -74.0059731,
+					marker: true,
+					title: 'Marker title',
+					infoWindow: 'Live Dinner Restaurant'
+				}
+			]
+		});	
+	</script>	
+	
+	<!--Footer-->
+    <footer class="footer-area bg-f" th:replace="/user/footer.html :: footer"></footer>
+    
+	<!-- ALL JS FILES -->
+    <!-- ALL PLUGINS -->
+    <div th:replace="/user/footer.html :: javascript"></div>
+    
+</body>
+</html>

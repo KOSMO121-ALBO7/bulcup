@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+
+<!-- =========================================================
+* Sneat - Bootstrap 5 HTML Admin Template - Pro | v1.0.0
+==============================================================
+
+* Product Page: https://themeselection.com/products/sneat-bootstrap-html-admin-template/
+* Created by: ThemeSelection
+* License: You must have a valid license purchased in order to legally use the theme for your project.
+* Copyright ThemeSelection (https://themeselection.com)
+
+=========================================================
+ -->
+<!-- beautify ignore:start -->
+<html
+  lang="en"
+  class="light-style layout-menu-fixed"
+  dir="ltr"
+  data-theme="theme-default"
+  data-assets-path="/manager/assets/"
+  data-template="vertical-menu-template-free"
+  txmlns:th="http://www.thymeleaf.org"
+>
+  <head th:fragment="head">
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
+    />
+
+    <title>BULCUP Manager</title>
+
+    <meta name="description" content="" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/manager/assets/img/favicon/favicon.ico" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Icons. Uncomment required icon fonts -->
+    <link rel="stylesheet" href="/manager/assets/vendor/fonts/boxicons.css" />
+
+    <!-- Core CSS -->
+    <link rel="stylesheet" href="/manager/assets/vendor/css/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="/manager/assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="/manager/assets/css/demo.css" />
+
+    <!-- Vendors CSS -->
+    <link rel="stylesheet" href="/manager/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+
+    <!-- Page CSS -->
+
+    <!-- Helpers -->
+    <script src="/manager/assets/vendor/js/helpers.js"></script>
+
+    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
+    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+    <script src="/manager/assets/js/config.js"></script>
+  </head>
+
+  <body>
+  	<div th:fragment="navbar">
+	        <!-- Layout wrapper -->
+    <div class="layout-wrapper layout-content-navbar">
+      <div class="layout-container">
+        <!-- Menu -->
+        <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+          <div class="app-brand demo">
+            <a href="/managermanager_index.html" class="app-brand-link">
+              <img src="/manager/assets/img/favicon/favicon.png"/>
+              <span class="app-brand-text demo menu-text fw-bolder ms-2">BULCUP</span>
+            </a>
+
+            <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
+              <i class="bx bx-chevron-left bx-sm align-middle"></i>
+            </a>
+          </div>
+
+          <div class="menu-inner-shadow"></div>
+
+          <ul class="menu-inner py-1">
+            <!-- Dashboard -->
+            <li class="menu-item active">
+              <a href="manager_index.html" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                <div data-i18n="Analytics">대시보드</div>
+              </a>
+            </li>
+
+            <!-- Layouts -->
+            <li class="menu-header small text-uppercase">
+              <span class="menu-header-text">정보 관리</span>
+            </li>
+            <li class="menu-item">
+              <a href="manager_nutrient.html" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-layout"></i>
+                <div data-i18n="Layouts">영양제 정보 관리</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="manager_blog.html" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-collection"></i>
+                <div data-i18n="Account Settings">영양 상식 관리</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="manager_question.html" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-dock-top"></i>
+                <div data-i18n="Account Settings">자가 진단 관리</div>
+              </a>
+            </li>
+            <!-- Forms & Tables -->
+            <li class="menu-header small text-uppercase"><span class="menu-header-text">고객 응대</span></li>
+              <li class="menu-item">
+                <a href="manager_contact.html" class="menu-link">
+                  <i class="menu-icon tf-icons bx bx-crown"></i>
+                  <div data-i18n="Misc">문의 처리</div>
+                </a>
+              </li>
+            </li>
+            <!-- Forms & Tables -->
+            <li class="menu-header small text-uppercase"><span class="menu-header-text">통계</span></li>
+              <li class="menu-item">
+                <a href="manager_chart_nutrient.html" class="menu-link">
+                  <i class="menu-icon tf-icons bx bx-cube-alt"></i>
+                  <div data-i18n="Misc">영양제 검색 통계</div>
+                </a>
+              </li>
+              <li class="menu-item">
+                <a href="manager_chart_site.html" class="menu-link">
+                  <i class="menu-icon tf-icons bx bx-copy"></i>
+                  <div data-i18n="Extended UI">사이트 이용 통계</div>
+                </a>
+              </li>
+            </li>
+            <!-- Forms & Tables -->
+            <li class="menu-header small text-uppercase"><span class="menu-header-text">관리자 관리</span></li>
+              <li class="menu-item">
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                  <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>
+                  <div data-i18n="Authentications">관리자 계정 관리</div>
+                </a>
+                <ul class="menu-sub">
+                  <li class="menu-item">
+                    <a href="/manager/manager_account.html" class="menu-link" target="_blank">
+                      <div data-i18n="Basic">관리자 계정</div>
+                    </a>
+                  </li>
+                  <li class="menu-item">
+                    <a href="/manager/manager_registration.html" class="menu-link" target="_blank">
+                      <div data-i18n="Basic">관리자 등록 페이지</div>
+                    </a>
+                  </li>
+                  <li class="menu-item">
+                    <a href="/manager/manager_manage.html" class="menu-link" target="_blank">
+                      <div data-i18n="Basic">관리자 권한 변경</div>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            </li>
+          </ul>
+        </aside>
+        <!-- / Menu -->
+        <!-- Navbar -->
+        <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
+          <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+            <i class="bx bx-menu bx-sm"></i>
+          </a>
+        </div>
+        <!-- / Navbar -->
+	    </div>
+	  </div>
+	</div>
+	      <!-- Core JS -->
+    <!-- build:js assets/vendor/js/core.js -->
+    <script src="/manager/assets/vendor/libs/jquery/jquery.js"></script>
+    <script src="/manager/assets/vendor/libs/popper/popper.js"></script>
+    <script src="/manager/assets/vendor/js/bootstrap.js"></script>
+    <script src="/manager/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+
+    <script src="/manager/assets/vendor/js/menu.js"></script>
+    <!-- endbuild -->
+
+    <!-- Vendors JS -->
+    <script src="/manager/assets/vendor/libs/apex-charts/apexcharts.js"></script>
+
+    <!-- Main JS -->
+    <script src="/manager/assets/js/main.js"></script>
+
+    <!-- Page JS -->
+    <script src="/manager/assets/js/dashboards-analytics.js"></script>
+
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+  </body>
+</html>

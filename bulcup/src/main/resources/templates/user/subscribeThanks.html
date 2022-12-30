@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" txmlns:th="http://www.thymeleaf.org"><!-- Basic -->
+<head th:replace="/user/header.html :: head"></head>
+
+<body>
+	<!-- Start header -->
+	<header th:replace="/user/header.html :: header"></header>
+	<!-- Start Contact -->
+	<div class="contact-box">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="heading-title text-center">
+					</br>
+					</br>
+					</br>
+					</br>
+					</br>
+					</br>
+					</br>
+					</br>
+					<h2>구독해주셔서 감사합니다.</h2>
+				</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="submit-button text-center">
+						<a href="index.html"><button class="btn btn-common" id="submit" type="submit">홈페이지</button></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End Contact -->
+	<!--Footer-->
+    <footer class="footer-area bg-f" th:replace="/user/footer.html :: footer"></footer>
+	
+	<!-- ALL JS FILES -->
+    <!-- ALL PLUGINS -->
+    <div th:replace="/user/footer.html :: javascript"></div>
+    
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" txmlns:th="http://www.thymeleaf.org"><!-- Basic -->
+<head th:replace="/user/header.html :: head"></head>
+
+<body>
+	<header th:replace="/user/header.html :: header"></header>	
+	<!-- Start All Pages -->
+	<div class="all-page-title page-breadcrumb">
+		<div class="container text-center">
+			<div class="row">
+				<div class="col-lg-12">
+					<h1>영양 정보</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End All Pages -->
+	
+	<!-- Start blog -->
+	<div class="blog-box">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="heading-title text-center">
+						<h2>가장 많이 나타난 단어</h2>
+						<p>여기에는 키바나 그래프를 넣고 시프다.</p>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-4 col-md-6 col-12">
+					<div class="blog-box-inner">
+						<div class="blog-img-box">
+							<img class="img-fluid" src="/user/images/blog-img-01.jpg" alt="">
+						</div>
+						<div class="blog-detail">
+							<h4>Duis feugiat neque sed dolor cursus.</h4>
+							<ul>
+								<li><span>Post by Admin</span></li>
+								<li>|</li>
+								<li><span>27 February 2018</span></li>
+							</ul>
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque auctor suscipit feugiat. Ut at pellentesque ante, sed convallis arcu. Nullam facilisis, eros in eleifend luctus, odio ante sodales augue, eget lacinia lectus erat et sem. </p>
+							<p>Sed semper orci sit amet porta placerat. Etiam quis finibus eros. </p>
+							<a class="btn btn-lg btn-circle btn-outline-new-white" href="#">Read More</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6 col-12">
+					<div class="blog-box-inner">
+						<div class="blog-img-box">
+							<img class="img-fluid" src="/user/images/blog-img-02.jpg" alt="">
+						</div>
+						<div class="blog-detail">
+							<h4>Duis feugiat neque sed dolor cursus.</h4>
+							<ul>
+								<li><span>Post by Admin</span></li>
+								<li>|</li>
+								<li><span>27 February 2018</span></li>
+							</ul>
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque auctor suscipit feugiat. Ut at pellentesque ante, sed convallis arcu. Nullam facilisis, eros in eleifend luctus, odio ante sodales augue, eget lacinia lectus erat et sem. </p>
+							<p>Sed semper orci sit amet porta placerat. Etiam quis finibus eros. </p>
+							<a class="btn btn-lg btn-circle btn-outline-new-white" href="#">Read More</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6 col-12">
+					<div class="blog-box-inner">
+						<div class="blog-img-box">
+							<img class="img-fluid" src="/user/images/blog-img-03.jpg" alt="">
+						</div>
+						<div class="blog-detail">
+							<h4>Duis feugiat neque sed dolor cursus.</h4>
+							<ul>
+								<li><span>Post by Admin</span></li>
+								<li>|</li>
+								<li><span>27 February 2018</span></li>
+							</ul>
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque auctor suscipit feugiat. Ut at pellentesque ante, sed convallis arcu. Nullam facilisis, eros in eleifend luctus, odio ante sodales augue, eget lacinia lectus erat et sem. </p>
+							<p>Sed semper orci sit amet porta placerat. Etiam quis finibus eros. </p>
+							<a class="btn btn-lg btn-circle btn-outline-new-white" href="#">Read More</a>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+	<!-- End blog -->
+	<!--Footer-->
+    <footer class="footer-area bg-f" th:replace="/user/footer.html :: footer"></footer>
+	
+	<!-- ALL JS FILES -->
+    <!-- ALL PLUGINS -->
+    <div th:replace="/user/footer.html :: javascript"></div>
+    
+</body>
+</html>
