@@ -26,7 +26,8 @@
   <body>
         <!-- Layout container -->
         <div class="layout-page">   
-        <div th:replace="/manager/manager_header :: navbar"></div>   
+		<a th:if="${session.loginAuthority}">        
+		  <div th:replace="/manager/manager_header :: navbar"></div>   
           <!-- Content wrapper -->
           <div class="content-wrapper">
             <!-- Content -->
@@ -148,6 +149,7 @@
             <div class="content-backdrop fade"></div>
           </div>
           <!-- Content wrapper -->
+        </a>
         </div>
         <!-- / Layout page -->
       </div>

@@ -21,7 +21,7 @@
   data-template="vertical-menu-template-free"
   txmlns:th="http://www.thymeleaf.org"
 >
-  <head th:fragment="head">
+  <head th:fragment="head"> 
     <meta charset="utf-8" />
     <meta
       name="viewport"
@@ -33,7 +33,7 @@
     <meta name="description" content="" />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="/manager/assets/img/favicon/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="/manager/assets/img/favicon/favicon.png" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -54,6 +54,8 @@
     <!-- Vendors CSS -->
     <link rel="stylesheet" href="/manager/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
 
+    <link rel="stylesheet" href="/manager/assets/vendor/libs/apex-charts/apex-charts.css" />
+
     <!-- Page CSS -->
 
     <!-- Helpers -->
@@ -65,8 +67,10 @@
   </head>
 
   <body>
+	<div th:if = "${session.loginId != null}">
+		
   	<div th:fragment="navbar">
-	        <!-- Layout wrapper -->
+	<!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
       <div class="layout-container">
         <!-- Menu -->
@@ -86,7 +90,7 @@
 
           <ul class="menu-inner py-1">
             <!-- Dashboard -->
-            <li class="menu-item active">
+            <li class="menu-item">
               <a href="manager_index.html" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">대시보드</div>
@@ -165,6 +169,14 @@
                 </ul>
               </li>
             </li>
+            <!-- Forms & Tables -->
+            <li class="menu-header small text-uppercase"><span class="menu-header-text">관리자 로그인: </span><a th:text="${session.loginId}"></a></li>
+              <li class="menu-item">
+                <a href="logoutManager.do" class="menu-link">
+                  <i class="menu-icon tf-icons bx bx-cube-alt"></i>
+                  <div>로그아웃</div>
+                </a>
+              </li>
           </ul>
         </aside>
         <!-- / Menu -->
@@ -178,6 +190,9 @@
 	    </div>
 	  </div>
 	</div>
+	
+	</div>
+
 	      <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
     <script src="/manager/assets/vendor/libs/jquery/jquery.js"></script>

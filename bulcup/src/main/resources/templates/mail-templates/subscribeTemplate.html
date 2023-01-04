@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" txmlns:th="http://www.thymeleaf.org">
+<!-- Basic -->
+
+<head th:replace="/user/header.html :: head"></head>
+
+<body class="main full-padding" style="margin: 0;padding: 0;-webkit-text-size-adjust: 100%;">
+	<table class="wrapper"
+		style="border-collapse: collapse;table-layout: fixed;min-width: 320px;width: 100%;background-color: #eff0ed;"
+		cellpadding="0" cellspacing="0" role="presentation">
+		<tbody>
+			<tr>
+				<td>
+					<div role="banner">
+						<div class="preheader"
+							style="Margin: 0 auto;max-width: 560px;min-width: 280px; width: 280px;width: calc(28000% - 167440px);">
+							<div style="border-collapse: collapse;display: table;width: 100%;">
+								<div class="snippet"
+									style="display: table-cell;Float: left;font-size: 12px;line-height: 19px;max-width: 280px;min-width: 140px; width: 140px;width: calc(14000% - 78120px);padding: 10px 0 5px 0;color: #968f8b;font-family: Open Sans,sans-serif;">
+								</div>
+								<div class="webversion"
+									style="display: table-cell;Float: left;font-size: 12px;line-height: 19px;max-width: 280px;min-width: 139px; width: 139px;width: calc(14100% - 78680px);padding: 10px 0 5px 0;text-align: right;color: #968f8b;font-family: Open Sans,sans-serif;">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div>
+						<div style="background-color: #ffffff;">
+							<div class="layout one-col stack"
+								style="Margin: 0 auto;max-width: 600px;min-width: 320px; width: 320px;width: calc(28000% - 167400px);overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;">
+								<div class="layout__inner"
+									style="border-collapse: collapse;display: table;width: 100%;">
+									<div class="column"
+										style="text-align: left;color: #808285;font-size: 14px;line-height: 21px;font-family: Merriweather,Georgia,serif;">
+
+										<div style="Margin-left: 20px;Margin-right: 20px;Margin-top: 24px;">
+										</div>
+
+										<div style="Margin-left: 20px;Margin-right: 20px;">
+										</div>
+
+										<div style="font-size: 12px;font-style: normal;font-weight: normal;line-height: 19px;"
+											align="center">
+											<img style="border: 0;display: block;height: auto;width: 100%;max-width: 900px;"
+												alt="" width="600" th:src="${imgurl}" />
+										</div>
+
+										<div style="Margin-left: 20px;Margin-right: 20px;">
+											<h1 th:text="${title}"
+												style="Margin-top: 0;Margin-bottom: 0;font-style: normal;font-weight: normal;color: #99a389;font-size: 22px;line-height: 31px;text-align: center;">
+											</h1>
+										</div>
+
+										<div style="Margin-left: 20px;Margin-right: 20px;Margin-top: 20px;">
+										</div>
+
+										<div style="Margin-left: 20px;Margin-right: 20px;">
+											<p style="Margin-top: 0;Margin-bottom: 20px;text-align: center;"
+												th:text="${content}"></p>
+										</div>
+										<div style="Margin-left: 20px;Margin-right: 20px;Margin-bottom: 24px;">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="layout two-col has-gutter stack"
+							style="Margin: 0 auto;max-width: 600px;min-width: 320px; width: 320px;width: calc(28000% - 167400px);overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;">
+							<div class="layout__inner" style="border-collapse: collapse;display: table;width: 100%;">
+								<div class="column"
+									style="max-width: 320px;min-width: 290px; width: 320px;width: calc(18290px - 3000%);Float: left;">
+									<table class="column__background"
+										style="border-collapse: collapse;table-layout: fixed;background-color: #ffffff;"
+										cellpadding="0" cellspacing="0" width="100%" role="presentation">
+										<tbody>
+											<tr>
+												<td>
+													<a style="text-align: center;color: rgb(128, 0, 255);font-size: 14px;line-height: 21px;font-family: Merriweather,Georgia,serif;"
+														th:href="${url}">원본 링크</a>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								<div class="gutter" style="Float: left;width: 20px;">&nbsp;</div>
+								<div class="column"
+									style="max-width: 320px;min-width: 290px; width: 320px;width: calc(18290px - 3000%);Float: left;">
+									<table class="column__background"
+										style="border-collapse: collapse;table-layout: fixed;background-color: #ffffff;"
+										cellpadding="0" cellspacing="0" width="100%" role="presentation">
+										<tbody>
+											<tr>
+												<td>
+
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div role="contentinfo">
+						<div style="line-height:20px;font-size:20px;" id="footer-top-spacing">&nbsp;</div>
+						<div class="layout email-flexible-footer email-footer"
+							style="Margin: 0 auto;max-width: 600px;min-width: 320px; width: 320px;width: calc(28000% - 167400px);overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;"
+							id="footer-content">
+						</div>
+					</div>
+					<table style="border-collapse: collapse;table-layout: fixed;width: 100%;" cellpadding="0"
+						cellspacing="0">
+						<tbody>
+							<tr>
+								<td>
+									<div class="column js-footer-additional-info"
+										style="text-align: center;font-size: 12px;line-height: 19px;color: #968f8b;font-family: Open Sans,sans-serif;display: inline;width: 100%;"
+										align="center">
+										<div
+											style="margin-left: 0;margin-right: 0;Margin-top: 10px;Margin-bottom: 10px;">
+											<div class="email-footer__additional-info"
+												style="font-size: 12px;line-height: 19px;margin-bottom: 15px;">
+												<a href="#"><span>
+														<preferences style="text-decoration: underline;" lang="en">
+															bulcup</preferences>&nbsp;&nbsp;|&nbsp;&nbsp;
+													</span></a><a href="#">
+													<unsubscribe style="text-decoration: underline;">Unsubscribe
+													</unsubscribe>
+												</a>
+											</div>
+										</div>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<div style="line-height:40px;font-size:40px;" id="footer-bottom-spacing">&nbsp;</div>
+					</div>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+
+</html>

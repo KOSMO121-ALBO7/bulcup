@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+
+<!-- =========================================================
+* Sneat - Bootstrap 5 HTML Admin Template - Pro | v1.0.0
+==============================================================
+
+* Product Page: https://themeselection.com/products/sneat-bootstrap-html-admin-template/
+* Created by: ThemeSelection
+* License: You must have a valid license purchased in order to legally use the theme for your project.
+* Copyright ThemeSelection (https://themeselection.com)
+
+=========================================================
+ -->
+<!-- beautify ignore:start -->
+<html
+  lang="en"
+  class="light-style customizer-hide"
+  dir="ltr"
+  data-theme="theme-default"
+  data-assets-path="/manager/assets/"
+  data-template="vertical-menu-template-free"
+  txmlns:th="http://www.thymeleaf.org"
+>
+
+  <head th:replace="/manager/manager_header :: head"></head>
+  <body>
+	  
+    <!-- Content -->
+    <div class="container-xxl col-md-6">
+      <div class="authentication-wrapper authentication-basic container-p-y">
+        <div class="authentication-inner">
+          <!-- Register -->
+          <div class="card">
+            <div class="card-body">
+              <!-- Logo -->
+              <div class="app-brand justify-content-center">
+                <img src="/manager/assets/img/favicon/favicon.png">
+              </div>
+              <!-- /Logo -->
+
+              <h4 class="mb-2"><string>로그아웃 되었습니다.</string></h4>
+              <p class="mb-4">관리자 로그인을 하십시오.</p>
+
+              <form id="loginManager" class="mb-3" action="loginManager.do" method="GET">
+                <div class="mb-3">
+                  <button class="btn btn-primary d-grid w-100" type="submit">로그인</button>
+                </div>
+              </form>
+
+            </div>
+          </div>
+          <!-- /Register -->
+        </div>
+      </div>
+    </div>
+
+    <!-- / Content -->
+
+
+    <!-- Core JS -->
+    <!-- build:js assets/vendor/js/core.js -->
+    <!-- Vendors JS -->
+    <!-- Main JS -->
+    <!-- Page JS -->
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <footer th:replace="/manager/manager_footer :: javascript"></footer>
+  </body>
+</html>

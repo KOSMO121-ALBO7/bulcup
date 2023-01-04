@@ -8,16 +8,23 @@
 	<!-- Start Contact -->
 	<div class="contact-box">
 		<div class="container">
+		<nav class="survey-test-header">
+		<br></br>
+		<ul class="heading-title text-center">
+		
+		<li data="기본정보" class="step-list"><h3>기본정보</h3>
+		</li><li data="증상/불편" class="step-list"><h3>증상/불편</h3>
+		</li><li data="생활 습관" class="step-list"><h3>생활 습관</h3></li>
+		<li data="기타" class="step-list"><h3>기타</h3></li></ul></nav>
+			
+			<div class="survey-progress"><div id="survey-progress-rate" style="width: 18%;"></div></div>
 			<div class="row">
-				<div class="col-lg-12">
-					<div class="heading-title text-center">
-						</br>
-						</br>
-						</br>
-						</br>
-						</br>
-						<h2>사용자입력 정보</h2>
-					</div>
+				<div class="col-lg-12">			
+						<br/><br/>
+						<h5>질문 1</h5>
+						
+						<h2>사용자 정보를 입력해주세요.</h2>
+						<hr/>
 				</div>
 			</div>
 			<div class="row">
@@ -62,11 +69,12 @@
 	</div>
 	<!-- End Contact -->
 	<!--Footer-->
-    <footer class="footer-area bg-f" th:replace="/user/footer.html :: footer"></footer>
+   
 	
 	<!-- ALL JS FILES -->
     <!-- ALL PLUGINS -->
     <div th:replace="/user/footer.html :: javascript"></div>
+ 
     
 </body>
 </html>

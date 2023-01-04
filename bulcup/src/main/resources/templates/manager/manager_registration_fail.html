@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+
+<!-- =========================================================
+* Sneat - Bootstrap 5 HTML Admin Template - Pro | v1.0.0
+==============================================================
+
+* Product Page: https://themeselection.com/products/sneat-bootstrap-html-admin-template/
+* Created by: ThemeSelection
+* License: You must have a valid license purchased in order to legally use the theme for your project.
+* Copyright ThemeSelection (https://themeselection.com)
+
+=========================================================
+ -->
+<!-- beautify ignore:start -->
+<html
+  lang="en"
+  class="light-style customizer-hide"
+  dir="ltr"
+  data-theme="theme-default"
+  data-assets-path="/manager/assets/"
+  data-template="vertical-menu-template-free"
+  txmlns:th="http://www.thymeleaf.org"
+>
+
+  <head th:replace="/manager/manager_header :: head"></head>
+  <body>
+	  
+    <!-- Content -->
+    <div class="container-xxl col-md-6">
+      <div class="authentication-wrapper authentication-basic container-p-y">
+        <div class="authentication-inner">
+          <!-- Register -->
+          <div class="card">
+            <div class="card-body">
+              <!-- Logo -->
+              <div class="app-brand justify-content-center">
+                <img src="/manager/assets/img/favicon/favicon.png">
+              </div>
+              <!-- /Logo -->
+
+              <h4 class="mb-2"><string>관리자 등록에 실패 했습니다.</string></h4>
+              <p class="mb-4">다시 관리자 등록을 하십시오.</p>
+                <div class="mb-3">
+                  <a href="manager_registration.html"><button class="btn btn-primary d-grid w-100" type="submit">관리자 등록하기</button></a>
+                </div>
+            </div>
+          </div>
+          <!-- /Register -->
+        </div>
+      </div>
+    </div>
+    <!-- / Content -->
+
+
+    <!-- Core JS -->
+    <!-- build:js assets/vendor/js/core.js -->
+    <!-- Vendors JS -->
+    <!-- Main JS -->
+    <!-- Page JS -->
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <footer th:replace="/manager/manager_footer :: javascript"></footer>
+  </body>
+</html>

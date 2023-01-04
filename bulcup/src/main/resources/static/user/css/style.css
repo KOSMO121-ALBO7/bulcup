@@ -20,7 +20,7 @@
 body {
     color: #666666;
     font-size: 15px;
-    font-family: 'Rubik', sans-serif;
+    font-family: 'GmarketSansMedium';
     line-height: 1.80857;
 }
 
@@ -36,12 +36,14 @@ a {
     transition: all .3s ease-in-out;
 }
 
+
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
+	font-family:'GmarketSansMedium';
     letter-spacing: 0;
     font-weight: normal;
     position: relative;
@@ -53,7 +55,8 @@ h6 {
 }
 
 h1 {
-    font-size: 24px
+    font-size: 25px;
+    font-weight: bold;
 }
 
 h2 {
@@ -74,6 +77,19 @@ h5 {
 
 h6 {
     font-size: 13px
+}
+
+h7{
+	 font-size: 29px;
+    font-weight: bold;
+    color: #212121;
+}
+h0{
+	font-size: 13px;
+}
+dl{
+	margin-top: 20px;
+    font-size: 14px;
 }
 
 h1 a,
@@ -102,6 +118,11 @@ a {
     outline: none;
 }
 
+.data{
+	position: absolute;
+    top: 0;
+    right: 40px;
+}
 a,
 .btn {
     text-decoration: none !important;
@@ -165,7 +186,7 @@ button:focus{
 	padding: 15px 0px;
 	position: fixed;
 	width: 100%;
-	border-radius: 0px 0px 40px 40px;
+	border-radius: 0px 0px 0px 0px;
 	transition: height .3s ease-out, background .3s ease-out, box-shadow .3s ease-out;
 	-webkit-transform: translate3d(0, 0, 0);
 	transform: translate3d(0, 0, 0);
@@ -217,7 +238,7 @@ button:focus{
 -------------------------------------------------------------------*/
 
 .cover-slides{
-	height: 100vh;
+	height: 80vh;
 }
 .slides-navigation a {
 	background: #335E4A;
@@ -297,7 +318,7 @@ button:focus{
 }
 
 .cover-slides h1{
-	font-family: 'Rubik', sans-serif;
+	font-family: 'GmarketSansMedium';
 	font-weight: 500;
 	font-size: 64px;
 	color: #F7F7F7;
@@ -325,9 +346,10 @@ button:focus{
 }
 .inner-column{
 	text-align: left;
+	margin-bottom: 10px;
 }
 .inner-column h1{
-	font-family: 'Rubik', sans-serif;
+	font-family: 'GmarketSansMedium';
 	font-size: 30px;
 	color: #010101;
 	font-weight: 500;
@@ -368,7 +390,7 @@ button:focus{
     font-weight: 300;
     line-height: 44px;
     color: #F7F7F7;
-	font-family: 'Rubik', sans-serif;
+	font-family: 'GmarketSansMedium';
 	margin-bottom: 20px;
 }
 
@@ -392,7 +414,7 @@ button:focus{
 .heading-title h2{
 	color: #010101;
 	font-size: 28px;
-	font-family: 'Rubik', sans-serif;
+	font-family: 'GmarketSansMedium';
 	font-weight: 500;
 }
 .heading-title p{
@@ -438,7 +460,7 @@ button:focus{
 	color: #F7F7F7;
 	font-size: 16px;
 	font-weight: 500;
-	font-family: 'Rubik', sans-serif;
+	font-family: 'GmarketSansMedium';
 }
 .why-text p{
 	color: #F7F7F7;
@@ -770,13 +792,13 @@ button:focus{
 -------------------------------------------------------------------*/
 
 .page-breadcrumb {
-    padding: 200px 0 100px;
+    padding: 10px 0 100px;
     background: url(../images/all-bg.jpg) no-repeat;
     background-attachment: fixed;
     background-size: cover;
     background-position: 0 0;
     position: relative;
-	border-radius: 0px 0px 40px 40px;
+	
 }
 .all-page-title .container{
 	position: relative;
@@ -795,7 +817,7 @@ button:focus{
 .all-page-title h1{
 	font-size: 38px;
 	color: #F7F7F7;
-	font-family: 'Rubik', sans-serif;
+	font-family: 'GmarketSansMedium';
 	padding: 0px;
 	font-weight: 500;
 }
@@ -931,6 +953,12 @@ button:focus{
 	border-radius: 20px;
 	min-height: 50px;
 }
+.startform-control{
+	border-radius: 20px;
+	min-height: 50px;
+	border: 1px solid #335E4A;
+	box-shadow: none;
+}
 .form-control:focus{
 	border: 1px solid #335E4A;
 	box-shadow: none;
@@ -953,7 +981,7 @@ button:focus{
 }
 .blog-box{
 	padding: 70px 0px;
-    background-color: #F7F7F7;
+    
 }
 .blog-box-inner{
 	position: relative;
@@ -1216,14 +1244,18 @@ blockquote {
 }
 .blog-search-form {
     position: relative;
-    padding-bottom: 30px;
-    margin-bottom: 20px;
+    padding-bottom: 50px;
+    margin-bottom: 10px;
+    width: 900px;
+	height: 40px;
+	margin-left: 60px;
+	box-shadow:  rgba(0,0,0,0.7);
 }
 .blog-search-form input {
     width: 100%;
-    min-height: 40px;
-    border: 2px solid #444444;
-    padding: 5px 40px 5px 10px;
+    min-height: 55px;
+    border: 2px solid #c0c0c0;
+    padding: 10px 30px 5px 20px;
     font-size: 15px;
     color: #444444;
 	border-radius: 20px;
@@ -1234,7 +1266,7 @@ blockquote {
     background: none;
     border: none;
     font-size: 20px;
-    min-height: 40px;
+    min-height: 55px;
     padding: 0px 15px;
 }
 
@@ -1331,6 +1363,7 @@ blockquote {
 .contact-box{
 	padding: 70px 0px;
     background-color: #F7F7F7;
+    
 }
 
 .map-full {
@@ -1396,9 +1429,8 @@ blockquote {
 
 
 .product-list{
-    width: 735px;
-    margin-left: auto;
-    margin-right: auto;
+    width: 1200px;
+    margin-top:20px; 
 }
 .products h3{
     font-size: 24px;
@@ -1411,12 +1443,11 @@ blockquote {
 .product{
     display: block;
     width: 225px;
-    text-align: center;
     text-decoration:none;
     color: black;
     float:left;
-    margin-left: 10px;
-    margin-right: 10px;
+    margin-left: 0px;
+    margin-right: 20px;
     margin-bottom: 30px;
 }
 
@@ -1427,14 +1458,220 @@ blockquote {
 
 /* end of 부위별 영양제 추천 css*/
 
-.blog-box{
-    background: linear-gradient(pink,blanchedalmond);
-    
-}
+
 
 .bb{
     width: 225px;
     text-align: center;
     color: black;
     float:left;
+}
+
+.main1{
+	 margin-left: 350px;
+	 
+}
+
+@font-face {
+    font-family: 'SDSamliphopangche_Outline';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/SDSamliphopangche_Outline.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.ms-img {
+	width: 420px;
+    height: 240px;
+    object-fit: fill;
+    margin-right: 30px;
+     box-shadow: 0 4px 2px -2px rgba(0,0,0,0.7);
+}
+
+.ms-main5{
+	margin-left: 30px;
+}
+
+.msinner-column{
+	text-align: left;
+	margin-bottom: 30px;
+}
+
+.survey-test-header {
+	margin-top:30px;
+    height: 91px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.step-list-wrap{
+	list-style:disc;
+    margin:0;
+    padding:0;
+    margin-left: 370px;
+}
+
+.step-list{
+	margin-left: 20px;
+	margin-right: 45px;
+    padding: 0 0 0 0;
+    border : 0;
+    float: left;
+}
+
+.survey-progress{
+	height: 4px;
+    background-color: #eee;
+}
+
+.dis-checkbox {
+	margin-right: 10px;
+	display: noen;
+	accent-color:#335E4A;
+
+}
+
+.hc{
+	float: left;
+}
+
+.see-text{
+	padding-top: 5px;
+	margin-left: 10px;
+}
+
+.col-lg-4 col-md-6 special-grid drinks{
+	margin-left: 30px;
+	-webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    border: 6px;
+}
+	
+	
+	
+.con-contactForm {
+    position: relative;
+    padding-bottom: 50px;
+    margin-top: 50px;
+    margin-bottom: 10px;
+    width: 900px;
+	height: 40px;
+	margin-left: 60px;
+	box-shadow:  rgba(0,0,0,0.7);
+}
+.con-contactForm input {
+    width: 100%;
+    min-height: 55px;
+    border: 2px solid #c0c0c0;
+    padding: 10px 30px 5px 20px;
+    font-size: 15px;
+    color: #444444;
+	border-radius: 20px;
+	min-height: 50px;
+}
+
+.con-contactForm input:focus{
+	border: 1px solid #335E4A;
+	box-shadow: none;
+	color: #2a2a2a;
+    opacity: 1;
+}
+
+
+.contact-mbox{
+	padding: 70px 0px;
+    background-color: #F7F7F7;
+    margin-top: 50px;
+    
+    
+}
+
+
+.dropdown-label{
+  font-size : 12px;
+  margin : 10px;
+  font-weight : bold;
+  color : rgb(50, 50, 50);
+}
+
+.dropdown{
+  position : relative;
+  display : inline-block;
+}
+
+.dropbtn_icon{
+  font-family : 'GmarketSansMedium';
+}
+.dropbtn{
+  display : block;
+  border : 2px solid rgb(94, 94, 94);
+  border-radius : 4px;
+  background-color: #fcfcfc;
+  font-weight: 400;
+  color : rgb(124, 124, 124);
+  padding : 12px;
+  width :240px;
+  text-align: left;
+  cursor : pointer;
+  font-size : 12px;
+  z-index :1;
+  position : relative;
+}
+.dropdown-content{
+  display : none;
+  font-weight: 400;
+  background-color: #fcfcfc;
+  min-width : 240px;
+  border-radius: 8px;
+  height : 160px;
+  overflow : scroll;
+  box-shadow: 0px 0px 10px 3px rgba(190, 190, 190, 0.6);
+}
+.dropdown-content::-webkit-scrollbar{
+  width : 5px;
+  height : 10px;
+}
+.dropdown-content::-webkit-scrollbar-thumb{
+  border-radius : 2px;
+  background-color :rgb(194, 194, 194)
+}
+
+.dropdown-content div{
+  display : block;
+  text-decoration : none;
+  color : rgb(37, 37, 37);
+  font-size: 12px;
+  padding : 12px 20px;
+}
+.dropdown-content div:hover{
+  background-color: rgb(226, 226, 226);
+}
+
+.dropdown-content.show{
+  display : block;
+}
+
+.reg {
+			font-size: 14px;
+			width: 110px;
+			color: #390;
+			font-weight: bold;
+			float: left;
+			text-align: right;
+			margin-right: 10px;
+		}
+		
+.blog-header{
+	background-color: #F7F7F7;
+	padding-top: 10px;
+	padding-bottom: 10px;
 }

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bulcup.dao.ManagerDao">	
+	<!-- INSERT -->
+	<insert id="insertManager" parameterType="ManagerVO">
+		INSERT INTO MANAGER(id, password, tel, email, authority)
+		 VALUES(#{id}, #{password}, #{tel}, #{email}, 'emp')
+	</insert>
+
+	<!-- SELECT -->
+	<select id="selectManagerByIdAndPw" parameterType="ManagerVO" resultType="ManagerVO">
+		SELECT * FROM MANAGER 
+		WHERE id = #{id} AND password = #{password}
+	</select>
+	<select id="getManagerList" resultType="ManagerVO">
+		SELECT * FROM MANAGER
+	</select>
+	<select id="getContactList" resultType="ContactVO">
+		SELECT * FROM CONTACT
+		WHERE ANSWER IS NULL
+	</select>
+	<select id="getFinishedContactList" resultType="ContactVO">
+		SELECT * FROM CONTACT
+		WHERE ANSWER IS NOT NULL
+	</select>
+	
+	<!-- UPDATE -->
+	<update id="updateManager" parameterType="ManagerVO">
+		UPDATE MANAGER 
+		SET password=#{password}, tel=#{tel}, email=#{email}, authority=#{authority}
+		WHERE id = #{id}
+	</update>
+	<update id="updateContact" parameterType="ContactVO">
+		UPDATE CONTACT
+		SET answer = #{answer}, answer_date=sysdate(), manager_id=#{manager_id}
+		WHERE id = #{id}
+	</update>
+	
+	<!--DELETE -->
+	<delete id="deleteManagerById" parameterType="ManagerVO">
+		DELETE FROM MANAGER 
+		WHERE id = #{id}
+	</delete>
+	<delete id="deleteContact" parameterType="ContactVO">
+		DELETE FROM CONTACT 
+		WHERE id = #{id}
+	</delete>
+	
+	<select id="getSubscribeList" resultType="SubscribeVO">
+		SELECT * FROM subscribe
+	</select>
+</mapper>

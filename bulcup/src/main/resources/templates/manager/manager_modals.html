@@ -602,7 +602,7 @@
                           <div class="modal-dialog" role="document">
                             <div class="modal-content">
                               <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel1">Modal title</h5>
+                                <h5 class="modal-title" id="exampleModalLabel1">관리자 권한 수정</h5>
                                 <button
                                   type="button"
                                   class="btn-close"
@@ -613,26 +613,66 @@
                               <div class="modal-body">
                                 <div class="row">
                                   <div class="col mb-3">
-                                    <label for="nameBasic" class="form-label">Name</label>
-                                    <input type="text" id="nameBasic" class="form-control" placeholder="Enter Name" />
+                                    <label for="nameBasic" class="form-label">id</label>
+                                    <input type="text" id="nameBasic" class="form-control" placeholder="아이디" />
                                   </div>
                                 </div>
-                                <div class="row g-2">
-                                  <div class="col mb-0">
-                                    <label for="emailBasic" class="form-label">Email</label>
-                                    <input type="text" id="emailBasic" class="form-control" placeholder="xxxx@xxx.xx" />
-                                  </div>
-                                  <div class="col mb-0">
-                                    <label for="dobBasic" class="form-label">DOB</label>
-                                    <input type="text" id="dobBasic" class="form-control" placeholder="DD / MM / YY" />
+                                <div class="row">
+                                  <div class="col mb-3">
+                                    <label for="nameBasic" class="form-label">password</label>
+                                    <input type="text" id="nameBasic" class="form-control" placeholder="비밀번호를 입력하세요" />
                                   </div>
                                 </div>
+                                 <div class="row">
+                                  <div class="col mb-3">
+                                    <label for="nameBasic" class="form-label">password check</label>
+                                    <input type="text" id="nameBasic" class="form-control" placeholder="비밀번호를 입력하세요" />
+                                  </div>
+                                </div>
+                                 <div class="row">
+                                  <div class="col mb-3">
+                                    <label for="nameBasic" class="form-label">tel</label>
+                                    <input type="text" id="nameBasic" class="form-control" placeholder="전화번호를 입력하세요" />
+                                  </div>
+                                </div>
+                                 <div class="row">
+                                  <div class="col mb-3">
+                                    <label for="nameBasic" class="form-label">email</label>
+                                    <input type="text" id="nameBasic" class="form-control" placeholder="이메일를 입력하세요" />
+                                  </div>
+                                </div>
+                                <div class="row">
+                                  <div class="col mb-3">
+                                    <label for="nameBasic" class="form-label">권한</label>
+                                     <button
+                                class="btn btn-sm btn-outline-primary dropdown-toggle"
+                                type="button"
+                                id="growthReportId"
+                                data-bs-toggle="dropdown"
+                                aria-haspopup="true"
+                                aria-expanded="false"
+                              >
+                                ㅇㅇㅇ
+                              </button>
+                              <select name="power">
+                              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="growthReportId">
+                                <a class="dropdown-item" href="javascript:void(0);"><option>admin</option></a>
+                                <a class="dropdown-item" href="javascript:void(0);">mgr</a>
+                                <a class="dropdown-item" href="javascript:void(0);">emp</a>
+                              </div>
+                              </select>
+                                  </div>
+                                </div>
+                                
+                                
+                                
+                               
                               </div>
                               <div class="modal-footer">
                                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-                                  Close
+                                  취소
                                 </button>
-                                <button type="button" class="btn btn-primary">Save changes</button>
+                                <button type="button" class="btn btn-primary">수정하기</button>
                               </div>
                             </div>
                           </div>
