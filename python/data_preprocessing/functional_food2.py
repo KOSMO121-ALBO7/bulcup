@@ -14,7 +14,7 @@ def create_functional_food_file():
     url=base_url+key+url_last
     with req.urlopen(url) as response:
         data=response.read().decode("utf-8-sig")
-        with open('./data/functional_food2.txt','x',encoding='utf-8-sig') as f:
+        with open('origin_data/functional_food2.txt', 'x', encoding='utf-8-sig') as f:
             f.write(data)
 
 
@@ -38,7 +38,7 @@ def functional_food_preprocessing(data_list):
             # 복수의'/' 모두 '/' 변경 후 공백 제거 및 양끝 '/' 제거
             data['IFTKN_ATNT_MATR_CN'] = re.sub(r'\s*/+\s*', '/', data['IFTKN_ATNT_MATR_CN']).strip().strip('/').strip()
             data['IFTKN_ATNT_MATR_CN'] = re.sub(r'\s+', ' ', data['IFTKN_ATNT_MATR_CN'])
-            # print(data['IFTKN_ATNT_MATR_CN'])
+            # print(origin_data['IFTKN_ATNT_MATR_CN'])
 
         # 주요 기능
         if data['PRIMARY_FNCLTY'] != '':
@@ -63,12 +63,12 @@ def functional_food_preprocessing(data_list):
             # 복수의'/' 모두 '/' 변경 후 공백 제거 및 양끝 '/' 제거
             data['PRIMARY_FNCLTY'] = re.sub(r'\s*/+\s*', '/', data['PRIMARY_FNCLTY']).strip().strip('/').strip()
             data['PRIMARY_FNCLTY'] = re.sub(r'\s+', ' ', data['PRIMARY_FNCLTY'])
-            # print(data['PRIMARY_FNCLTY'])
+            # print(origin_data['PRIMARY_FNCLTY'])
 
         # 원재료
         if data['PRIMARY_FNCLTY'] != '':
             data['RAWMTRL_NM'] = re.sub(r'[,]', '/', data['RAWMTRL_NM'])
-            # print(data['RAWMTRL_NM'])
+            # print(origin_data['RAWMTRL_NM'])
 
         # 섭취방법
         if data['PRIMARY_FNCLTY'] != '':
@@ -77,7 +77,7 @@ def functional_food_preprocessing(data_list):
             data['NTK_MTHD'] = re.sub(r'\n\s*[\u2460-\u24FF]+\s*', '/', data['NTK_MTHD'])
             data['NTK_MTHD'] = re.sub(r'\n\s*[1-9]\)\s*', '/', data['NTK_MTHD'])
             data['NTK_MTHD'] = re.sub('2. ', '/', data['NTK_MTHD'])
-            # print(data['NTK_MTHD'])
+            # print(origin_data['NTK_MTHD'])
 
         # 불필요한 열 삭제
         del (data['LCNS_NO'])
@@ -152,10 +152,10 @@ def insert_into_functional_food(functional_food_list):
 
 
 
-if not path.isfile('./data/functional_food2.txt'):
+if not path.isfile('origin_data/functional_food2.txt'):
     create_functional_food_file()
 
-with open('./data/functional_food2.txt','r',encoding='utf-8-sig') as f:
+with open('origin_data/functional_food2.txt', 'r', encoding='utf-8-sig') as f:
     str_data=f.read()
     json_data=json.loads(str_data)
     temp_list=json_data['I0030']['row']

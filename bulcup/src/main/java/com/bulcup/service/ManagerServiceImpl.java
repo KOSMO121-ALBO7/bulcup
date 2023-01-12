@@ -13,10 +13,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bulcup.Email;
+import com.bulcup.paging;
 import com.bulcup.dao.ManagerDao;
 import com.bulcup.domain.BlogVO;
+import com.bulcup.domain.CategoryVO;
 import com.bulcup.domain.ContactVO;
+import com.bulcup.domain.FunctionalFoodVO;
 import com.bulcup.domain.ManagerVO;
+import com.bulcup.domain.PaginationVO;
+import com.bulcup.domain.QuestionVO;
 import com.bulcup.domain.SubscribeVO;
 
 @Service
@@ -55,6 +60,10 @@ public class ManagerServiceImpl implements ManagerService {
 	public List<ManagerVO> getManagerList() {
 		return managerdao.getManagerList();
 	}
+	
+	public List<ManagerVO> getManagerListPg(PaginationVO pageVO) {
+		return managerdao.getManagerListPg(pageVO);
+	}
 
 	public List<ContactVO> getContactList() {
 		return managerdao.getContactList();
@@ -70,19 +79,27 @@ public class ManagerServiceImpl implements ManagerService {
 		try {
 			sc = new Scanner(new FileInputStream("src/main/java/com/bulcup/service/crawling/text.txt"), "UTF-8");
 			String line = sc.nextLine();// header 읽기
-			while (sc.hasNext()) {
+			int lineEnd = paging.pageNo * paging.pageSize;
+			int linePrint = 1;
+			int lineStart = (paging.pageNo - 1) * paging.pageSize;
+			System.out.println("STARTN END " + lineStart + " " + lineEnd);
+			while (sc.hasNext() && linePrint <= lineEnd) {
 				line = sc.nextLine();
-				// System.out.println(line);
-				String[] arr = line.split("::");
-				BlogVO vo = new BlogVO();
-				vo.setUrl(arr[0]);
-				vo.setTitle(arr[1]);
-				vo.setImg(arr[2]);
-				vo.setWriter(arr[3]);
-				vo.setTime(arr[4]);
-				vo.setContent(arr[5]);
-				vo.setClassify(arr[6]);
-				list.add(vo);
+				if (linePrint > lineStart) {
+					System.out.println("lineprint : " + linePrint);
+					// System.out.println(line);
+					String[] arr = line.split("::");
+					BlogVO vo = new BlogVO();
+					vo.setUrl(arr[0]);
+					vo.setTitle(arr[1]);
+					vo.setImg(arr[2]);
+					vo.setWriter(arr[3]);
+					vo.setTime(arr[4]);
+					vo.setContent(arr[5]);
+					vo.setClassify(arr[6]);
+					list.add(vo);
+				}
+				linePrint++;
 			} // while
 
 		} catch (Exception e) {
@@ -166,5 +183,52 @@ public class ManagerServiceImpl implements ManagerService {
 			email.Send("Bulcup 정기구독", subscribeVO.getEmail(), "/mail-templates/subscribeTemplate", values);
 		}
 	}
+
+	public int updateFunctionalFood(FunctionalFoodVO vo) {
+		return managerdao.updateFunctionalFood(vo);
+	}
+
+	public int deleteFuctionalFood(FunctionalFoodVO vo) {
+		return managerdao.deleteFuctionalFood(vo);
+	}
+
+	public List<FunctionalFoodVO> getFunctionalFoodListPg(PaginationVO pageVO) {
+		return managerdao.getFunctionalFoodListPg(pageVO);
+	}
+
+	// 페이징 용 크기 획득
+	public int getPageSize(String pageno) {
+		return managerdao.getPageSize(pageno);
+	}
+	
+	public int deleteQuetstion(QuestionVO vo) {
+		return managerdao.deleteQuestion(vo);
+	}
+
+	public int updateQuestion(QuestionVO vo) {
+		return managerdao.updateQuestion(vo);
+	}
+
+	public int insertQuestion(QuestionVO vo) {
+		return managerdao.insertQuestion(vo);
+	}
+	
+	public List<QuestionVO> getQuestionListPg(PaginationVO pageVO) {
+		return managerdao.getQuestionListPg(pageVO);
+	}
+
+	public int questionCount() {
+		return managerdao.questionCount();
+	}
+	
+	public int managerCount() {
+		return managerdao.managerCount();
+	}
+
+	public int foodCount() {
+		return managerdao.foodCount();
+	}
+	
+
 
 }

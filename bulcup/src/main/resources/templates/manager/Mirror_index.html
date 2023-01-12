@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" txmlns:th="http://www.thymeleaf.org">
+<!-- Basic -->
+
+<head th:replace="/user/header.html :: head"></head>
+
+<body>
+	<div class="demo-wrapper">
+		<div class="heatmap">
+			<block th:replace="/user/index.html :: index"></block>
+		</div>
+	</div>
+	<!-- ALL JS FILES -->
+	<!-- ALL PLUGINS -->
+	<div th:replace="/user/footer.html :: javascript"></div>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/heatmap.js/2.0.2/heatmap.js"></script>
+	<script>
+		var heatmapInstance = h337.create({
+			container: document.querySelector('.heatmap'),
+			radius: 90
+		});
+		$(document).ready(function () {
+			id_numbers = new Array();
+			$.ajax({
+				type: "GET",
+				url: "getCoordinates",
+				success: function (array) {
+					$.each(array, function (index, strValue) {
+						var strValueArray = strValue.split(",");
+						//console.log(strValueArray);
+						heatmapInstance.addData({
+							x: strValueArray[0],
+							y: strValueArray[1],
+							value: 1
+						});
+					});
+				}
+			});
+		});
+	</script>
+
+</body>
+
+</html>

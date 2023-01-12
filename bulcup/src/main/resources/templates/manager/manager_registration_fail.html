@@ -24,7 +24,7 @@
 
   <head th:replace="/manager/manager_header :: head"></head>
   <body>
-	  
+	  <a th:if="${session.loginAuthority} == admin" >
     <!-- Content -->
     <div class="container-xxl col-md-6">
       <div class="authentication-wrapper authentication-basic container-p-y">

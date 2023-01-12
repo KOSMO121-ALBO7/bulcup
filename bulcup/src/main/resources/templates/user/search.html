@@ -1,6 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" txmlns:th="http://www.thymeleaf.org"><!-- Basic -->
+<html lang="en" txmlns:th="http://www.thymeleaf.org">
+<!-- Basic -->
+
 <head th:replace="/user/header.html :: head"></head>
+
 
 <body>
 	<!-- Start header -->
@@ -18,273 +21,136 @@
 	<!-- End All Pages -->
 
 	<!-- Start Contact -->
-	
 	<div class="contact-box">
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-12">
-					<form id="contactForm"> 
-						<div class="blog-search-form">
-							<input name="search" placeholder="제품명이나 성분으로 검색" type="text">
-							<button class="search-btn">
-								<i class="fa fa-search" aria-hidden="true"></i>
-							</button>
+				<form th:action="@{search.html(condition=${condition},keyword=${keyword})}" style="width: 100%; display: inline;">
+					<div class="row">
+						<div class="col-lg-2">
+							<select th:name="condition" style="margin-top:2px; margin-left: 5px; 
+               padding: 15px 15px; width: 100%; border-radius: 20px; border:solid rgb(192, 192, 192) 2px;">
+								<option value="functional_food_name" th:selected="${condition} == 'functional_food_name'">제품명</option>
+								<option value="functionalities" th:selected="${condition} == 'functionalities'">기능성</option>
+								<option value="raw_material" th:selected="${condition} == 'raw_material'">원재료명</option>
+							</select>
 						</div>
-					</form>
-				</div>
-
-				<!-- Start Gallery -->
-				<div class="gallery-box">
-					<div class="container">
-						<div class="row inner-menu-box">
-							<div class="col-3">
-								<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-									<a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">전체</a>
-									<a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">눈 관련</a>
-									<a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">간 관련</</a>
-									<a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">장 관련</a>
-									<a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">다이어트 관련</a>
-									<a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">활력 관련</a>
-									<a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">뼈 관련</a>
-								</div>
-							</div>
-							
-							<div class="col-9">
-								<div class="tab-content" id="v-pills-tabContent">
-									<div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
-										<div class="row">
-											<div class="col-lg-4 col-md-6 special-grid drinks">
-												<div class="gallery-single fix">
-													<img src="/user/images/img-01.jpg" class="img-fluid" alt="Image">
-													<div class="why-text">
-														<h4>Special Drinks 1</h4>
-														<p>Sed id magna vitae eros sagittis euismod.</p>
-														<h5> $7.79</h5>
-													</div>
-													<div class= "see-text">
-													<h5>네오바이오</h5>
-													<h3>컨트롤러</h3>
-													<h0>#눈</h0>
-													<h0>#장</h0>
-													</div>
-												</div>
-											</div>
-											
-											<div class="col-lg-4 col-md-6 special-grid drinks">
-												<div class="gallery-single fix">
-													<img src="/user/images/img-02.jpg" class="img-fluid" alt="Image">
-													<div class="why-text">
-														<h4>Special Drinks 2</h4>
-														<p>Sed id magna vitae eros sagittis euismod.</p>
-														<h5> $9.79</h5>
-													</div>
-												</div>
-											</div>
-											
-											<div class="col-lg-4 col-md-6 special-grid drinks">
-												<div class="gallery-single fix">
-													<img src="/user/images/img-03.jpg" class="img-fluid" alt="Image">
-													<div class="why-text">
-														<h4>Special Drinks 3</h4>
-														<p>Sed id magna vitae eros sagittis euismod.</p>
-														<h5> $10.79</h5>
-													</div>
-												</div>
-											</div>
-											
-											<div class="col-lg-4 col-md-6 special-grid lunch">
-												<div class="gallery-single fix">
-													<img src="/user/images/img-04.jpg" class="img-fluid" alt="Image">
-													<div class="why-text">
-														<h4>Special Lunch 1</h4>
-														<p>Sed id magna vitae eros sagittis euismod.</p>
-														<h5> $15.79</h5>
-													</div>
-												</div>
-											</div>
-											
-											<div class="col-lg-4 col-md-6 special-grid lunch">
-												<div class="gallery-single fix">
-													<img src="/user/images/img-05.jpg" class="img-fluid" alt="Image">
-													<div class="why-text">
-														<h4>Special Lunch 2</h4>
-														<p>Sed id magna vitae eros sagittis euismod.</p>
-														<h5> $18.79</h5>
-													</div>
-												</div>
-											</div>
-											
-											<div class="col-lg-4 col-md-6 special-grid lunch">
-												<div class="gallery-single fix">
-													<img src="/user/images/img-06.jpg" class="img-fluid" alt="Image">
-													<div class="why-text">
-														<h4>Special Lunch 3</h4>
-														<p>Sed id magna vitae eros sagittis euismod.</p>
-														<h5> $20.79</h5>
-													</div>
-												</div>
-											</div>
-											
-											<div class="col-lg-4 col-md-6 special-grid dinner">
-												<div class="gallery-single fix">
-													<img src="/user/images/img-07.jpg" class="img-fluid" alt="Image">
-													<div class="why-text">
-														<h4>Special Dinner 1</h4>
-														<p>Sed id magna vitae eros sagittis euismod.</p>
-														<h5> $25.79</h5>
-													</div>
-												</div>
-											</div>
-											
-											<div class="col-lg-4 col-md-6 special-grid dinner">
-												<div class="gallery-single fix">
-													<img src="/user/images/img-08.jpg" class="img-fluid" alt="Image">
-													<div class="why-text">
-														<h4>Special Dinner 2</h4>
-														<p>Sed id magna vitae eros sagittis euismod.</p>
-														<h5> $22.79</h5>
-													</div>
-												</div>
-											</div>
-											
-											<div class="col-lg-4 col-md-6 special-grid dinner">
-												<div class="gallery-single fix">
-													<img src="/user/images/img-09.jpg" class="img-fluid" alt="Image">
-													<div class="why-text">
-														<h4>Special Dinner 3</h4>
-														<p>Sed id magna vitae eros sagittis euismod.</p>
-														<h5> $24.79</h5>
-													</div>
-												</div>
-											</div>
-										</div>
-										
-									</div>
-									<div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
-										<div class="row">
-											<div class="col-lg-4 col-md-6 special-grid drinks">
-												<div class="gallery-single fix">
-													<img src="/user/images/img-01.jpg" class="img-fluid" alt="Image">
-													<div class="why-text">
-														<h4>Special Drinks 1</h4>
-														<p>Sed id magna vitae eros sagittis euismod.</p>
-														<h5> $7.79</h5>
-													</div>
-												</div>
-											</div>
-											
-											<div class="col-lg-4 col-md-6 special-grid drinks">
-												<div class="gallery-single fix">
-													<img src="/user/images/img-02.jpg" class="img-fluid" alt="Image">
-													<div class="why-text">
-														<h4>Special Drinks 2</h4>
-														<p>Sed id magna vitae eros sagittis euismod.</p>
-														<h5> $9.79</h5>
-													</div>
-												</div>
-											</div>
-											
-											<div class="col-lg-4 col-md-6 special-grid drinks">
-												<div class="gallery-single fix">
-													<img src="/user/images/img-03.jpg" class="img-fluid" alt="Image">
-													<div class="why-text">
-														<h4>Special Drinks 3</h4>
-														<p>Sed id magna vitae eros sagittis euismod.</p>
-														<h5> $10.79</h5>
-													</div>
-												</div>
-											</div>
-										</div>
-										
-									</div>
-									<div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
-										<div class="row">
-											<div class="col-lg-4 col-md-6 special-grid lunch">
-												<div class="gallery-single fix">
-													<img src="/user/images/img-04.jpg" class="img-fluid" alt="Image">
-													<div class="why-text">
-														<h4>Special Lunch 1</h4>
-														<p>Sed id magna vitae eros sagittis euismod.</p>
-														<h5> $15.79</h5>
-													</div>
-												</div>
-											</div>
-											
-											<div class="col-lg-4 col-md-6 special-grid lunch">
-												<div class="gallery-single fix">
-													<img src="/user/images/img-05.jpg" class="img-fluid" alt="Image">
-													<div class="why-text">
-														<h4>Special Lunch 2</h4>
-														<p>Sed id magna vitae eros sagittis euismod.</p>
-														<h5> $18.79</h5>
-													</div>
-												</div>
-											</div>
-											
-											<div class="col-lg-4 col-md-6 special-grid lunch">
-												<div class="gallery-single fix">
-													<img src="/user/images/img-06.jpg" class="img-fluid" alt="Image">
-													<div class="why-text">
-														<h4>Special Lunch 3</h4>
-														<p>Sed id magna vitae eros sagittis euismod.</p>
-														<h5> $20.79</h5>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
-										<div class="row">
-											<div class="col-lg-4 col-md-6 special-grid dinner">
-												<div class="gallery-single fix">
-													<img src="/user/images/img-07.jpg" class="img-fluid" alt="Image">
-													<div class="why-text">
-														<h4>Special Dinner 1</h4>
-														<p>Sed id magna vitae eros sagittis euismod.</p>
-														<h5> $25.79</h5>
-													</div>
-												</div>
-											</div>
-											
-											<div class="col-lg-4 col-md-6 special-grid dinner">
-												<div class="gallery-single fix">
-													<img src="/user/images/img-08.jpg" class="img-fluid" alt="Image">
-													<div class="why-text">
-														<h4>Special Dinner 2</h4>
-														<p>Sed id magna vitae eros sagittis euismod.</p>
-														<h5> $22.79</h5>
-													</div>
-												</div>
-											</div>
-											
-											<div class="col-lg-4 col-md-6 special-grid dinner">
-												<div class="gallery-single fix">
-													<img src="/user/images/img-09.jpg" class="img-fluid" alt="Image">
-													<div class="why-text">
-														<h4>Special Dinner 3</h4>
-														<p>Sed id magna vitae eros sagittis euismod.</p>
-														<h5> $24.79</h5>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
+						<div class="col-lg-10">
+							<div class="blog-search-form" style="width: 100%; margin: 2px 0 0 0;">
+								<input th:name="keyword" type="text" th:value="${keyword}">
+								<button class="search-btn" type="submit">
+									<i class="fa fa-search" aria-hidden="true"></i>
+								</button>
 							</div>
 						</div>
 					</div>
+				</form>
+
+				<!-- Start Gallery -->
+				<div class="gallery-box col-lg-12">
+					<div class="container">
+						<div class="row inner-menu-box">
+							<div class="col-3">
+								<ul class="nav nav-pills flex-column">
+									<a th:each="Clist: ${categoryList}">
+										<li class="nav-item" th:unless="${Clist.id} == ${category_id}">
+											<a th:href="@{search.html(category=${Clist.id})}" class="nav-link"
+												th:text="${Clist.category}"></a>
+										</li>
+										<li class="nav-item" th:if="${Clist.id} == ${category_id}"><a
+												th:href="@{search.html(category=${Clist.id})}" class="nav-link active"
+												th:text="${Clist.category}"></a></li>
+									</a>
+								</ul>
+							</div>
+
+							<!-- 컨텐츠 시작 -->	
+							<div class="col-9">
+								<div class="row">
+									<div class="col-lg-4 col-md-6 special-grid drinks" th:each="list : ${list}">
+										<div class="gallery-single fix">
+											<img th:src="${list.image_path}" class="img-fluid" alt="Image"> <!-- 사진 -->
+											<div class="see-text">
+												<h5 th:text="${list.manufacturer}"></h5>
+												<h3 th:text="${list.functional_food_name}"></h3> <!-- 제목 -->
+												<h0>#</h0>
+												<h0 th:text="${list.category}"></h0>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- 컨텐츠 끝 -->
+					</div>
 				</div>
-				<!-- End Gallery -->
 			</div>
+			<!-- End Gallery -->
 		</div>
+         <nav aria-label="Page navigation" th:if="${category_id != null}">
+            <ul class="pagination justify-content-center"
+               th:with="start=${pageVO.firstPageNo}, last=(${pageVO.lastPageNo})">
+               <li th:if="${pageVO.hasPrevPageNav==true}"><a class="page-link" th:href="@{search.html(category=${category_id}, pageNo=1)}"
+                     aria-label="First"> <span aria-hidden="true">FIRST</span>
+                  </a></li>
+               <li th:if="${pageVO.hasPrevPageNav==true}"><a class="page-link"
+                     th:href="@{search.html(category=${category_id}, pageNo=${pageVO.firstPageNo - pageVO.pageNavSize})}" aria-label="Previous">
+                     <span aria-hidden="true"> 이전 </span></a></li>
+      
+               <a th:each="i: ${#numbers.sequence(start, last)}">
+                  <li class="page-item" th:unless="${i} == ${pageVO.pageNo}">
+                     <a th:href="@{search.html(category=${category_id}, pageNo=${i})}" class="page-link" th:text="${i}"></a>
+                  </li>
+                  <li class="page-item active" th:if="${i} == ${pageVO.pageNo}">
+                     <a th:href="@{search.html(category=${category_id}, pageNo=${i})}" class="page-link" th:text="${i}"></a>
+                  </li>
+               </a>
+      
+               <li th:if="${pageVO.hasNextPageNav==true}"><a class="page-link"
+                     th:href="@{search.html(category=${category_id}, pageNo=${pageVO.firstPageNo + pageVO.pageNavSize})}" aria-label="Previous">
+                     <span aria-hidden="true"> 다음 </span></a></li>
+               <li th:if="${pageVO.hasNextPageNav==true}"><a class="page-link"
+                     th:href="@{search.html(category=${category_id}, pageNo=${pageVO.totalPage})}" aria-label="Last"> <span
+                        aria-hidden="true">END</span>
+                  </a></li>
+            </ul>
+         </nav>
+         <nav aria-label="Page navigation" th:if="${condition != null}">
+            <ul class="pagination justify-content-center"
+               th:with="start=${pageVO.firstPageNo}, last=(${pageVO.lastPageNo})">
+               <li th:if="${pageVO.hasPrevPageNav==true}"><a class="page-link" th:href="@{search.html(condition=${condition}, keyword=${keyword}, pageNo=1)}"
+                     aria-label="First"> <span aria-hidden="true">FIRST</span>
+                  </a></li>
+               <li th:if="${pageVO.hasPrevPageNav==true}"><a class="page-link"
+                     th:href="@{search.html(condition=${condition}, keyword=${keyword}, pageNo=${pageVO.firstPageNo - pageVO.pageNavSize})}" aria-label="Previous">
+                     <span aria-hidden="true"> 이전 </span></a></li>
+      
+               <a th:each="i: ${#numbers.sequence(start, last)}">
+                  <li class="page-item" th:unless="${i} == ${pageVO.pageNo}">
+                     <a th:href="@{search.html(condition=${condition}, keyword=${keyword}, pageNo=${i})}" class="page-link" th:text="${i}"></a>
+                  </li>
+                  <li class="page-item active" th:if="${i} == ${pageVO.pageNo}">
+                     <a th:href="@{search.html(condition=${condition}, keyword=${keyword}, pageNo=${i})}" class="page-link" th:text="${i}"></a>
+                  </li>
+               </a>
+      
+               <li th:if="${pageVO.hasNextPageNav==true}"><a class="page-link"
+                     th:href="@{search.html(condition=${condition}, keyword=${keyword}, pageNo=${pageVO.firstPageNo + pageVO.pageNavSize})}" aria-label="Previous">
+                     <span aria-hidden="true"> 다음 </span></a></li>
+               <li th:if="${pageVO.hasNextPageNav==true}"><a class="page-link"
+                     th:href="@{search.html(condition=${condition}, keyword=${keyword}, pageNo=${pageVO.totalPage})}" aria-label="Last"> <span
+                        aria-hidden="true">END</span>
+                  </a></li>
+            </ul>
+         </nav>
 	</div>
 	<!-- End Contact -->
 	<!--Footer-->
-    <footer class="footer-area bg-f" th:replace="/user/footer.html :: footer"></footer>
-	
+	<footer class="footer-area bg-f" th:replace="/user/footer.html :: footer"></footer>
+
 	<!-- ALL JS FILES -->
-    <!-- ALL PLUGINS -->
-    <div th:replace="/user/footer.html :: javascript"></div>
-    
+	<!-- ALL PLUGINS -->
+	<div th:replace="/user/footer.html :: javascript"></div>
+
 </body>
+
 </html>

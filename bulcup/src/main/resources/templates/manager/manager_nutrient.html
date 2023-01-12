@@ -21,7 +21,7 @@
 <body>
    <!-- Layout container -->
    <div class="layout-page">
-   <a th:if="${session.loginAuthority}">
+   <a th:if="${session.loginAuthority != emp}">
       <div th:replace="/manager/manager_header :: navbar"></div>
       <!-- Content wrapper -->
       <div class="content-wrapper">
@@ -34,92 +34,23 @@
 
             <!-- Basic Bootstrap Table -->
             <div class="card">
-               <h5 class="card-header">영양제 정보 <a class="btn btn-hsprimary" align="right"
-								data-bs-toggle="modal" data-bs-target="#basicModal2"
-								type="button"><h6>등록</h6></a></h5>
-								  <!-- Modal -->
-                                 <div class="modal fade" id="basicModal2" tabindex="-1"
-                                    aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                       <div class="modal-content">
-                                          <div class="modal-header">
-                                             <h5 class="modal-title" id="exampleModalLabel1">영양제 정보 관리
-                                                </h5>
-                                             <button type="button" class="btn-close"
-                                                data-bs-dismiss="modal" aria-label="Close"></button>
-                                          </div>
-                                          <div class="modal-body">
-                                             <div class="row">
-                                                <div class="col mb-3">
-                                                   <label for="nameBasic" class="form-label">분류</label> <br />
-                                                   <select class="btn btn-outline-primary dropdown-toggle">
-                                                      <option>눈</option>
-                                                      <option>위</option>
-                                                      <option>관절</option>
-                                                      <option>간</option>
-                                                      <option>다이어트</option>
-                                                      <option>활력</option>
-                                                   </select>
-                                                </div>
-                                             </div>
-                                             <div class="row">
-                                                <div class="col mb-3">
-                                                   <label for="nameBasic" class="form-label">분류코드</label> <input
-                                                      type="text" id="nameBasic" class="form-control"
-                                                      placeholder="분류코드" />
-                                                </div>
-                                             </div>
-                                             <div class="row">
-                                                <div class="col mb-3">
-                                                   <label for="nameBasic" class="form-label">제품명</label>
-                                                   <input type="text" id="nameBasic" class="form-control"
-                                                      placeholder="제품명" />
-                                                </div>
-                                             </div>
-                                             <div class="row">
-                                                <div class="col mb-3">
-                                                   <label for="nameBasic" class="form-label">함량</label> <input
-                                                      type="text" id="nameBasic" class="form-control"
-                                                      placeholder="함량" />
-                                                </div>
-                                             </div>
-                                             <div class="row">
-                                                <div class="col mb-3">
-                                                   <label for="nameBasic" class="form-label">제조사</label> <input
-                                                      type="text" id="nameBasic" class="form-control"
-                                                      placeholder="제조사" />
-                                                </div>
-                                             </div>
-                                          </div>
-                                          <div class="modal-footer">
-                                             <button type="button" class="btn btn-outline-secondary"
-                                                data-bs-dismiss="modal">취소</button>
-                                             <button type="button" class="btn btn-primary">등록하기</button>
-                                          </div>
-                                       </div>
-                                    </div>
-                                 </div>
-                                 <!--End Modal-->
+               <h5 class="card-header">영양제 정보</h5>
                <div class="table-responsive text-nowrap">
                   <table class="table">
                      <thead>
                         <tr>
                            <th>적용범위</th>
-                           <th>분류코드</th>
-                           <th>제품명</th>
-                           <th>함량</th>
-                           <th>제조사</th>
+                           <th>ID</th>
+                           <th>제품명</th>                          
                            <th>:-)</th>
                         </tr>
                      </thead>
                      <tbody class="table-border-bottom-0">
-                        <tr>
+                        <tr th:each="food, managerStat : ${getFunctionalFoodListPg}">
                            <td><i class="fab fa-angular fa-lg text-danger me-3"></i>
-                              <strong>적용범위</strong></td>
-                           <td>분류코드</td>
-                           <td>제품명</td>
-                           <td>함량</td>
-                           <td>제조사</td>
+                              <strong><a th:text="${food.category}"/></strong></td>
+                           <td><a th:text="${food.id}"/></td>
+                           <td><a th:text=${food.functional_food_name}/></td>                           
                            <td>
                               <div class="dropdown">
                                  <button type="button"
@@ -129,14 +60,15 @@
                                  </button>
                                  <div class="dropdown-menu">
                                     <a class="dropdown-item" data-bs-toggle="modal"
-                                       data-bs-target="#basicModal" type="button"><i
-                                       class="bx bx-edit-alt me-1"></i> Edit</a> <a
-                                       class="dropdown-item" href="javascript:void(0);"><i
-                                       class="bx bx-trash me-1"></i> Delete</a>
+                                       th:data-bs-target="|#basicModal${managerStat.index}|" type="button"><i
+                                       class="bx bx-edit-alt me-1"></i> 정보 수정</a> <a
+                                       class="dropdown-item" th:href="@{deleteFunctionalFood.do(id=${food.id})}"><i
+                                       class="bx bx-trash me-1"></i> 정보 삭제</a>
                                  </div>
 
                                  <!-- Modal -->
-                                 <div class="modal fade" id="basicModal" tabindex="-1"
+                                 <form action="updateFunctionalFood.do" method="post">
+                                  <div class="modal fade" th:id="|basicModal${managerStat.index}|" tabindex="-1"
                                     aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                        <div class="modal-content">
@@ -149,171 +81,125 @@
                                           <div class="modal-body">
                                              <div class="row">
                                                 <div class="col mb-3">
-                                                   <label for="nameBasic" class="form-label">분류</label> <br />
-                                                   <select class="btn btn-outline-primary dropdown-toggle">
-                                                      <option>눈</option>
-                                                      <option>위</option>
-                                                      <option>관절</option>
-                                                      <option>간</option>
-                                                      <option>다이어트</option>
-                                                      <option>활력</option>
+                                                   <label for="category" class="form-label">분류</label> <br />
+                                                   <select class="btn btn-outline-primary dropdown-toggle" name="category_id" th:value="${food.category_id}">
+                                                      <option value=1 th:selected="${food.category_id}==1">눈</option>
+                                                      <option value=2 th:selected="${food.category_id}==2">소화/장</option>
+                                                      <option value=3 th:selected="${food.category_id}==3">관절</option>
+                                                      <option value=4 th:selected="${food.category_id}==4">간</option>
+                                                      <option value=5 th:selected="${food.category_id}==5">다이어트</option>
+                                                      <option value=6 th:selected="${food.category_id}==6">피로/활력</option>
                                                    </select>
                                                 </div>
                                              </div>
                                              <div class="row">
                                                 <div class="col mb-3">
-                                                   <label for="nameBasic" class="form-label">분류코드</label> <input
-                                                      type="text" id="nameBasic" class="form-control"
-                                                      placeholder="분류코드" />
+                                                   <label for="nameBasic" class="form-label">ID</label> <input
+                                                      type="text" name="id" class="form-control"
+                                                      placeholder="ID" th:value="${food.id}" readonly />
                                                 </div>
-                                             </div>
+                                             </div>                                             
                                              <div class="row">
                                                 <div class="col mb-3">
                                                    <label for="nameBasic" class="form-label">제품명</label>
-                                                   <input type="text" id="nameBasic" class="form-control"
-                                                      placeholder="제품명" />
+                                                   <input type="text" name="functional_food_name" class="form-control"
+                                                      placeholder="제품명" th:value="${food.functional_food_name}"/>
                                                 </div>
                                              </div>
                                              <div class="row">
                                                 <div class="col mb-3">
-                                                   <label for="nameBasic" class="form-label">함량</label> <input
-                                                      type="text" id="nameBasic" class="form-control"
-                                                      placeholder="함량" />
+                                                   <label for="nameBasic" class="form-label">기능성</label> <textarea
+                                                      id ="basic-default-message"
+                                                      name="functionalities" class="form-control"
+                                                      placeholder="기능성" th:text="${food.functionalities}"></textarea>
                                                 </div>
                                              </div>
                                              <div class="row">
                                                 <div class="col mb-3">
-                                                   <label for="nameBasic" class="form-label">제조사</label> <input
-                                                      type="text" id="nameBasic" class="form-control"
-                                                      placeholder="제조사" />
+                                                   <label for="nameBasic" class="form-label">원재료</label> <input
+                                                      type="text" name="raw_materials" class="form-control"
+                                                      placeholder="원재료" th:value="${food.raw_materials}" />
+                                                </div>
+                                             </div>
+                                             <div class="row">
+                                                <div class="col mb-3">
+                                                   <label for="nameBasic" class="form-label">주의사항</label> <input
+                                                      type="text" name="caution" class="form-control"
+                                                      placeholder="주의사항" th:value="${food.caution}" />
+                                                </div>
+                                             </div>
+                                             <div class="row">
+                                                <div class="col mb-3">
+                                                   <label for="nameBasic" class="form-label">형상</label> <input
+                                                      type="text" name="formulation" class="form-control"
+                                                      placeholder="형상" th:value="${food.formulation}" />
+                                                </div>
+                                             </div>
+                                             <div class="row">
+                                                <div class="col mb-3">
+                                                   <label for="nameBasic" class="form-label">섭취방법</label> <input
+                                                      type="text" name="intake_method" class="form-control"
+                                                      placeholder="섭취방법" th:value="${food.intake_method}" />
+                                                </div>
+                                             </div>
+                                             <div class="row">
+                                                <div class="col mb-3">
+                                                   <label for="nameBasic" class="form-label">사진 출처</label> <input
+                                                      type="text" name="image_path" class="form-control"
+                                                      placeholder="사진 출처" th:value="${food.image_path}" />
                                                 </div>
                                              </div>
                                           </div>
                                           <div class="modal-footer">
                                              <button type="button" class="btn btn-outline-secondary"
                                                 data-bs-dismiss="modal">취소</button>
-                                             <button type="button" class="btn btn-primary">수정하기</button>
+                                             <button type="submit" class="btn btn-primary">수정하기</button>
                                           </div>
                                        </div>
                                     </div>
-                                 </div>
+                                  </div>
+                                </form>
                                  <!--End Modal-->
                               </div>
                            </td>
-                        </tr>
-                        <tr>
-                           <td><i class="fab fa-angular fa-lg text-danger me-3"></i>
-                              <strong>적용범위</strong></td>
-                           <td>분류코드</td>
-                           <td>제품명</td>
-                           <td>함량</td>
-                           <td>제조사</td>
-                           <td>
-                              <div class="dropdown">
-                                 <button type="button"
-                                    class="btn p-0 dropdown-toggle hide-arrow"
-                                    data-bs-toggle="dropdown">
-                                    <i class="bx bx-dots-vertical-rounded"></i>
-                                 </button>
-                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" data-bs-toggle="modal"
-                                       data-bs-target="#basicModal" type="button"><i
-                                       class="bx bx-edit-alt me-1"></i> Edit</a> <a
-                                       class="dropdown-item" href="javascript:void(0);"><i
-                                       class="bx bx-trash me-1"></i> Delete</a>
-                                 </div>
-                                 <!-- Modal -->
-                                 <div class="modal fade" id="basicModal" tabindex="-1"
-                                    aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                       <div class="modal-content">
-                                          <div class="modal-header">
-                                             <h5 class="modal-title" id="exampleModalLabel1">영양제 정보 관리
-                                                </h5>
-                                             <button type="button" class="btn-close"
-                                                data-bs-dismiss="modal" aria-label="Close"></button>
-                                          </div>
-                                          <div class="modal-body">
-                                             <div class="row">
-                                                <div class="col mb-3">
-                                                   <label for="nameBasic" class="form-label">분류</label> <br />
-                                                   <select class="btn btn-outline-primary dropdown-toggle">
-                                                      <option>눈</option>
-                                                      <option>위</option>
-                                                      <option>관절</option>
-                                                      <option>간</option>
-                                                      <option>다이어트</option>
-                                                      <option>활력</option>
-                                                   </select>
-                                                </div>
-                                             </div>
-                                             <div class="row">
-                                                <div class="col mb-3">
-                                                   <label for="nameBasic" class="form-label">분류코드</label> <input
-                                                      type="text" id="nameBasic" class="form-control"
-                                                      placeholder="분류코드" />
-                                                </div>
-                                             </div>
-                                             <div class="row">
-                                                <div class="col mb-3">
-                                                   <label for="nameBasic" class="form-label">제품명</label>
-                                                   <input type="text" id="nameBasic" class="form-control"
-                                                      placeholder="제품명" />
-                                                </div>
-                                             </div>
-                                             <div class="row">
-                                                <div class="col mb-3">
-                                                   <label for="nameBasic" class="form-label">함량</label> <input
-                                                      type="text" id="nameBasic" class="form-control"
-                                                      placeholder="함량" />
-                                                </div>
-                                             </div>
-                                             <div class="row">
-                                                <div class="col mb-3">
-                                                   <label for="nameBasic" class="form-label">제조사</label> <input
-                                                      type="text" id="nameBasic" class="form-control"
-                                                      placeholder="제조사" />
-                                                </div>
-                                             </div>
-                                          </div>
-                                          <div class="modal-footer">
-                                             <button type="button" class="btn btn-outline-secondary"
-                                                data-bs-dismiss="modal">취소</button>
-                                             <button type="button" class="btn btn-primary">수정하기</button>
-                                          </div>
-                                       </div>
-                                    </div>
-                                 </div>
-                                 <!--End Modal-->
-                              </div>
-                           </td>
-                        </tr>
+                        </tr>                       
                      </tbody>
                   </table>
                </div>
             </div>
             <!--/ Basic Bootstrap Table -->
+            <nav aria-label="Page navigation">
+							<ul class="pagination justify-content-center"
+								th:with="start=${pageVO.firstPageNo}, last=(${pageVO.lastPageNo})">
+								<li th:if="${pageVO.hasPrevPageNav==true}"><a class="page-link"
+									th:href="@{/manager/manager_nutrient.html(pageNo=1)}"
+									aria-label="First"> <span aria-hidden="true">FIRST</span>
+								</a></li>
+								<li th:if="${pageVO.hasPrevPageNav==true}"><a class="page-link"
+									th:href="@{/manager/manager_nutrient.html(pageNo=${pageVO.firstPageNo - pageVO.pageNavSize})}"
+									aria-label="Previous"> <span aria-hidden="true">  이전 </span></a></li>
+	
+								<a th:each="i: ${#numbers.sequence(start, last)}">
+									<li class="page-item" th:unless="${i} == ${pageVO.pageNo}">
+										<a th:href="@{/manager/manager_nutrient.html(pageNo=${i})}"
+										class="page-link" th:text="${i}"></a>
+								</li>
+									<li class="page-item active" th:if="${i} == ${pageVO.pageNo}">
+										<a th:href="@{/manager/manager_nutrient.html(pageNo=${i})}"
+										class="page-link" th:text="${i}"></a>
+								</li>
+								</a>
+								
+								<li th:if="${pageVO.hasNextPageNav==true}"><a class="page-link"
+									th:href="@{/manager/manager_nutrient.html(pageNo=${pageVO.firstPageNo + pageVO.pageNavSize})}"
+									aria-label="Previous"> <span aria-hidden="true"> 다음 </span></a></li>
+								<li th:if="${pageVO.hasNextPageNav==true}"><a class="page-link"
+									th:href="@{/manager/manager_nutrient.html(pageNo=${pageVO.totalPage})}"
+									aria-label="Last"> <span aria-hidden="true">END</span>
+								</a></li>
+							</ul>
+						</nav>
          </div>
-         <nav aria-label="Page navigation">
-            <ul class="pagination justify-content-center">
-               <li class="page-item prev"><a class="page-link"
-                  href="javascript:void(0);"><i
-                     class="tf-icon bx bx-chevrons-left"></i></a></li>
-               <li class="page-item"><a class="page-link"
-                  href="javascript:void(0);">1</a></li>
-               <li class="page-item"><a class="page-link"
-                  href="javascript:void(0);">2</a></li>
-               <li class="page-item active"><a class="page-link"
-                  href="javascript:void(0);">3</a></li>
-               <li class="page-item"><a class="page-link"
-                  href="javascript:void(0);">4</a></li>
-               <li class="page-item"><a class="page-link"
-                  href="javascript:void(0);">5</a></li>
-               <li class="page-item next"><a class="page-link"
-                  href="javascript:void(0);"><i
-                     class="tf-icon bx bx-chevrons-right"></i></a></li>
-            </ul>
-         </nav>
          <!-- / Content -->
 
          <!-- Footer -->

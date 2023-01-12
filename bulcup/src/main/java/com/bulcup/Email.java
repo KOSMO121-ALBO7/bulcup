@@ -6,7 +6,9 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
 import org.thymeleaf.context.Context;
@@ -21,7 +23,11 @@ public class Email {
     @Autowired
     private SpringTemplateEngine templateEngine;
 
-    
+    @Autowired
+    public JavaMailSenderImpl mailSender() {
+        JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
+        return javaMailSender;
+    }
     /**
     * 이메일 발송 함수
     * @param title 이메일 제목
@@ -39,7 +45,7 @@ public class Email {
 			helper = new MimeMessageHelper(message, true);
 			
 			// 발신자 설정
-			helper.setFrom("cgtcsg@naver.com");
+			helper.setFrom("gt-choe@naver.com");
 			
 			//메일 제목 설정
 	        helper.setSubject(title);

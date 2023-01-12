@@ -44,79 +44,144 @@
                     </div>
                     <div class="card-body px-0">
                       <div class="tab-content p-0">
-                        <div class="tab-pane fade show active" id="navs-tabs-line-card-income" role="tabpanel">
-                          <div class="d-flex p-4 pt-3">
-                            <div class="avatar flex-shrink-0 me-3">
-                              <img src="../assets/img/icons/unicons/wallet.png" alt="User" />
-                            </div>
-                            <div>
-                              <small class="text-muted d-block">Total Balance</small>
-                              <div class="d-flex align-items-center">
-                                <h6 class="mb-0 me-1">$459.10</h6>
-                                <small class="text-success fw-semibold">
-                                  <i class="bx bx-chevron-up"></i>
-                                  42.9%
-                                </small>
-                              </div>
-                            </div>
-                          </div>
-                          <div id="incomeChart"></div>
-                          <div class="d-flex justify-content-center pt-4 gap-2">
-                            <div class="flex-shrink-0">
-                              <div id="expensesOfWeek"></div>
-                            </div>
-                            <div>
-                              <p class="mb-n1 mt-1">Expenses This Week</p>
-                              <small class="text-muted">$39 less than last week</small>
-                            </div>
-                          </div>
-                        </div>
+                        <div style="width:100%;">
+  <canvas id="canvas"></canvas>
+</div>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/heatmap.js/2.0.2/heatmap.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+	<script th:inline="javascript">
+
+ new Chart(document.getElementById("canvas"), {
+    type: 'line',
+    data: {
+        labels: ['자가진단', '문의하기', '메인', '검색하기'],
+        datasets: [{
+            label: '방문 시간',
+            data: [
+               [[${self}]],
+                [[${contact}]],
+                [[${index}]],
+                [[${search}]]
+                
+            ],
+            borderColor: "rgba(255, 201, 14, 1)",
+            backgroundColor: "rgba(255, 201, 14, 0.5)",
+            fill: true,
+            lineTension: 0
+        }]
+    },
+    options: {
+        responsive: true,
+        title: {
+            display: true,
+            text: '라인 차트 테스트'
+        },
+        tooltips: {
+            mode: 'index',
+            intersect: false,
+        },
+        hover: {
+            mode: 'nearest',
+            intersect: true
+        },
+        scales: {
+            xAxes: [{
+                display: true,
+                scaleLabel: {
+                    display: true,
+                    labelString: '페이지 이름'
+                }
+            }],
+            yAxes: [{
+                display: true,
+                ticks: {
+                    suggestedMin: 0,
+                },
+                scaleLabel: {
+                    display: true,
+                    labelString: '방문 시간'
+                }
+            }]
+        }
+    }
+});
+</script>
+                        
                       </div>
                     </div>
                   </div>
                 </div>
                 <!--/ Expense Overview -->
                 <!--Small Boxes -->
-                <div class="col-2 col-md-4 col-lg-2 order-3 order-md-2">
-                  <div class="row">
-                    <div class="col-12 mb-4">
-                      <div class="card">
-                        <div class="card-body">
-                          <div class="card-title d-flex align-items-start justify-content-between">
-                            <div class="avatar flex-shrink-0">
-                              <img
-                                src="../assets/img/icons/unicons/wallet-info.png"
-                                alt="Credit Card"
-                                class="rounded"
-                              />
-                            </div>
-                          </div>
-                          <span>정기 구독 횟수</span>
-                          <h3 class="card-title text-nowrap mb-1">$4,679</h3>
-                          <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +28.42%</small>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-12 mb-4">
-                      <div class="card">
-                        <div class="card-body">
-                          <div class="card-title d-flex align-items-start justify-content-between">
-                            <div class="avatar flex-shrink-0">
-                              <img
-                                src="../assets/img/icons/unicons/wallet-info.png"
-                                alt="Credit Card"
-                                class="rounded"
-                              />
-                            </div>
-                          </div>
-                          <span>정기 구독 횟수</span>
-                          <h3 class="card-title text-nowrap mb-1">$4,679</h3>
-                          <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +28.42%</small>
-                        </div>
-                      </div>
+                     <div class="col-md-8 col-lg-10 order-1 mb-4">
+                <div class="row col-md-auto"></div> 
+                
+                <div class="card-body1">
+                  <div class="card-title d-flex align-items-start justify-content-between">
+                    <div class="avatar flex-shrink-0">
+                      <img
+                        src="/manager/assets/img/icons/unicons/wallet-info.png"
+                        alt="Credit Card"
+                        class="rounded"
+                      />
                     </div>
                   </div>
+                  <span>홈화면 방문 횟수</span>
+                  <h3 class="card-title text-nowrap mb-1" ><a th:text="${index}"/></a></h3>
+
                 </div>
+              
+                <div class="card-body1">
+                  <div class="card-title d-flex align-items-start justify-content-between">
+                    <div class="avatar flex-shrink-0">
+                      <img
+                        src="/manager/assets/img/icons/unicons/wallet-info.png"
+                        alt="Credit Card"
+                        class="rounded"
+                      />
+                    </div>
+                  </div>
+                  <span>문의화면 방문 횟수</span>
+                  <h3 class="card-title text-nowrap mb-1"><a th:text="${contact}"/></a></h3>
+
+                </div>
+           
+                <div class="card-body1">
+                  <div class="card-title d-flex align-items-start justify-content-between">
+                    <div class="avatar flex-shrink-0">
+                      <img
+                        src="/manager/assets/img/icons/unicons/wallet-info.png"
+                        alt="Credit Card"
+                        class="rounded"
+                      />
+                    </div>
+                  </div>
+                  <span>검색화면 방문 횟수</span>
+                  <h3 class="card-title text-nowrap mb-1"><a th:text="${search}"/></a></h3>
+                  
+                </div>
+             
+
+                <div class="card-body1">
+                  <div class="card-title d-flex align-items-start justify-content-between">
+                    <div class="avatar flex-shrink-0">
+                      <img
+                        src="/manager/assets/img/icons/unicons/wallet-info.png"
+                        alt="Credit Card"
+                        class="rounded"
+                      />
+                    </div>
+                  </div>
+                  <span>자가진단 화면 방문 횟수</span>
+                  <h3 class="card-title text-nowrap mb-1"><a th:text="${self}"/></a></h3>
+                 
+                </div>
+                </div>
+                
+                
+                
+                
                 <!-- / Small Boxes-->
               </div>
             </div>

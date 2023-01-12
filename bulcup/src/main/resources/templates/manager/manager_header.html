@@ -61,9 +61,12 @@
     <!-- Helpers -->
     <script src="/manager/assets/vendor/js/helpers.js"></script>
 
+   
+
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="/manager/assets/js/config.js"></script>
+
   </head>
 
   <body>
@@ -90,8 +93,8 @@
 
           <ul class="menu-inner py-1">
             <!-- Dashboard -->
-            <li class="menu-item">
-              <a href="manager_index.html" class="menu-link">
+            <li class="menu-item cate1">
+              <a href="manager_index.html?cate=cate1" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">대시보드</div>
               </a>
@@ -101,28 +104,31 @@
             <li class="menu-header small text-uppercase">
               <span class="menu-header-text">정보 관리</span>
             </li>
-            <li class="menu-item">
-              <a href="manager_nutrient.html" class="menu-link">
+            <li class="menu-item cate2">
+            <a th:if="${session.loginAuthority} != emp" >
+              <a href="manager_nutrient.html?cate=cate2" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-layout"></i>
                 <div data-i18n="Layouts">영양제 정보 관리</div>
-              </a>
+              </a></a>
             </li>
-            <li class="menu-item">
-              <a href="manager_blog.html" class="menu-link">
+            <li class="menu-item cate3">
+            
+              <a href="manager_blog.html?cate=cate3" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-collection"></i>
                 <div data-i18n="Account Settings">영양 상식 관리</div>
               </a>
             </li>
-            <li class="menu-item">
-              <a href="manager_question.html" class="menu-link">
+            <li class="menu-item cate4">
+            <a th:if="${session.loginAuthority} == admin" >
+              <a href="manager_question.html?cate=cate4" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-dock-top"></i>
                 <div data-i18n="Account Settings">자가 진단 관리</div>
-              </a>
+              </a></a>	
             </li>
             <!-- Forms & Tables -->
             <li class="menu-header small text-uppercase"><span class="menu-header-text">고객 응대</span></li>
-              <li class="menu-item">
-                <a href="manager_contact.html" class="menu-link">
+              <li class="menu-item cate5">
+                <a href="manager_contact.html?cate=cate5" class="menu-link">
                   <i class="menu-icon tf-icons bx bx-crown"></i>
                   <div data-i18n="Misc">문의 처리</div>
                 </a>
@@ -130,14 +136,14 @@
             </li>
             <!-- Forms & Tables -->
             <li class="menu-header small text-uppercase"><span class="menu-header-text">통계</span></li>
-              <li class="menu-item">
-                <a href="manager_chart_nutrient.html" class="menu-link">
+              <li class="menu-item cate6">
+                <a href="manager_chart_nutrient.html?cate=cate6" class="menu-link">
                   <i class="menu-icon tf-icons bx bx-cube-alt"></i>
                   <div data-i18n="Misc">영양제 검색 통계</div>
                 </a>
               </li>
-              <li class="menu-item">
-                <a href="manager_chart_site.html" class="menu-link">
+              <li class="menu-item cate7">
+                <a href="manager_chart_site.html?cate=cate7" class="menu-link">
                   <i class="menu-icon tf-icons bx bx-copy"></i>
                   <div data-i18n="Extended UI">사이트 이용 통계</div>
                 </a>
@@ -145,26 +151,30 @@
             </li>
             <!-- Forms & Tables -->
             <li class="menu-header small text-uppercase"><span class="menu-header-text">관리자 관리</span></li>
-              <li class="menu-item">
+              <li class="menu-item cate8">
+              <a th:if="${session.loginAuthority}">
                 <a href="javascript:void(0);" class="menu-link menu-toggle">
                   <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>
                   <div data-i18n="Authentications">관리자 계정 관리</div>
-                </a>
+                </a></a>
                 <ul class="menu-sub">
-                  <li class="menu-item">
-                    <a href="/manager/manager_account.html" class="menu-link" target="_blank">
+                  <li class="menu-item cate8">
+                  <a th:if="${session.loginAuthority}">
+                    <a href="/manager/manager_account.html?cate=cate8" class="menu-link">
                       <div data-i18n="Basic">관리자 계정</div>
-                    </a>
+                    </a></a>
                   </li>
-                  <li class="menu-item">
-                    <a href="/manager/manager_registration.html" class="menu-link" target="_blank">
+                  <li class="menu-item cate9">
+                  <a th:if="${session.loginAuthority} == admin" >
+                    <a href="/manager/manager_registration.html?cate=cate8" class="menu-link">
                       <div data-i18n="Basic">관리자 등록 페이지</div>
-                    </a>
+                    </a></a>
                   </li>
-                  <li class="menu-item">
-                    <a href="/manager/manager_manage.html" class="menu-link" target="_blank">
+                  <li class="menu-item cate10">
+                  <a th:if="${session.loginAuthority} == admin" >
+                    <a href="/manager/manager_manage.html?cate=cate8" class="menu-link">
                       <div data-i18n="Basic">관리자 권한 변경</div>
-                    </a>
+                    </a></a>
                   </li>
                 </ul>
               </li>
@@ -214,5 +224,6 @@
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
+	
   </body>
 </html>

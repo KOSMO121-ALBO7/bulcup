@@ -8,6 +8,8 @@
 	<typeAliases>
 		<typeAlias alias="ManagerVO" type="com.bulcup.domain.ManagerVO"/>
 		<typeAlias alias="ContactVO" type="com.bulcup.domain.ContactVO"/>
+		<typeAlias alias="SubscribeVO" type="com.bulcup.domain.SubscribeVO"/>
+		<typeAlias alias="FunctionalFoodVO" type="com.bulcup.domain.FunctionalFoodVO"/>
 	</typeAliases>
 
 </configuration>

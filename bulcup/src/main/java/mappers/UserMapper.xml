@@ -10,6 +10,65 @@
 	</insert>
 
 	<!-- SELECT -->
+	<select id="foodCount" parameterType="int" resultType="int">
+		SELECT COUNT(*) FROM functional_food
+		<if test="category_id != 0">
+		WHERE category_id = #{category_id}
+		</if>
+	</select>
+	<select id="foodCountBySearch" parameterType="map" resultType="int">
+		SELECT COUNT(*) FROM functional_food 
+		<trim prefix="WHERE" suffixOverrides="OR">
+		<foreach collection="keywordArr" item="keyword" separator="OR">
+			<choose>
+				<when test="condition.equals('functional_food_name')">
+					functional_food_name LIKE CONCAT('%', #{keyword}, '%')
+				</when>
+				<when test="condition.equals('raw_material')">
+					raw_materials LIKE CONCAT('%', #{keyword}, '%')
+				</when>
+				<when test="condition.equals('functionalities')">
+					functionalities LIKE CONCAT('%', #{keyword}, '%')
+				</when>
+			</choose>
+		</foreach>
+		</trim>
+	</select>
+	<select id="getFunctionalFoodListPg" parameterType="map" resultType="FunctionalFoodVO">
+		SELECT ff.image_path image_path, ff.manufacturer manufacturer, ff.functional_food_name functional_food_name, c.category category
+		FROM functional_food ff INNER JOIN category c 
+		ON ff.category_id = c.id
+		<choose>
+			<when test="searchMap.condition != null">
+				<trim prefix="WHERE" suffixOverrides="OR">
+				<foreach collection="searchMap.keywordArr" item="keyword" separator="OR">
+					<choose>
+						<when test="searchMap.condition.equals('functional_food_name')">
+							ff.functional_food_name LIKE CONCAT('%', #{keyword}, '%')
+						</when>
+						<when test="searchMap.condition.equals('raw_material')">
+							ff.raw_materials LIKE CONCAT('%', #{keyword}, '%')
+						</when>
+						<when test="searchMap.condition.equals('functionalities')">
+							ff.functionalities LIKE CONCAT('%', #{keyword}, '%')
+						</when>
+					</choose>
+				</foreach>
+				</trim>
+			</when>
+			<otherwise>
+				<if test="category_id != 0">
+				WHERE c.id = #{category_id}
+				</if>
+			</otherwise>
+		</choose>
+		ORDER BY ff.functional_food_name
+		LIMIT #{pageVO.pageSize}
+		OFFSET #{pageVO.startRow}
+	</select>
+	<select id="category" resultType="CategoryVO">
+		SELECT id, category FROM category
+	</select>
 	
 	<!-- UPDATE -->
 	

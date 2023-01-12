@@ -2,7 +2,7 @@ f=open('C:/Users/kosmo/Desktop/최종 프로젝트/DB가공자료/건강기능�
 data=f.read()
 f.close()
 
-#print(data)
+#print(origin_data)
 
 import json
 jdata=json.loads(data)

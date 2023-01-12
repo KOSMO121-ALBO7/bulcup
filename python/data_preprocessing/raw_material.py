@@ -100,9 +100,9 @@ def create_raw_material_file():
         # print(response)
         # print(type(response))
         data = response.read().decode("utf-8-sig")
-        # print(data)
-        # print(type(data))
-        with open('./data/raw_material.txt', 'x', encoding='utf-8-sig') as f:
+        # print(origin_data)
+        # print(type(origin_data))
+        with open('origin_data/raw_material.txt', 'x', encoding='utf-8-sig') as f:
             f.write(data)
 
 
@@ -134,10 +134,10 @@ def insert_raw_material_data(raw_material_list):
 
 
 if __name__ == '__main__':
-    if not path.isfile('./data/raw_material.txt'):
+    if not path.isfile('origin_data/raw_material.txt'):
         create_raw_material_file()
 
-    with open('./data/raw_material.txt', 'r', encoding='utf-8-sig') as f:
+    with open('origin_data/raw_material.txt', 'r', encoding='utf-8-sig') as f:
         str_data = f.read()
         json_data = json.loads(str_data)
         # print(json_data)

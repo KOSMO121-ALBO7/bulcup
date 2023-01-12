@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
-<mapper namespace="com.bulcup.dao.ManagerDao">	
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bulcup.dao.ManagerDao">
 	<!-- INSERT -->
 	<insert id="insertManager" parameterType="ManagerVO">
 		INSERT INTO MANAGER(id, password, tel, email, authority)
 		 VALUES(#{id}, #{password}, #{tel}, #{email}, 'emp')
 	</insert>
-
+	
 	<!-- SELECT -->
 	<select id="selectManagerByIdAndPw" parameterType="ManagerVO" resultType="ManagerVO">
 		SELECT * FROM MANAGER 
-		WHERE id = #{id} AND password = #{password}
+		WHERE id = #{id}
 	</select>
 	<select id="getManagerList" resultType="ManagerVO">
 		SELECT * FROM MANAGER
@@ -21,9 +19,51 @@
 		SELECT * FROM CONTACT
 		WHERE ANSWER IS NULL
 	</select>
+	<select id="getSubscribeList" resultType="SubscribeVO">
+		SELECT * FROM subscribe
+	</select>
 	<select id="getFinishedContactList" resultType="ContactVO">
 		SELECT * FROM CONTACT
 		WHERE ANSWER IS NOT NULL
+	</select>
+	<select id="getQuestionListPg" parameterType="PaginationVO"
+		resultType="QuestionVO">
+		SELECT *
+		FROM sympthom_question
+		ORDER BY id
+		limit
+		#{pageSize}
+		offset
+		#{startRow};
+	</select>
+	<select id="getManagerListPg" parameterType="PaginationVO" resultType="ManagerVO">
+		SELECT * FROM MANAGER
+		ORDER BY authority
+		limit
+		#{pageSize}
+		offset
+		#{startRow};
+	</select>
+	<select id="getFunctionalFoodListPg" parameterType="PaginationVO" resultType="FunctionalFoodVO">
+		SELECT c.category, ff.id, ff.category_id, ff.functional_food_name,
+		ff.functionalities, ff.raw_materials, ff.caution, ff.formulation,
+		ff.intake_method, ff.image_path
+		FROM functional_food ff inner join category c on ff.category_id = c.id
+		ORDER BY ff.id asc
+		limit
+		#{pageSize}
+		offset
+		#{startRow};
+	</select>
+	<select id="questionCount" resultType="int">
+		SELECT COUNT(*) FROM sympthom_question
+	</select>
+	<select id="managerCount" resultType="int">
+		SELECT COUNT(*) FROM manager
+	</select>
+	<select id="foodCount" resultType="int">
+		SELECT count(*) FROM
+		functional_food
 	</select>
 	
 	<!-- UPDATE -->
@@ -37,7 +77,19 @@
 		SET answer = #{answer}, answer_date=sysdate(), manager_id=#{manager_id}
 		WHERE id = #{id}
 	</update>
-	
+	<update id="updateQuestion" parameterType="QuestionVO">
+		UPDATE
+		sympthom_question
+		SET category_id=#{category_id},
+		sympthom_question=#{sympthom_question}
+		WHERE id = #{id}
+	</update>
+	<update id="updateFunctionalFood" parameterType="FunctionalFoodVO">
+		update functional_food
+		set category_id=#{category_id},functional_food_name=#{functional_food_name},functionalities=#{functionalities},raw_materials=#{raw_materials},caution=#{caution},formulation=#{formulation},intake_method=#{intake_method},image_path=#{image_path}
+		where id=#{id}   
+	</update>
+		
 	<!--DELETE -->
 	<delete id="deleteManagerById" parameterType="ManagerVO">
 		DELETE FROM MANAGER 
@@ -47,8 +99,13 @@
 		DELETE FROM CONTACT 
 		WHERE id = #{id}
 	</delete>
+	<delete id="deleteQuestion" parameterType="QuestionVO">
+		DELETE FROM
+		sympthom_question
+		WHERE id = #{id}
+	</delete>
+	<delete id="deleteFuctionalFood" parameterType="FunctionalFoodVO">
+		delete from functional_food where id=#{id}
+	</delete>
 	
-	<select id="getSubscribeList" resultType="SubscribeVO">
-		SELECT * FROM subscribe
-	</select>
 </mapper>

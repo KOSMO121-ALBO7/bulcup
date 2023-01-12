@@ -25,6 +25,7 @@
       <div class="authentication-wrapper authentication-basic container-p-y">
         <div class="authentication-inner">
           <!-- Register -->
+          <a th:if="${session.loginAuthority} == admin">
           <div class="card">
             <div class="card-body">
               <!-- Logo -->
@@ -32,7 +33,7 @@
                 <img src="/manager/assets/img/favicon/favicon.png">
               </div>
               <!-- /Logo -->
-
+			
               <h4 class="mb-2"><strong>관리자 등록</strong></h4>
               <p class="mb-4">관리자 상세 정보</p>
                         <form id="insertManager" method="POST" th:action="@{insertManager.do}">

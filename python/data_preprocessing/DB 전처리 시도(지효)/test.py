@@ -2,7 +2,7 @@ f=open('./건강기능식품 품목제조 신고사항 현황(1-1000).json','rt'
 data=f.read()
 f.close()
 
-#print(data)
+#print(origin_data)
 
 import json
 jdata=json.loads(data)

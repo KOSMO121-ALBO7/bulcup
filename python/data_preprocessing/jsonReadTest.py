@@ -15,7 +15,7 @@ contents=response.text
 
 data=json.loads(contents)
 stat=data['I0030']['row']
-#print(data)
+#print(origin_data)
 print(stat)
 
 #df=json_normalize(stat)

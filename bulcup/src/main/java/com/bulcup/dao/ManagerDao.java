@@ -4,8 +4,12 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.bulcup.domain.CategoryVO;
 import com.bulcup.domain.ContactVO;
+import com.bulcup.domain.FunctionalFoodVO;
 import com.bulcup.domain.ManagerVO;
+import com.bulcup.domain.PaginationVO;
+import com.bulcup.domain.QuestionVO;
 import com.bulcup.domain.SubscribeVO;
 
 @Mapper
@@ -18,8 +22,23 @@ public interface ManagerDao {
 	public int updateContact(ContactVO vo);
 	public int deleteContact(ContactVO vo);
 	public List<ManagerVO> getManagerList();
+	public List<ManagerVO> getManagerListPg(PaginationVO pageVO);
 	public List<ContactVO> getContactList();
 	public List<ContactVO> getFinishedContactList();
 	public List<SubscribeVO> getSubscribeList();
+	// 모든 건강기능식품 가져오기
+	public List<FunctionalFoodVO> getFunctionalFoodListPg(PaginationVO pageVO);
+	// 건강기능식품 정보 수정
+	public int updateFunctionalFood(FunctionalFoodVO vo);
+	// 건강기능식품 정보 삭제
+	public int deleteFuctionalFood(FunctionalFoodVO vo);
+	public int getPageSize(String pageno);
+	public List<QuestionVO> getQuestionListPg(PaginationVO pageVO);
+	public int deleteQuestion(QuestionVO vo);
+	public int updateQuestion(QuestionVO vo);
+	public int insertQuestion(QuestionVO vo);
+	public int questionCount();
+	public int foodCount();
+	public int managerCount();
 	
 }
