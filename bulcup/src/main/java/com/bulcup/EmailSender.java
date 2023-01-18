@@ -15,7 +15,7 @@ import org.thymeleaf.context.Context;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 
 @Component
-public class Email {
+public class EmailSender {
 
     @Autowired
     private JavaMailSender javaMailSender;
@@ -41,15 +41,11 @@ public class Email {
         MimeMessageHelper helper;
         
 		try {
-			
 			helper = new MimeMessageHelper(message, true);
-			
 			// 발신자 설정
 			helper.setFrom("gt-choe@naver.com");
-			
 			//메일 제목 설정
 	        helper.setSubject(title);
-
 	        //수신자 설정
 	        helper.setTo(to);
 

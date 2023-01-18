@@ -2,15 +2,19 @@ from selenium import webdriver
 from bs4 import BeautifulSoup
 from time import time
 
-driver = webdriver.Chrome('../cWebConn/4_selenium_class/webdriver/chromedriver.exe')
+option = webdriver.ChromeOptions()
+option.add_experimental_option("useAutomationExtension", False)
+option.add_experimental_option("excludeSwitches", ['enable-automation'])
 
-eye = open("fileEye.txt", "r", encoding='UTF-8').read().split(', ')
-diet = open("fileDiet.txt", "r", encoding='UTF-8').read().split(', ')
-liver = open("fileLiver.txt", "r", encoding='UTF-8').read().split(', ')
-digestive = open("fileDigestive.txt", "r", encoding='UTF-8').read().split(', ')
-bone = open("fileBone.txt", "r", encoding='UTF-8').read().split(', ')
-energy = open("fileEnergy.txt", "r", encoding='UTF-8').read().split(', ')
-file = open("text.txt", "w", encoding='UTF-8')
+driver = webdriver.Chrome('D:/Python/aBasic/cWebConn/4_selenium_class/chromedriver.exe')
+
+eye = open("D:/ALLBO7/Bulcup/src/main/java/com/bulcup/service/crawling/fileEye.txt", "r", encoding='UTF-8').read().split(', ')
+diet = open("D:/ALLBO7/Bulcup/src/main/java/com/bulcup/service/crawling/fileDiet.txt", "r", encoding='UTF-8').read().split(', ')
+liver = open("D:/ALLBO7/Bulcup/src/main/java/com/bulcup/service/crawling/fileLiver.txt", "r", encoding='UTF-8').read().split(', ')
+digestive = open("D:/ALLBO7/Bulcup/src/main/java/com/bulcup/service/crawling/fileDigestive.txt", "r", encoding='UTF-8').read().split(', ')
+bone = open("D:/ALLBO7/Bulcup/src/main/java/com/bulcup/service/crawling/fileBone.txt", "r", encoding='UTF-8').read().split(', ')
+energy = open("D:/ALLBO7/Bulcup/src/main/java/com/bulcup/service/crawling/fileEnergy.txt", "r", encoding='UTF-8').read().split(', ')
+file = open("D:/ALLBO7/Bulcup/src/main/java/com/bulcup/service/crawling/text.txt", "w", encoding='UTF-8')
 file.write("URL:: TITLE:: IMG:: WRITER:: TIME:: CONTENT:: CLASSIFY\n")
 
 # 뉴스들의 url 가져오기
@@ -26,6 +30,7 @@ for i in range(1000):
     for url in soup.select('td.content a'):
         print(url)
         news.append(url['href'])
+
 
 for url in news[::2]:
     try:

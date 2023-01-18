@@ -3,12 +3,12 @@ package com.bulcup.service;
 import java.util.List;
 
 import com.bulcup.domain.BlogVO;
-import com.bulcup.domain.CategoryVO;
 import com.bulcup.domain.ContactVO;
 import com.bulcup.domain.FunctionalFoodVO;
 import com.bulcup.domain.ManagerVO;
 import com.bulcup.domain.PaginationVO;
 import com.bulcup.domain.QuestionVO;
+import com.bulcup.domain.noticeVO;
 
 public interface ManagerService {
 
@@ -20,8 +20,8 @@ public interface ManagerService {
 	public int deleteContact(ContactVO vo);
 	public List<ManagerVO> getManagerList();
 	public List<ManagerVO> getManagerListPg(PaginationVO pageVO);
-	public List<ContactVO> getContactList();
-	public List<ContactVO> getFinishedContactList();
+	public List<ContactVO> getContactList(PaginationVO pageVO);
+	public List<ContactVO> getFinishedContactList(PaginationVO pageVO);
 	public int insertBlog(BlogVO vo);
 	public int updateBlog(BlogVO vo);
 	public int deleteBlog(BlogVO vo);
@@ -39,6 +39,12 @@ public interface ManagerService {
 	public int questionCount();
 	public int foodCount();
 	public int managerCount();
-	
-	
+	public int waitCount();
+	public int completeCount();
+	// 공지사항 리스트 출력
+	public List<noticeVO> getListnotice(PaginationVO pageVO);
+	// 공지사항 리스트 총 갯수
+	public int countnotice();
+	public void insertnotice(noticeVO vo);
+
 }

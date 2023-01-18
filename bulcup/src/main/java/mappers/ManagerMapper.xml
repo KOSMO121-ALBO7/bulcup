@@ -6,6 +6,10 @@
 		INSERT INTO MANAGER(id, password, tel, email, authority)
 		 VALUES(#{id}, #{password}, #{tel}, #{email}, 'emp')
 	</insert>
+	<insert id="insertnotice" parameterType="noticeVO">
+		INSERT INTO NOTICE(id,title,reg_date,writer,content)
+		VALUES(nextval(seq_notice_id),#{title},sysdate(),#{writer},#{content})
+	</insert>
 	
 	<!-- SELECT -->
 	<select id="selectManagerByIdAndPw" parameterType="ManagerVO" resultType="ManagerVO">
@@ -18,6 +22,10 @@
 	<select id="getContactList" resultType="ContactVO">
 		SELECT * FROM CONTACT
 		WHERE ANSWER IS NULL
+		limit
+		#{pageSize}
+		offset
+		#{startRow}
 	</select>
 	<select id="getSubscribeList" resultType="SubscribeVO">
 		SELECT * FROM subscribe
@@ -25,11 +33,14 @@
 	<select id="getFinishedContactList" resultType="ContactVO">
 		SELECT * FROM CONTACT
 		WHERE ANSWER IS NOT NULL
+		limit
+		#{pageSize}
+		offset
+		#{startRow};
 	</select>
 	<select id="getQuestionListPg" parameterType="PaginationVO"
 		resultType="QuestionVO">
-		SELECT *
-		FROM sympthom_question
+		SELECT * FROM sympthom_question
 		ORDER BY id
 		limit
 		#{pageSize}
@@ -37,7 +48,7 @@
 		#{startRow};
 	</select>
 	<select id="getManagerListPg" parameterType="PaginationVO" resultType="ManagerVO">
-		SELECT * FROM MANAGER
+		SELECT * FROM MANAGER 
 		ORDER BY authority
 		limit
 		#{pageSize}
@@ -62,8 +73,23 @@
 		SELECT COUNT(*) FROM manager
 	</select>
 	<select id="foodCount" resultType="int">
-		SELECT count(*) FROM
-		functional_food
+		SELECT count(*) FROM functional_food
+	</select>
+	<select id="waitCount" resultType="int">
+		SELECT count(*) FROM CONTACT
+	</select>
+	<select id="completeCount" resultType="int">
+		SELECT count(*) FROM CONTACT
+	</select>
+		<select id="getListnotice"  parameterType="PaginationVO" resultType="noticeVO">
+		SELECT id,title,writer,reg_date FROM notice
+		limit
+		#{pageSize}
+		offset
+		#{startRow}
+	</select>
+	<select id="countnotice" resultType="int">
+		SELECT COUNT(*) FROM notice
 	</select>
 	
 	<!-- UPDATE -->

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" txmlns:th="http://www.thymeleaf.org">
+<!-- Basic -->
+
+<head th:replace="/user/header.html :: head"></head>
+
+<body>
+	<header th:replace="/user/header.html :: header"></header>
+	<!-- Start Contact -->
+	<div class="contact-box">
+		<div class="container">
+			<nav class="survey-test-header">
+				<br></br>
+				<ul class="heading-title text-center">
+					<li data="기본정보" class="step-list">
+						<h3>기본정보</h3>
+					</li>
+					<li data="관심사항" class="step-list">
+						<h3>관심사항</h3>
+					</li>
+					<li data="증상/불편" class="step-list">
+						<h3>증상/불편</h3>
+					</li>
+					<li data="생활 습관" class="step-list">
+						<h3>생활 습관</h3>
+					</li>
+				</ul>
+			</nav>
+
+			<div class="survey-progress">
+				<div id="survey-progress-rate" style="width: 18%;"></div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12">
+					<br /><br />
+					<h5>질문</h5>
+					<h2 th:text="${title}"></h2>
+					<hr />
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12">
+					<form th:action="@{selfDiagnosisSympthom.html}" method="post">
+						<div class="form-group">
+							<div class="wrap-check" th:each="list : ${categoryList}">
+								<label>
+									<input class='dis-checkbox' type="checkbox" th:name="category" th:value="${list.id}"
+										th:text="${list.category}"><label></br>
+							</div>
+						</div>
+						<div>
+							<span class="submit-button text" style="float: left;">
+								<a th:href="@{selfDiagnosisStart.html}"><button class="btn btn-common" type="button">이전</button></a>
+							</span>
+							<span class="submit-button text" style="float: right;">
+								<button class="btn btn-common" type="submit">다음</button>
+							</span>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+	</div>
+	<!-- End Contact -->
+	<!--Footer-->
+
+
+	<!-- ALL JS FILES -->
+	<script src="/user/js/jquery-3.2.1.min.js"></script>
+	<script src="/user/js/selfDiagnosisCq.js"></script>
+	<!-- ALL PLUGINS -->
+
+
+</body>
+
+</html>

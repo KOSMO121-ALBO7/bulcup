@@ -12,17 +12,17 @@ import java.util.Scanner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.bulcup.Email;
+import com.bulcup.EmailSender;
 import com.bulcup.paging;
 import com.bulcup.dao.ManagerDao;
 import com.bulcup.domain.BlogVO;
-import com.bulcup.domain.CategoryVO;
 import com.bulcup.domain.ContactVO;
 import com.bulcup.domain.FunctionalFoodVO;
 import com.bulcup.domain.ManagerVO;
 import com.bulcup.domain.PaginationVO;
 import com.bulcup.domain.QuestionVO;
 import com.bulcup.domain.SubscribeVO;
+import com.bulcup.domain.noticeVO;
 
 @Service
 public class ManagerServiceImpl implements ManagerService {
@@ -31,7 +31,7 @@ public class ManagerServiceImpl implements ManagerService {
 	private ManagerDao managerdao;
 
 	@Autowired
-	private Email email;
+	private EmailSender email;
 
 	public int insertManager(ManagerVO vo) {
 		return managerdao.insertManager(vo);
@@ -60,17 +60,17 @@ public class ManagerServiceImpl implements ManagerService {
 	public List<ManagerVO> getManagerList() {
 		return managerdao.getManagerList();
 	}
-	
+
 	public List<ManagerVO> getManagerListPg(PaginationVO pageVO) {
 		return managerdao.getManagerListPg(pageVO);
 	}
 
-	public List<ContactVO> getContactList() {
-		return managerdao.getContactList();
+	public List<ContactVO> getContactList(PaginationVO pageVO) {
+		return managerdao.getContactList(pageVO);
 	}
 
-	public List<ContactVO> getFinishedContactList() {
-		return managerdao.getFinishedContactList();
+	public List<ContactVO> getFinishedContactList(PaginationVO pageVO) {
+		return managerdao.getFinishedContactList(pageVO);
 	}
 
 	public List<BlogVO> getBlogList() {
@@ -200,7 +200,7 @@ public class ManagerServiceImpl implements ManagerService {
 	public int getPageSize(String pageno) {
 		return managerdao.getPageSize(pageno);
 	}
-	
+
 	public int deleteQuetstion(QuestionVO vo) {
 		return managerdao.deleteQuestion(vo);
 	}
@@ -212,7 +212,7 @@ public class ManagerServiceImpl implements ManagerService {
 	public int insertQuestion(QuestionVO vo) {
 		return managerdao.insertQuestion(vo);
 	}
-	
+
 	public List<QuestionVO> getQuestionListPg(PaginationVO pageVO) {
 		return managerdao.getQuestionListPg(pageVO);
 	}
@@ -220,7 +220,7 @@ public class ManagerServiceImpl implements ManagerService {
 	public int questionCount() {
 		return managerdao.questionCount();
 	}
-	
+
 	public int managerCount() {
 		return managerdao.managerCount();
 	}
@@ -228,7 +228,23 @@ public class ManagerServiceImpl implements ManagerService {
 	public int foodCount() {
 		return managerdao.foodCount();
 	}
-	
 
+	public int waitCount() {
+		return managerdao.waitCount();
+	}
+
+	public int completeCount() {
+		return managerdao.completeCount();
+	}
+	// 공지사항 리스트 출력
+	public List<noticeVO> getListnotice(PaginationVO pageVO) {
+		return managerdao.getListnotice(pageVO);
+	}
+	public int countnotice() {
+		return managerdao.countnotice();
+	}
+	public void insertnotice(noticeVO vo) {
+		managerdao.insertnotice(vo);
+	}
 
 }

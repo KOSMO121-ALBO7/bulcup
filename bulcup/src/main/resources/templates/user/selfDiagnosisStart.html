@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" txmlns:th="http://www.thymeleaf.org"><!-- Basic -->
+<html lang="en" txmlns:th="http://www.thymeleaf.org">
+<!-- Basic -->
+
 <head th:replace="/user/header.html :: head"></head>
 
 <body>
@@ -8,60 +10,74 @@
 	<!-- Start Contact -->
 	<div class="contact-box">
 		<div class="container">
-		<nav class="survey-test-header">
-		<br></br>
-		<ul class="heading-title text-center">
-		
-		<li data="기본정보" class="step-list"><h3>기본정보</h3>
-		</li><li data="증상/불편" class="step-list"><h3>증상/불편</h3>
-		</li><li data="생활 습관" class="step-list"><h3>생활 습관</h3></li>
-		<li data="기타" class="step-list"><h3>기타</h3></li></ul></nav>
-			
-			<div class="survey-progress"><div id="survey-progress-rate" style="width: 18%;"></div></div>
+			<nav class="survey-test-header">
+				<br></br>
+				<ul class="heading-title text-center">
+
+					<li data="기본정보" class="step-list">
+						<h3>기본정보</h3>
+					</li>
+					<li data="관심사항" class="step-list">
+						<h3>관심사항</h3>
+					</li>
+					<li data="증상/불편" class="step-list">
+						<h3>증상/불편</h3>
+					</li>
+					<li data="생활 습관" class="step-list">
+						<h3>생활 습관</h3>
+					</li>
+				</ul>
+			</nav>
+
+			<div class="survey-progress">
+				<div id="survey-progress-rate" style="width: 18%;"></div>
+			</div>
 			<div class="row">
-				<div class="col-lg-12">			
-						<br/><br/>
-						<h5>질문 1</h5>
-						
-						<h2>사용자 정보를 입력해주세요.</h2>
-						<hr/>
+				<div class="col-lg-12">
+					<br /><br />
+					<h2>사용자 정보를 입력해주세요.</h2>
+					<hr />
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-lg-12">
-					<form id="contactForm">
+					<form th:action="@{selfDiagnosisCategory.html}" method="post">
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
-									<input type="text" class="form-control" id="name" name="name" placeholder="이름" required data-error="이름을 입력해주세요">
+									<input type="text" placeholder="이름" id="name" class="form-control" th:name="name"
+										required data-error="이름을 입력해주세요">
 									<div class="help-block with-errors"></div>
-								</div>                                 
+								</div>
 							</div>
 							<div class="col-md-12">
 								<div class="form-group">
-									<input type="text" placeholder="키" id="height" class="form-control" name="name" required data-error="키를 입력해주세요">
+									<input type="text" placeholder="키" id="height" class="form-control" th:name="height"
+										required data-error="키를 입력해주세요">
 									<div class="help-block with-errors"></div>
-								</div> 
+								</div>
 							</div>
 							<div class="col-md-12">
 								<div class="form-group">
-									<input type="text" placeholder="체중" id="weight" class="form-control" name="weight" required data-error="체중을 입력해주세요">
+									<input type="text" placeholder="체중" id="weight" class="form-control" th:name="weight"
+										required data-error="체중을 입력해주세요">
 									<div class="help-block with-errors"></div>
-								</div> 
+								</div>
 							</div>
 
 							<div class="col-md-12">
-								<div class="form-group"> 
-									<input type="text" placeholder="나이" id="age" class="form-control" name="age" required data-error="나이를 입력해주세요">
+								<div class="form-group">
+									<input type="text" placeholder="나이" id="age" class="form-control" th:name="age"
+										required data-error="나이를 입력해주세요">
 									<div class="help-block with-errors"></div>
 								</div>
 								<div>
 									<span class="submit-button text" style="float: right;">
-										<a href="selfDiagnosisIn.html"><button class="btn btn-common" id="next" type="button">다음</button></a>
+										<button class="btn btn-common" id="next" type="submit">다음</button>
 									</span>
 								</div>
 							</div>
-						</div>            
+						</div>
 					</form>
 				</div>
 			</div>
@@ -69,12 +85,15 @@
 	</div>
 	<!-- End Contact -->
 	<!--Footer-->
-   
-	
+
+
 	<!-- ALL JS FILES -->
-    <!-- ALL PLUGINS -->
-    <div th:replace="/user/footer.html :: javascript"></div>
- 
-    
+	<script src="/user/js/jquery-3.2.1.min.js"></script>
+	<script src="/user/js/selfDiagnosisStart.js"></script>
+	<!-- ALL PLUGINS -->
+	<div th:replace="/user/footer.html :: javascript"></div>
+
+
 </body>
+
 </html>

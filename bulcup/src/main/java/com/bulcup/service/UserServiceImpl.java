@@ -14,6 +14,8 @@ import com.bulcup.domain.BlogVO;
 import com.bulcup.domain.CategoryVO;
 import com.bulcup.domain.ContactVO;
 import com.bulcup.domain.FunctionalFoodVO;
+import com.bulcup.domain.SubscribeVO;
+import com.bulcup.domain.SympthomQuestionVO;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -70,7 +72,7 @@ public class UserServiceImpl implements UserService {
 	public Integer foodCount(Integer category_id) {
 		return userdao.foodCount(category_id);
 	}
-	
+
 	public Integer foodCount(HashMap searchMap) {
 		return userdao.foodCountBySearch(searchMap);
 	}
@@ -78,5 +80,14 @@ public class UserServiceImpl implements UserService {
 	public List<CategoryVO> category() {
 		return userdao.category();
 	}
+
+	public int insertSubscriber(SubscribeVO vo) {
+		return userdao.insertSubscriber(vo);
+	}
+
+	public List<SympthomQuestionVO> getSympthomQuestion(String category_id) {
+		return userdao.getSympthomQuestion(category_id);
+	}
+
 
 }

@@ -4,17 +4,17 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.bulcup.domain.CategoryVO;
 import com.bulcup.domain.ContactVO;
 import com.bulcup.domain.FunctionalFoodVO;
 import com.bulcup.domain.ManagerVO;
 import com.bulcup.domain.PaginationVO;
 import com.bulcup.domain.QuestionVO;
 import com.bulcup.domain.SubscribeVO;
+import com.bulcup.domain.noticeVO;
 
 @Mapper
 public interface ManagerDao {
-	
+
 	public int insertManager(ManagerVO vo);
 	public ManagerVO selectManagerByIdAndPw(ManagerVO vo);
 	public int updateManager(ManagerVO vo);
@@ -23,8 +23,8 @@ public interface ManagerDao {
 	public int deleteContact(ContactVO vo);
 	public List<ManagerVO> getManagerList();
 	public List<ManagerVO> getManagerListPg(PaginationVO pageVO);
-	public List<ContactVO> getContactList();
-	public List<ContactVO> getFinishedContactList();
+	public List<ContactVO> getContactList(PaginationVO pageVO);
+	public List<ContactVO> getFinishedContactList(PaginationVO pageVO);
 	public List<SubscribeVO> getSubscribeList();
 	// 모든 건강기능식품 가져오기
 	public List<FunctionalFoodVO> getFunctionalFoodListPg(PaginationVO pageVO);
@@ -40,5 +40,12 @@ public interface ManagerDao {
 	public int questionCount();
 	public int foodCount();
 	public int managerCount();
-	
+	public int waitCount();
+	public int completeCount();
+	public List<noticeVO> getListnotice(PaginationVO pageVO);
+	// 공지사항 리스트 총 갯수
+	public int countnotice();
+	// 공지사항 입력
+	public void insertnotice(noticeVO vo);
+
 }

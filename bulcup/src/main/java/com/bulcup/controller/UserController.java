@@ -10,6 +10,7 @@ import java.util.UUID;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,7 +29,11 @@ import com.bulcup.domain.BlogVO;
 import com.bulcup.domain.CategoryVO;
 import com.bulcup.domain.ContactVO;
 import com.bulcup.domain.FunctionalFoodVO;
+import com.bulcup.domain.LifestyleQuestionVO;
 import com.bulcup.domain.PaginationVO;
+import com.bulcup.domain.SelfDiagnosisVO;
+import com.bulcup.domain.SubscribeVO;
+import com.bulcup.domain.SympthomQuestionVO;
 import com.bulcup.service.UserService;
 
 @Controller
@@ -44,6 +49,18 @@ public class UserController {
 	Long prevTime = Long.valueOf(LocalTime.now().format(DateTimeFormatter.ofPattern("mm")));
 	String prevPage = null;
 	String nextPage = null;
+
+	@GetMapping("/{step}")
+	public String viewPage(@PathVariable String step, HttpServletRequest req, HttpServletResponse res) {
+		if(prevPage == null) {
+			prevPage = step.replace(".html", "");
+		}
+		logUser(req, res, step.replace(".html", "") + "\n");
+		logFavoritePages(step.replace(".html", ""));
+		logTime(step.replace(".html", ""));
+		logger.log("User page: " + step);
+		return "/user/" + step;
+	} // viewPage
 
 	@RequestMapping("insertContact.do")
 	public String insertContact(ContactVO contactVO) {
@@ -76,18 +93,6 @@ public class UserController {
 		m.addAttribute("getBlogList", list);
 		return "/user/blog.html";
 	}
-
-	@GetMapping("/{step}")
-	public String viewPage(@PathVariable String step, HttpServletRequest req, HttpServletResponse res) {
-		if(prevPage == null) {
-			prevPage = step.replace(".html", "");
-		}
-		logUser(req, res, step.replace(".html", "") + "\n");
-		logFavoritePages(step.replace(".html", ""));
-		logTime(step.replace(".html", ""));
-		logger.log("User page: " + step);
-		return "/user/" + step;
-	} // viewPage
 
 	// name: logUser
 	// param: HttpServletRequest, HttpServletResponse, String = pathURL
@@ -149,7 +154,7 @@ public class UserController {
 		prevTime = formattedNow;
 		prevPage = page;
 	}// logFavoritePages
-	
+
 	public void logSearch(String condition, String keyword) {
 		logSearch = BulcupLogger.getLogger("log/search/"+condition+".log");
 		logSearch.log(keyword);
@@ -164,21 +169,21 @@ public class UserController {
 			@RequestParam(value = "category", required = false) String cate,		// 카테고리번호 파라미터
 			@RequestParam(value = "condition", required = false) String condition,	// 검색타입 파라미터
 			@RequestParam(value = "keyword", required = false) String keyword) {	// 키워드 파라미터
-		
+
 		if(prevPage == null) {
 			prevPage = "search";
 		}
-		
+
 		// 요청한 페이지번호가 있으면 형변환 없으면 1
 		Integer pageNo = (pageno == null) ? 1 : Integer.valueOf(pageno);
 		Integer category_id = null;
 		Integer totalRecord = null;
 		HashMap searchMap = new HashMap<>();
 		HashMap map = new HashMap();
-		
+
 		if(condition == null) {
 			// 카테고리 클릭시
-				// 요청 카테고리가 있으면 형변환 없으면 0
+			// 요청 카테고리가 있으면 형변환 없으면 0
 			category_id = (cate == null) ? 0 : Integer.valueOf(cate);
 			totalRecord = userService.foodCount(category_id);
 		} else {
@@ -187,7 +192,7 @@ public class UserController {
 			searchMap.put("condition", condition);
 			searchMap.put("keywordArr", keywordArr);
 			totalRecord = userService.foodCount(searchMap);
-			
+
 			logSearch(condition, keyword + "\n");
 		}
 
@@ -223,4 +228,95 @@ public class UserController {
 		logyCoord.log(y + "-");
 		return "ok";
 	}
+
+	@PostMapping(value="insertSubscriber.do")
+	@ResponseBody
+	public void insertSubscriber (SubscribeVO vo) {
+		userService.insertSubscriber(vo);
+	};
+
+
+	@PostMapping(value = "selfDiagnosisCategory.html")
+	public String selfDiagnosisCategory(Model m, SelfDiagnosisVO persnal, HttpSession session) {
+		List<CategoryVO> categoryList = userService.category();
+		categoryList.remove(0);
+		session.setAttribute("category", categoryList);
+		m.addAttribute("title", "관심있는 사항을 체크해주세여 (최대 3개)");
+		m.addAttribute("categoryList", categoryList);
+		session.setAttribute("persnalInfo", persnal);
+		return "/user/selfDiagnosisCategory.html";
+	}
+
+	
+	@PostMapping(value = "selfDiagnosisSympthom.html")
+	public String selfDiagnosisSympthom(Model m, HttpServletRequest req, HttpSession session) {
+		List<String[]> sympthom = (List<String[]>) session.getAttribute("sympthom");
+		List<List<SympthomQuestionVO>> waitingList = (List) session.getAttribute("wait");
+		List<List<SympthomQuestionVO>> completeList = (List) session.getAttribute("complete");
+		if(waitingList == null) waitingList = new ArrayList<>();
+		if(completeList == null) completeList = new ArrayList<>();
+		
+		String[] categoryArr = req.getParameterValues("category");
+		if(categoryArr != null) {
+			session.setAttribute("category", categoryArr);
+			for(int i=categoryArr.length-1; i>=0; i--) {
+				List<SympthomQuestionVO> sympthomList = userService.getSympthomQuestion(categoryArr[i]);
+				waitingList.add(sympthomList);
+			}
+			int last = waitingList.size() - 1;
+			m.addAttribute("questionList", waitingList.get(last));
+			completeList.add(waitingList.get(last));
+			session.setAttribute("complete", completeList);
+			waitingList.remove(last);
+			session.setAttribute("wait", waitingList);
+			return "/user/selfDiagnosisSympthom.html";
+		}
+		///////////////////////////////////////////////////////////////////////////////////////////
+		String[] sympthomArr = req.getParameterValues("sympthom");
+		if(sympthomArr == null) ;
+		
+		int last = waitingList.size() - 1;
+		m.addAttribute("questionList", waitingList.get(last));
+		completeList.add(waitingList.get(last));
+		session.setAttribute("complete", completeList);
+		waitingList.remove(last);
+		session.setAttribute("wait", waitingList);
+
+		m.addAttribute("title", "해당하는 증상을 체크해주세요.");
+		return "/user/selfDiagnosisSympthom.html";
+	}
+	
+	
+	@PostMapping(value = "selfDiagnosisSympthom.do")
+	public String selfDiagnosisSympthom(Model m, HttpServletRequest req, HttpSession session,
+			@RequestParam(value = "page", required = false) String page) {
+		List<String[]> sympthom = (List<String[]>) session.getAttribute("sympthom");
+		List<List<SympthomQuestionVO>> waitingList = (List) session.getAttribute("wait");
+		List<List<SympthomQuestionVO>> completeList = (List) session.getAttribute("complete");
+		System.out.println("sympthom"+sympthom.get(0));
+		
+		if(page.equals("next")) {
+			String[] sympthomArr = req.getParameterValues("sympthom");
+			session.setAttribute("sympthom", sympthom.add(sympthomArr));
+			if(waitingList.size() == 0) return "/user/selfDiagnosisLifestyle.html";
+			
+			
+		} else if(page.equals("prev")) {
+			if(completeList.size() == 1) {
+				System.out.println("size = 1");
+				m.addAttribute("categoryList", session.getAttribute("category"));
+				return "/user/selfDiagnosisCategory.html";
+			}
+			int last = sympthom.size() - 1;
+			m.addAttribute("questionList", completeList.get(last));
+			waitingList.add(completeList.get(last));
+			session.setAttribute("wait", waitingList);
+			completeList.remove(last);
+			session.setAttribute("complete", completeList);
+		}
+		
+		m.addAttribute("title", "해당하는 증상을 체크해주세요.");
+		return "/user/selfDiagnosisSympthom.html";
+	}
+	
 }

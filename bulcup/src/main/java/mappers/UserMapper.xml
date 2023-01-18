@@ -8,6 +8,10 @@
 		INSERT INTO Contact(id, email, question, contact_date)
 		 VALUES(nextval(contact_id_seq), #{email}, #{question}, SYSDATE())
 	</insert>
+	<insert id="insertSubscriber" parameterType="SubscribeVO">
+      INSERT INTO subscribe(email,subscribe_date,renewal_date)
+      VALUES(#{email},sysdate(),date_add(sysdate(), interval 1 month))
+   </insert>
 
 	<!-- SELECT -->
 	<select id="foodCount" parameterType="int" resultType="int">
@@ -68,6 +72,9 @@
 	</select>
 	<select id="category" resultType="CategoryVO">
 		SELECT id, category FROM category
+	</select>
+	<select id="getSympthomQuestion" parameterType="string" resultType="SympthomQuestionVO">
+		SELECT * FROM sympthom_question WHERE category_id = #{category_id}
 	</select>
 	
 	<!-- UPDATE -->
