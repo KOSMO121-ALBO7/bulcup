@@ -83,6 +83,7 @@
 	</select>
 		<select id="getListnotice"  parameterType="PaginationVO" resultType="noticeVO">
 		SELECT id,title,writer,reg_date FROM notice
+		ORDER BY reg_date DESC
 		limit
 		#{pageSize}
 		offset

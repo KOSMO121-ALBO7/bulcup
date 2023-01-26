@@ -53,11 +53,11 @@
 	<script th:inline="javascript">
 
  new Chart(document.getElementById("canvas"), {
-    type: 'line',
+    type: 'horizontalBar',
     data: {
         labels: ['자가진단', '문의하기', '메인', '검색하기'],
         datasets: [{
-            label: '방문 시간',
+            label: '이용 사이트',
             data: [
                [[${self}]],
                 [[${contact}]],
@@ -75,7 +75,7 @@
         responsive: true,
         title: {
             display: true,
-            text: '라인 차트 테스트'
+            text: '페이지 사용 시간 통계'
         },
         tooltips: {
             mode: 'index',
@@ -90,7 +90,7 @@
                 display: true,
                 scaleLabel: {
                     display: true,
-                    labelString: '페이지 이름'
+                    labelString: '페이지 유지 시간'
                 }
             }],
             yAxes: [{
@@ -100,7 +100,7 @@
                 },
                 scaleLabel: {
                     display: true,
-                    labelString: '방문 시간'
+                    labelString: '방문 페이지명'
                 }
             }]
         }
@@ -177,6 +177,8 @@
                   <h3 class="card-title text-nowrap mb-1"><a th:text="${self}"/></a></h3>
                  
                 </div>
+                <!-- IFRAME 은 여기다 박아주세요-->
+               <iframe src="http://192.168.0.52:5601/app/visualize#/edit/d4065ef0-9718-11ed-a667-492c2a7645e4?embed=true&_g=(filters%3A!()%2CrefreshInterval%3A(pause%3A!t%2Cvalue%3A0)%2Ctime%3A(from%3Anow-1y%2Cto%3Anow))" height="600" width="100%"></iframe>
                 </div>
                 
                 

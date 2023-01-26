@@ -4,7 +4,9 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 import javax.servlet.http.Cookie;
@@ -29,8 +31,10 @@ import com.bulcup.domain.BlogVO;
 import com.bulcup.domain.CategoryVO;
 import com.bulcup.domain.ContactVO;
 import com.bulcup.domain.FunctionalFoodVO;
+import com.bulcup.domain.LifestyleGroupVO;
 import com.bulcup.domain.LifestyleQuestionVO;
 import com.bulcup.domain.PaginationVO;
+import com.bulcup.domain.RawMaterialVO;
 import com.bulcup.domain.SelfDiagnosisVO;
 import com.bulcup.domain.SubscribeVO;
 import com.bulcup.domain.SympthomQuestionVO;
@@ -52,15 +56,25 @@ public class UserController {
 
 	@GetMapping("/{step}")
 	public String viewPage(@PathVariable String step, HttpServletRequest req, HttpServletResponse res) {
-		if(prevPage == null) {
-			prevPage = step.replace(".html", "");
-		}
+		if(prevPage == null) prevPage = step.replace(".html", "");
 		logUser(req, res, step.replace(".html", "") + "\n");
 		logFavoritePages(step.replace(".html", ""));
 		logTime(step.replace(".html", ""));
 		logger.log("User page: " + step);
 		return "/user/" + step;
 	} // viewPage
+
+	@GetMapping(value = "index.html")
+	public String index(Model m, HttpServletRequest req, HttpServletResponse res) {
+		if(prevPage == null) prevPage = "index";
+		logUser(req, res, "index\n");
+		logFavoritePages("index");
+		logTime("index");
+		logger.log("User page: " + "index.html");
+		List<BlogVO> list = userService.getBlogList(1, 3);
+		m.addAttribute("getBlogList", list);
+		return "/user/index.html";
+	}
 
 	@RequestMapping("insertContact.do")
 	public String insertContact(ContactVO contactVO) {
@@ -76,17 +90,13 @@ public class UserController {
 	@GetMapping(value = "blog.html")
 	public String blog(Model m, @RequestParam(value = "pageNo", required = false) String pageno, 
 			HttpServletRequest req, HttpServletResponse res) {
-		if(prevPage == null) {
-			prevPage = "blog";
-		}
+		if(prevPage == null) prevPage = "blog";
 		logUser(req, res, "blog\n");
 		logFavoritePages("blog");
 		logTime("blog");
 		logger.log("User page: " + "blog.html");
-		if (pageno != null)
-			paging.pageNo = Integer.valueOf(pageno);
-		else
-			paging.pageNo = 1;
+		if (pageno != null) paging.pageNo = Integer.valueOf(pageno);
+		else paging.pageNo = 1;
 		m.addAttribute("totalPageNo", paging.totalPageNo);
 		m.addAttribute("pageNo", paging.pageNo);
 		List<BlogVO> list = userService.getBlogList(paging.pageNo, paging.pageSize);
@@ -170,9 +180,7 @@ public class UserController {
 			@RequestParam(value = "condition", required = false) String condition,	// 검색타입 파라미터
 			@RequestParam(value = "keyword", required = false) String keyword) {	// 키워드 파라미터
 
-		if(prevPage == null) {
-			prevPage = "search";
-		}
+		if(prevPage == null) prevPage = "search";
 
 		// 요청한 페이지번호가 있으면 형변환 없으면 1
 		Integer pageNo = (pageno == null) ? 1 : Integer.valueOf(pageno);
@@ -235,88 +243,259 @@ public class UserController {
 		userService.insertSubscriber(vo);
 	};
 
+	/****************************************
+	 * 함수명 : detail
+	 * 역할 : 사용자가 검색을 통해 원하는 영양제 사진을 선택했을 때, 해당 제품의 상세정보 페이지로 넘어가 정보 출력
+	 * @param model
+	 * @param id
+	 * @return : 상세정보 페이지
+	 */
+	@RequestMapping(value="Detail.html")
+	public String detail(Model m , @RequestParam(value="id", required=false) String id) {
+		FunctionalFoodVO result = userService.detail(id);
+		m.addAttribute("result", result);
+		return "user/Detail.html";
+	}
 
-	@PostMapping(value = "selfDiagnosisCategory.html")
-	public String selfDiagnosisCategory(Model m, SelfDiagnosisVO persnal, HttpSession session) {
+	@RequestMapping(value = "selfDiagnosisCategory.html")
+	public String selfDiagnosisCategory(Model m, SelfDiagnosisVO vo, HttpSession session) {
+		System.out.println("selfDiagnosisCategory");
+		if(vo.getName() != null) session.setAttribute("result", vo);
+
+		Object obj = session.getAttribute("result");
+		if(obj == null) return "/user/selfDiagnosisStart.html";
+
 		List<CategoryVO> categoryList = userService.category();
 		categoryList.remove(0);
-		session.setAttribute("category", categoryList);
-		m.addAttribute("title", "관심있는 사항을 체크해주세여 (최대 3개)");
 		m.addAttribute("categoryList", categoryList);
-		session.setAttribute("persnalInfo", persnal);
+		m.addAttribute("title", "관심있는 분야를 선택해주세요. (최대 3개)");
 		return "/user/selfDiagnosisCategory.html";
 	}
 
-	
-	@PostMapping(value = "selfDiagnosisSympthom.html")
-	public String selfDiagnosisSympthom(Model m, HttpServletRequest req, HttpSession session) {
-		List<String[]> sympthom = (List<String[]>) session.getAttribute("sympthom");
-		List<List<SympthomQuestionVO>> waitingList = (List) session.getAttribute("wait");
-		List<List<SympthomQuestionVO>> completeList = (List) session.getAttribute("complete");
-		if(waitingList == null) waitingList = new ArrayList<>();
-		if(completeList == null) completeList = new ArrayList<>();
-		
-		String[] categoryArr = req.getParameterValues("category");
-		if(categoryArr != null) {
-			session.setAttribute("category", categoryArr);
-			for(int i=categoryArr.length-1; i>=0; i--) {
-				List<SympthomQuestionVO> sympthomList = userService.getSympthomQuestion(categoryArr[i]);
-				waitingList.add(sympthomList);
-			}
-			int last = waitingList.size() - 1;
-			m.addAttribute("questionList", waitingList.get(last));
-			completeList.add(waitingList.get(last));
-			session.setAttribute("complete", completeList);
-			waitingList.remove(last);
-			session.setAttribute("wait", waitingList);
-			return "/user/selfDiagnosisSympthom.html";
-		}
-		///////////////////////////////////////////////////////////////////////////////////////////
-		String[] sympthomArr = req.getParameterValues("sympthom");
-		if(sympthomArr == null) ;
-		
-		int last = waitingList.size() - 1;
-		m.addAttribute("questionList", waitingList.get(last));
-		completeList.add(waitingList.get(last));
-		session.setAttribute("complete", completeList);
-		waitingList.remove(last);
-		session.setAttribute("wait", waitingList);
 
-		m.addAttribute("title", "해당하는 증상을 체크해주세요.");
-		return "/user/selfDiagnosisSympthom.html";
-	}
-	
-	
-	@PostMapping(value = "selfDiagnosisSympthom.do")
-	public String selfDiagnosisSympthom(Model m, HttpServletRequest req, HttpSession session,
+	@RequestMapping(value = "selfDiagnosisSympthom.html")
+	public String selfDiagnosisSympthom(Model m, HttpSession session, HttpServletRequest req,
 			@RequestParam(value = "page", required = false) String page) {
-		List<String[]> sympthom = (List<String[]>) session.getAttribute("sympthom");
-		List<List<SympthomQuestionVO>> waitingList = (List) session.getAttribute("wait");
-		List<List<SympthomQuestionVO>> completeList = (List) session.getAttribute("complete");
-		System.out.println("sympthom"+sympthom.get(0));
-		
-		if(page.equals("next")) {
-			String[] sympthomArr = req.getParameterValues("sympthom");
-			session.setAttribute("sympthom", sympthom.add(sympthomArr));
-			if(waitingList.size() == 0) return "/user/selfDiagnosisLifestyle.html";
-			
-			
-		} else if(page.equals("prev")) {
-			if(completeList.size() == 1) {
-				System.out.println("size = 1");
-				m.addAttribute("categoryList", session.getAttribute("category"));
-				return "/user/selfDiagnosisCategory.html";
+		System.out.println("selfDiagnosisSympthom");
+
+		Object obj = session.getAttribute("result");
+		if(obj == null) return "/user/selfDiagnosisStart.html";
+
+		// 증상문항 첫 시작
+		if(page == null) {
+			System.out.println("selfDiagnosisSympthomStart");
+			String[] categoryIdArr = req.getParameterValues("category");
+			ArrayList<String> category = new ArrayList<>();
+			List<List<SympthomQuestionVO>> sympthomList = new ArrayList<>();
+
+			// 증상문항 DB에서 검색 후 세션에 저장
+			for(int i = 0; i < categoryIdArr.length; i++) {
+				List<SympthomQuestionVO> list = userService.getSympthomQuestion(categoryIdArr[i]);
+				CategoryVO categoryVO = userService.getCategory(categoryIdArr[i]);
+				sympthomList.add(list);
+				category.add(categoryVO.getCategory());
 			}
-			int last = sympthom.size() - 1;
-			m.addAttribute("questionList", completeList.get(last));
-			waitingList.add(completeList.get(last));
-			session.setAttribute("wait", waitingList);
-			completeList.remove(last);
-			session.setAttribute("complete", completeList);
+			int currIndex = 0;
+			int lastIndex = sympthomList.size() - 1;
+			session.setAttribute("sqCurrIndex", currIndex);
+			session.setAttribute("sqLastIndex", lastIndex);
+			session.setAttribute("sympthomList", sympthomList);
+			session.setAttribute("category", category);
+
+			m.addAttribute("category", category.get(currIndex));
+			m.addAttribute("questionList", sympthomList.get(currIndex));
+			m.addAttribute("title", "해당하는 항목을 선택해주세요.");
+
+			// 이전버튼 눌렀을 때
+		} else if(page.equals("prev")) {
+			System.out.println("selfDiagnosisSympthomPrev");
+			int currIndex = (int) session.getAttribute("sqCurrIndex");
+
+			// 첫 증상문항일 때 모델에 관심사항문항 담아 관심사항문항으로 리턴
+			if (currIndex == 0) return "redirect:/user/selfDiagnosisCategory.html";
+
+			currIndex--;
+			session.setAttribute("sqCurrIndex", currIndex);
+			List<List<SympthomQuestionVO>> sympthomList = (List<List<SympthomQuestionVO>>) session.getAttribute("sympthomList");
+			ArrayList<String[]> sympthom = (ArrayList<String[]>) session.getAttribute("sympthom");
+			int lastIndex = sympthom.size() - 1;
+			// 리스트에서 마지막 증상 삭제 후 세션에 저장
+			sympthom.remove(lastIndex);
+			session.setAttribute("sympthom", sympthom);
+
+			System.out.println(sympthom);
+
+			// 이전 증상문항 모델에 담아 리턴
+			List<String> category = (List<String>) session.getAttribute("category");
+			m.addAttribute("category", category.get(currIndex));
+			m.addAttribute("questionList", sympthomList.get(currIndex));
+			m.addAttribute("title", "해당하는 문항을 선택해주세요.");
+
+			// 다음버튼 눌렀을 때
+		} else if(page.equals("next")) {
+			System.out.println("selfDiagnosisSympthomNext");
+			// 선택리스트 세션에 저장
+			ArrayList<String[]> sympthom = (ArrayList<String[]>) session.getAttribute("sympthom");
+			if (sympthom == null) sympthom = new ArrayList<>();
+			String[] sympthomArr = req.getParameterValues("sympthom");
+			sympthom.add(sympthomArr);
+			session.setAttribute("sympthom", sympthom);
+
+			System.out.println(sympthom);
+
+			// 현재 인덱스 마지막 인덱스 세션에서 가져오기
+			int currIndex = (int) session.getAttribute("sqCurrIndex");
+			int lastIndex = (int) session.getAttribute("sqLastIndex");
+
+			// 마지막 페이지 비교
+			if(currIndex == lastIndex) return "redirect:/user/selfDiagnosisLifestyle.html";
+
+			currIndex++;
+			session.setAttribute("sqCurrIndex", currIndex);
+			List<List<SympthomQuestionVO>> sympthomList = (List<List<SympthomQuestionVO>>) session.getAttribute("sympthomList");
+			List<String> category = (List<String>) session.getAttribute("category");
+			m.addAttribute("category", category.get(currIndex));
+			m.addAttribute("questionList", sympthomList.get(currIndex));
+			m.addAttribute("title", "해당하는 문항을 선택해주세요.");
 		}
-		
-		m.addAttribute("title", "해당하는 증상을 체크해주세요.");
+
 		return "/user/selfDiagnosisSympthom.html";
+
 	}
-	
+
+	@RequestMapping(value = "selfDiagnosisLifestyle.html")
+	public String selfDiagnosisLifestyle(Model m, HttpSession session, HttpServletRequest req,
+			@RequestParam(value = "page", required = false) String page) {
+		System.out.println("selfDiagnosisLifestyle");
+
+		Object obj = session.getAttribute("result");
+		if(obj == null) return "/user/selfDiagnosisStart.html";
+
+		// 생활습관문항 첫 시작
+		if(page == null) {
+			System.out.println("selfDiagnosisLifestyleStart");
+
+			// 생활습관문항 DB에서 검색후 세션에 저장
+			List<List<LifestyleQuestionVO>> lifestyleList = new ArrayList<>();
+			List<LifestyleGroupVO> voList = userService.getLifestyleGroupList();
+			for (LifestyleGroupVO vo : voList) {
+				List<LifestyleQuestionVO> list = userService.getLifestyleQuestionList(vo.getId());
+				lifestyleList.add(list);
+				System.out.println("getLifestyleQuestionList:"+list);
+			}
+			int currIndex = 0;
+			int lastIndex = lifestyleList.size() - 1;
+			session.setAttribute("lqCurrIndex", currIndex);
+			session.setAttribute("lqLastIndex", lastIndex);
+			session.setAttribute("lifestyleList", lifestyleList);
+			m.addAttribute("questionList", lifestyleList.get(currIndex));
+			m.addAttribute("title", "해당하는 문항을 선택해주세요.");
+			m.addAttribute("group", lifestyleList.get(currIndex).get(0).getLifestyle_group());
+
+			// 이전버튼 눌렀을 때
+		} else if(page.equals("prev")) {
+			System.out.println("selfDiagnosisLifestylePrev");
+			int currIndex = (int) session.getAttribute("lqCurrIndex");
+
+			// 첫 생활습관문항일 때 마지막 증상문항으로 이동
+			if (currIndex == 0) {
+				ArrayList<String[]> sympthom = (ArrayList<String[]>) session.getAttribute("sympthom");
+				List<List<SympthomQuestionVO>> sympthomList = (List<List<SympthomQuestionVO>>) session.getAttribute("sympthomList");
+				int lastIndex = (int) session.getAttribute("sqLastIndex");
+				sympthom.remove(lastIndex);
+				session.setAttribute("sympthom", sympthom);
+
+				System.out.println(sympthom);
+
+				m.addAttribute("questionList", sympthomList.get(lastIndex));
+				m.addAttribute("title", "해당하는 문항을 선택해주세요.");
+				return "/user/selfDiagnosisSympthom.html";
+			}
+
+			currIndex--;
+			session.setAttribute("lqCurrIndex", currIndex);
+			List<List<LifestyleQuestionVO>> lifestyleList = (List<List<LifestyleQuestionVO>>) session.getAttribute("lifestyleList");
+			ArrayList<String[]> lifestyle = (ArrayList<String[]>) session.getAttribute("lifestyle");
+			// 생활습관문항 리스트에서 삭제 후 세션에 저장
+			int lastIndex = lifestyle.size() - 1;
+			lifestyle.remove(lastIndex);
+			session.setAttribute("lifestyle", lifestyle);
+
+			System.out.println(lifestyle);
+
+			// 이전 생활습관문항 모델에 담아 리턴
+			m.addAttribute("questionList", lifestyleList.get(lastIndex));
+			m.addAttribute("title", "해당하는 문항을 선택해주세요.");
+			m.addAttribute("group", lifestyleList.get(currIndex).get(0).getLifestyle_group());
+
+			// 다음버튼 눌렀을 때
+		} else if(page.equals("next")) {
+			System.out.println("selfDiagnosisLifestyleNext");
+			// 선택리스트 세션에 저장
+			ArrayList<String[]> lifestyle = (ArrayList<String[]>) session.getAttribute("lifestyle");
+			if (lifestyle == null) lifestyle = new ArrayList<>();
+			String[] lifestyleArr = req.getParameterValues("lifestyle");
+			lifestyle.add(lifestyleArr);
+			session.setAttribute("lifestyle", lifestyle);
+
+			System.out.println(lifestyle);
+
+			// 현재 인덱스 마지막 인덱스 세션에서 가져오기
+			int currIndex = (int) session.getAttribute("lqCurrIndex");
+			int lastIndex = (int) session.getAttribute("lqLastIndex");
+
+			// 마지막 페이지일 때
+			if(currIndex == lastIndex) {
+				////////////////// 결과값 result
+				SelfDiagnosisVO selfDiagnosisVo = (SelfDiagnosisVO) session.getAttribute("result");
+				ArrayList<String> category = (ArrayList<String>) session.getAttribute("category");
+				ArrayList<String[]> sympthom = (ArrayList<String[]>) session.getAttribute("sympthom");
+				List<List<SympthomQuestionVO>> sympthomList = (List<List<SympthomQuestionVO>>) session.getAttribute("sympthomList");
+				List<List<LifestyleQuestionVO>> lifestyleList = (List<List<LifestyleQuestionVO>>) session.getAttribute("lifestyleList");
+
+				String answer = "";
+				List result = new ArrayList<>();
+
+				for (int i = 0; i < sympthom.size(); i++) {
+					// 선택한 증상문항 관련 원재료id 검색후 Set에 저장 (중복제거)
+					HashMap resultMap = new HashMap<>();
+					List materials = new ArrayList<>();
+					Set<String> tempSet = new HashSet<>();
+					for(String sympthomQuestionId : sympthom.get(i)) {
+						List<String> rawMaterialList = userService.getRawMaterialIdList(sympthomQuestionId);
+						tempSet.addAll(rawMaterialList);
+					}
+					// 원재료 id로 원재료 검색 후 데이터 처리 및 리턴리스트에 저장
+					for(String id : tempSet) {
+						List<RawMaterialVO> rawMaterialList = userService.getRawMaterialList(id);
+						List<String> functionalityList = new ArrayList<>();
+						for (RawMaterialVO vo : rawMaterialList) {
+							String[] tempArr = vo.getFunctionality().split("/");
+							for(int j = 0; j < tempArr.length; j++) functionalityList.add(tempArr[j]);
+							HashMap material = new HashMap<>();
+							material.put("name", vo.getRaw_material_name());
+							material.put("functionality", functionalityList);
+							materials.add(material);
+						}
+					}
+					resultMap.put("category", category.get(i));
+					resultMap.put("materials", materials);
+					result.add(resultMap);
+				};
+				m.addAttribute("result", result);
+				return "/user/selfDiagnosisEnd.html";
+			}
+
+			currIndex++;
+			session.setAttribute("lqCurrIndex", currIndex);
+			List<List<LifestyleQuestionVO>> lifestyleList = (List<List<LifestyleQuestionVO>>) session.getAttribute("lifestyleList");
+			m.addAttribute("questionList", lifestyleList.get(currIndex));
+			m.addAttribute("title", "해당하는 문항을 선택해주세요.");
+			m.addAttribute("group", lifestyleList.get(currIndex).get(0).getLifestyle_group());
+		}
+
+		return "/user/selfDiagnosisLifestyle.html";
+
+	}
+
 }

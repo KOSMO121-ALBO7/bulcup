@@ -39,7 +39,7 @@
 		</trim>
 	</select>
 	<select id="getFunctionalFoodListPg" parameterType="map" resultType="FunctionalFoodVO">
-		SELECT ff.image_path image_path, ff.manufacturer manufacturer, ff.functional_food_name functional_food_name, c.category category
+		SELECT ff.id id, ff.image_path image_path, ff.manufacturer manufacturer, ff.functional_food_name functional_food_name, c.category category
 		FROM functional_food ff INNER JOIN category c 
 		ON ff.category_id = c.id
 		<choose>
@@ -73,8 +73,29 @@
 	<select id="category" resultType="CategoryVO">
 		SELECT id, category FROM category
 	</select>
+	<select id="getCategory" parameterType="string" resultType="CategoryVO">
+		SELECT category FROM category WHERE id = #{category_id}
+	</select>
 	<select id="getSympthomQuestion" parameterType="string" resultType="SympthomQuestionVO">
 		SELECT * FROM sympthom_question WHERE category_id = #{category_id}
+	</select>
+	<select id="getLifestyleGroupList" resultType="LifestyleGroupVO">
+		SELECT * FROM lifestyle_group
+	</select>
+	<select id="getLifestyleQuestionList" parameterType="int" resultType="LifestyleQuestionVO">
+		SELECT lq.id id, lq.lifestyle_question lifestyle_question, lg.lifestyle_group lifestyle_group
+		FROM lifestyle_question lq INNER JOIN lifestyle_group lg
+		ON lq.lifestyle_group_id = lg.id
+		WHERE lg.id = #{lifestyle_group_id}
+	</select>
+	<select id="getRawMaterialIdList" parameterType="string" resultType="string">
+		SELECT raw_material_id FROM question_raw_material WHERE sympthom_question_id = #{sympthomQuestionId}
+	</select>
+	<select id="getRawMaterialList" parameterType="string" resultType="RawMaterialVO">
+		SELECT * FROM raw_material WHERE id = #{id}
+	</select>
+	<select id="detail" resultType="FunctionalFoodVO">
+		SELECT * FROM functional_food WHERE id = #{id}
 	</select>
 	
 	<!-- UPDATE -->

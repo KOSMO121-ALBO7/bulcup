@@ -1,204 +1,217 @@
 <!DOCTYPE html>
-<html lang="en" txmlns:th="http://www.thymeleaf.org"><!-- Basic -->
+<html lang="en" txmlns:th="http://www.thymeleaf.org">
+<!-- Basic -->
+
 <head th:replace="/user/header.html :: head"></head>
 
 <style>
-html,body,div, video {margin:0;padding:0;}
-body {padding:0px, 0px, 0px, 0px; margin:0px, 0px, 0px, 0px; overflow:hidden; background-color:#335E4A; } .container {}
+	html,
+	body,
+	div,
+	video {
+		margin: 0;
+		padding: 0;
+	}
+
+	body {
+		padding: 0px, 0px, 0px, 0px;
+		margin: 0px, 0px, 0px, 0px;
+		overflow: hidden;
+		background-color: #335E4A;
+	}
 </style>
+
 <body>
-	<header th:replace="/user/header.html :: header"></header>
-	<!-- Start slides -->
-	<div id="slides" class="cover-slides">
-		<ul class="slides-container">
-			<li class="text-left">
-				<img src="/user/images/slider-01.jpg" alt="">
-				<div class="container">
-					<div class="row">
-						<div class="col-md-12">
-							<h1 class="m-b-20"><strong>-121304건<br>자가 진단 이용자 수</strong></h1>
-							<p class="m-b-40">자가 진단 이용자 수가 늘어 났으면 좋겠습니다. 많이많이 늘어나서 돈을 벌어다 줬으면 좋겠습니다. <br/> 광고님 최고! 광고주는 최고니까 위나 아래에 넣어줘야죠.</p>
-							<p><a class="btn btn-lg btn-circle btn-outline-new-white" href="selfDiagnosisStart.html">자가 진단 시작하기</a></p>
+	<block th:fragment="index">
+		<header th:replace="/user/header.html :: header"></header>
+		<!-- Start slides -->
+		<div id="slides" class="cover-slides">
+			<ul class="slides-container">
+				<li class="text-left">
+					<img src="/user/images/slider-01.jpg" alt="">
+					<div class="container">
+						<div class="row">
+							<div class="col-md-12">
+								<h1 class="m-b-20"><strong>자가 진단 이용자 수<br>123456 명</strong></h1>
+								<p class="m-b-40">BULCUP을 통해 영양 상태를 확인해보세요. <br /></p>
+								<p><a class="btn btn-lg btn-circle btn-outline-new-white"
+										href="selfDiagnosisStart.html">자가 진단 시작하기</a></p>
+							</div>
 						</div>
 					</div>
-				</div>
-			</li>
-			<li class="text-left">
-				<img src="/user/images/slider-02.jpg" alt="">
-				<div class="container">
-					<div class="row">
-						<div class="col-md-12">
-							<h1 class="m-b-20"><strong>-121304건<br>자가 진단 이용자 수</strong></h1>
-							<p class="m-b-40">자가 진단 이용자 수가 늘어 났으면 좋겠습니다. 많이많이 늘어나서 돈을 벌어다 줬으면 좋겠습니다. <br/> 광고님 최고! 광고주는 최고니까 위나 아래에 넣어줘야죠.</p>
-							<p><a class="btn btn-lg btn-circle btn-outline-new-white" href="selfDiagnosisStart.html">자가 진단 시작하기</a></p>
+				</li>
+				<li class="text-left">
+					<img src="/user/images/slider-02.jpg" alt="">
+					<div class="container">
+						<div class="row">
+							<div class="col-md-12">
+								<h1 class="m-b-20"><strong>영양 뉴스<br>매일 신선한 뉴스를 제공합니다.</strong></h1>
+								<p class="m-b-40">각 플랫폼에서 제공하는 영양 뉴스들을 한 번에 보여 드립니다. <br /> </p>
+								<p><a class="btn btn-lg btn-circle btn-outline-new-white" href="blog.html">뉴스 보러 가기</a>
+								</p>
+							</div>
 						</div>
 					</div>
-				</div>
-			</li>
-			<li class="text-left">
-				<img src="/user/images/slider-03.jpg" alt="">
-				<div class="container">
-					<div class="row">
-						<div class="col-md-12">
-							<h1 class="m-b-20"><strong>-121304건<br>자가 진단 이용자 수</strong></h1>
-							<p class="m-b-40">자가 진단 이용자 수가 늘어 났으면 좋겠습니다. 많이많이 늘어나서 돈을 벌어다 줬으면 좋겠습니다. <br/> 광고님 최고! 광고주는 최고니까 위나 아래에 넣어줘야죠.</p>
-							<p><a class="btn btn-lg btn-circle btn-outline-new-white" href="selfDiagnosisStart.html">자가 진단 시작하기</a></p>
+				</li>
+				<li class="text-left">
+					<img src="/user/images/slider-03.jpg" alt="">
+					<div class="container">
+						<div class="row">
+							<div class="col-md-12">
+								<h1 class="m-b-20"><strong>광고 및 후원<br>후원계좌 : 계좌번호(은행명)</strong></h1>
+								<p class="m-b-40">광고주님 압도적으로 감사드립니다.<br /> 비영리 사이트 이므로 광고와 후원은 필수!</p>
+								<p><a class="btn btn-lg btn-circle btn-outline-new-white" href="#">광고 사이트 연결</a></p>
+							</div>
 						</div>
 					</div>
-				</div>
-			</li>
-		</ul>s
-		<div class="slides-navigation">
-			<a href="#" class="next"><i class="fa fa-angle-right" aria-hidden="true"></i></a>
-			<a href="#" class="prev"><i class="fa fa-angle-left" aria-hidden="true"></i></a>
+				</li>
+			</ul>s
+			<div class="slides-navigation">
+				<a href="#" class="next"><i class="fa fa-angle-right" aria-hidden="true"></i></a>
+				<a href="#" class="prev"><i class="fa fa-angle-left" aria-hidden="true"></i></a>
+			</div>
 		</div>
-	</div>
-	<!-- End slides -->
-	
-	<!-- Start About -->
-	<div class="about-section-box">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12 col-md-12 col-sm-12 text-center">
-					<div class="inner-column">
-						<h1>부위별 추천 <span>영양제</span></h1>
-						
+		<!-- End slides -->
+
+		<!-- Start About -->
+		<div class="about-section-box">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12 col-md-12 col-sm-12 text-center">
+						<div class="inner-column">
+							<h1>부위별 추천 <span>영양제</span></h1>
+
+						</div>
 					</div>
-				</div>
-				<div class="col-lg-2 col-md-2 col-sm-2">
-					<img src="/user/images/eye.png" alt="" class="img-fluid">
-				</div>
-				<div class="col-lg-2 col-md-2 col-sm-2">
-					<img src="/user/images/diet.png" alt="" class="img-fluid">
-				</div>
-				<div class="col-lg-2 col-md-2 col-sm-2">
-					<img src="/user/images/bone.png" alt="" class="img-fluid">
-				</div>
-				<div class="col-lg-2 col-md-2 col-sm-2">
-					<img src="/user/images/liver.png" alt="" class="img-fluid">
-				</div>
-				<div class="col-lg-2 col-md-2 col-sm-2">
-					<img src="/user/images/digestive.png" alt="" class="img-fluid">
-				</div>
-				<div class="col-lg-2 col-md-2 col-sm-2">
-					<img src="/user/images/energy.png" alt="" class="img-fluid">
+					<div class="col-lg-2 col-md-2 col-sm-2">
+						<img src="/user/images/eye.png" alt="" class="img-fluid">
+					</div>
+					<div class="col-lg-2 col-md-2 col-sm-2">
+						<img src="/user/images/diet.png" alt="" class="img-fluid">
+					</div>
+					<div class="col-lg-2 col-md-2 col-sm-2">
+						<img src="/user/images/bone.png" alt="" class="img-fluid">
+					</div>
+					<div class="col-lg-2 col-md-2 col-sm-2">
+						<img src="/user/images/liver.png" alt="" class="img-fluid">
+					</div>
+					<div class="col-lg-2 col-md-2 col-sm-2">
+						<img src="/user/images/digestive.png" alt="" class="img-fluid">
+					</div>
+					<div class="col-lg-2 col-md-2 col-sm-2">
+						<img src="/user/images/energy.png" alt="" class="img-fluid">
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-	<!-- End About -->
-	<!-- Start blog -->
-	<div class="blog-box">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="heading-title text-center">
-						<h2>BulCup의 생활 영양</h2>
-						<p>오늘의 영양을 만나보세요!</p>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-lg-4 col-md-6 col-12">
-					<div class="blog-box-inner">
-						<div class="blog-img-box">
-							<img class="img-fluid" src="/user/images/blog-img-01.jpg" alt="">
-						</div>
-						<div class="blog-detail">
-							<h4>크롤링된 뉴스거리</h4>
-							<ul>
-								<li><span>글쓴이: -</span></li>
-								<li>|</li>
-								<li><span>2018년 2월 23일</span></li>
-							</ul>	
-							<p>모라모라써져있음 </p>
-							<p>모라모라써져있음모라모라써져있음모라모라써져있음</p>
-							<a class="btn btn-lg btn-circle btn-outline-new-white" href="#">Read More</a>
+		<!-- End About -->
+		<!-- Start blog -->
+		<div class="blog-box">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="heading-title text-center">
+							<h2>BulCup의 생활 영양</h2>
+							<p>오늘의 영양을 만나보세요!</p>
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-4 col-md-6 col-12">
-					<div class="blog-box-inner">
-						<div class="blog-img-box">
-							<img class="img-fluid" src="/user/images/blog-img-02.jpg" alt="">
-						</div>
-						<div class="blog-detail">
-							<h4>비타민 C 에 대하여...</h4>
-							<ul>
-								<li><span>글쓴이: -</span></li>
-								<li>|</li>
-								<li><span>2018년 2월 23일</span></li>
-							</ul>
-							<p>모라모라써져있음 </p>
-							<p>모라모라써져있음모라모라써져있음모라모라써져있음</p>
-							<a class="btn btn-lg btn-circle btn-outline-new-white" href="#">Read More</a>
+				<div class="row">
+					<div class="col-lg-4 col-md-6 col-12" th:each="blog, blogStat : ${getBlogList}">
+						<div class="blog-box-inner">
+							<div class="blog-img-box">
+								<img class="img-fluid" style="width:470px; height:470px;" th:src="${blog.img}"
+									alt="blog_image">
+							</div>
+							<div class="blog-detail">
+								<h4 th:text="${blog.title}"></h4>
+								<ul>
+									<li><span th:text="${blog.writer}"></span></li>
+									<li>|</li>
+									<li><span th:text="${#strings.abbreviate(blog.time,24)}"></span></li>
+								</ul>
+								<p th:text="${#strings.abbreviate(blog.content,150)}"></p>
+								<a class="btn btn-lg btn-circle btn-outline-new-white" th:href="${blog.url}">더 읽기</a>
+							</div>
 						</div>
 					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 col-12">
-					<div class="blog-box-inner">
-						<div class="blog-img-box">
-							<img class="img-fluid" src="/user/images/blog-img-03.jpg" alt="">
-						</div>
-						<div class="blog-detail">
-							<h4>비타민 D에 대하여</h4>
-							<ul>
-								<li><span>글쓴이: -</span></li>
-								<li>|</li>
-								<li><span>2018년 2월 23일</span></li>
-							</ul>
-							<p>모라모라써져있음 </p>
-							<p>모라모라써져있음모라모라써져있음모라모라써져있음</p>
-							<a class="btn btn-lg btn-circle btn-outline-new-white" href="#">Read More</a>
+					<div class="col-lg-4 col-md-6 col-12" th:each="blog, blogStat : ${getBlogList}">
+						<div class="blog-box-inner">
+							<div class="blog-img-box">
+								<img class="img-fluid" style="width:470px; height:470px;" th:src="${blog.img}"
+									alt="blog_image">
+							</div>
+							<div class="blog-detail">
+								<h4 th:text="${blog.title}"></h4>
+								<ul>
+									<li><span th:text="${blog.writer}"></span></li>
+									<li>|</li>
+									<li><span th:text="${#strings.abbreviate(blog.time,24)}"></span></li>
+								</ul>
+								<p th:text="${#strings.abbreviate(blog.content,150)}"></p>
+								<a class="btn btn-lg btn-circle btn-outline-new-white" th:href="${blog.url}">더 읽기</a>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-	<!-- End blog -->
-	
-	<!-- Start Contact info -->
-	<div class="contact-imfo-box">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-4 arrow-right">
-					<i class="fa fa-volume-control-phone"></i>
-					<div class="overflow-hidden">
-						<h4>문의처</h4>
-						<p class="lead">
-							+01 123-456-4590
-						</p>
+		<!-- End blog -->
+
+		<!-- Start Contact info -->
+		<div class="contact-imfo-box">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-4 arrow-right">
+						<i class="fa fa-volume-control-phone"></i>
+						<div class="overflow-hidden">
+							<h4>문의처</h4>
+							<p class="lead">
+								+01 123-456-4590
+							</p>
+						</div>
 					</div>
-				</div>
-				<div class="col-md-4 arrow-right">
-					<i class="fa fa-envelope"></i>
-					<div class="overflow-hidden">
-						<h4>이메일</h4>
-						<p class="lead">
-							bulcup3121@gmail.com
-						</p>
+					<div class="col-md-4 arrow-right">
+						<i class="fa fa-envelope"></i>
+						<div class="overflow-hidden">
+							<h4>이메일</h4>
+							<p class="lead">
+								bulcup3121@gmail.com
+							</p>
+						</div>
 					</div>
-				</div>
-				<div class="col-md-4">
-					<i class="fa fa-map-marker"></i>
-					<div class="overflow-hidden">
-						<h4>장소</h4>
-						<p class="lead">
-							Kosmo Academy, Seoul, ROK
-						</p>
+					<div class="col-md-4">
+						<i class="fa fa-map-marker"></i>
+						<div class="overflow-hidden">
+							<h4>장소</h4>
+							<p class="lead">
+								Kosmo Academy, Seoul, ROK
+							</p>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-	<!-- End Contact info -->
-	<!--Footer-->
-    <footer class="footer-area bg-f" th:replace="/user/footer.html :: footer"></footer>
-	
-	<!-- ALL JS FILES -->
-    <!-- ALL PLUGINS -->
-    <div th:replace="/user/footer.html :: javascript"></div>
-    
+		<!-- End Contact info -->
+		<!--Footer-->
+		<footer class="footer-area bg-f" th:replace="/user/footer.html :: footer"></footer>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/heatmap.js/2.0.2/heatmap.js"></script>
+		<script>
+			document.onclick = function (ev) {
+				let param = {'param1': ev.pageX, 'param2': ev.pageY, 'tourl': document.URL};
+				$.ajax({
+					type: "POST",
+					url: "saveCoordinates",
+					data: param,
+					dataType: "json"
+				});
+			};
+		</script>
+		<!-- ALL JS FILES -->
+		<!-- ALL PLUGINS -->
+		<div th:replace="/user/footer.html :: javascript"></div>
+	</block>
+
 </body>
+
 </html>

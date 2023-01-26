@@ -14,6 +14,9 @@ import com.bulcup.domain.BlogVO;
 import com.bulcup.domain.CategoryVO;
 import com.bulcup.domain.ContactVO;
 import com.bulcup.domain.FunctionalFoodVO;
+import com.bulcup.domain.LifestyleGroupVO;
+import com.bulcup.domain.LifestyleQuestionVO;
+import com.bulcup.domain.RawMaterialVO;
 import com.bulcup.domain.SubscribeVO;
 import com.bulcup.domain.SympthomQuestionVO;
 
@@ -80,6 +83,10 @@ public class UserServiceImpl implements UserService {
 	public List<CategoryVO> category() {
 		return userdao.category();
 	}
+	
+	public CategoryVO getCategory(String category_id) {
+		return userdao.getCategory(category_id);
+	}
 
 	public int insertSubscriber(SubscribeVO vo) {
 		return userdao.insertSubscriber(vo);
@@ -88,6 +95,31 @@ public class UserServiceImpl implements UserService {
 	public List<SympthomQuestionVO> getSympthomQuestion(String category_id) {
 		return userdao.getSympthomQuestion(category_id);
 	}
+
+	@Override
+	public List<LifestyleGroupVO> getLifestyleGroupList() {
+		return userdao.getLifestyleGroupList();
+	}
+
+	@Override
+	public List<LifestyleQuestionVO> getLifestyleQuestionList(Integer lifestyle_group_id) {
+		return userdao.getLifestyleQuestionList(lifestyle_group_id);
+	}
+
+	@Override
+	public List<String> getRawMaterialIdList(String sympthomQuestionId) {
+		return userdao.getRawMaterialIdList(sympthomQuestionId);
+	}
+
+	@Override
+	public List<RawMaterialVO> getRawMaterialList(String id) {
+		return userdao.getRawMaterialList(id);
+	}
+	
+	@Override
+	public FunctionalFoodVO detail(String id) {      
+	      return userdao.detail(id);
+	   }
 
 
 }
