@@ -68,7 +68,7 @@
 								<div class="row">
 									<div class="col-lg-4 col-md-6 special-grid drinks" th:each="list : ${list}">
 										<div class="gallery-single fix">
-											<img th:src="${list.image_path}" class="img-fluid" alt="Image"> <!-- 사진 -->
+											<a th:href="@{Detail.html(id=${list.id})}"><img th:src="${list.image_path}" class="img-fluid" alt="Image"> <!-- 사진 --></a>
 											<div class="see-text">
 												<h5 th:text="${list.manufacturer}"></h5>
 												<h3 th:text="${list.functional_food_name}"></h3> <!-- 제목 -->

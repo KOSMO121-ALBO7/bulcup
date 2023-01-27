@@ -447,13 +447,9 @@ public class UserController {
 			// 마지막 페이지일 때
 			if(currIndex == lastIndex) {
 				////////////////// 결과값 result
-				SelfDiagnosisVO selfDiagnosisVo = (SelfDiagnosisVO) session.getAttribute("result");
 				ArrayList<String> category = (ArrayList<String>) session.getAttribute("category");
 				ArrayList<String[]> sympthom = (ArrayList<String[]>) session.getAttribute("sympthom");
-				List<List<SympthomQuestionVO>> sympthomList = (List<List<SympthomQuestionVO>>) session.getAttribute("sympthomList");
-				List<List<LifestyleQuestionVO>> lifestyleList = (List<List<LifestyleQuestionVO>>) session.getAttribute("lifestyleList");
 
-				String answer = "";
 				List result = new ArrayList<>();
 
 				for (int i = 0; i < sympthom.size(); i++) {

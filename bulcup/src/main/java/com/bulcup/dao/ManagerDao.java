@@ -47,5 +47,6 @@ public interface ManagerDao {
 	public int countnotice();
 	// 공지사항 입력
 	public void insertnotice(noticeVO vo);
+	public void deletenotice(noticeVO vo);
 
 }

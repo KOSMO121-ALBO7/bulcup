@@ -46,5 +46,6 @@ public interface ManagerService {
 	// 공지사항 리스트 총 갯수
 	public int countnotice();
 	public void insertnotice(noticeVO vo);
+	public void deletenotice(noticeVO vo);
 
 }

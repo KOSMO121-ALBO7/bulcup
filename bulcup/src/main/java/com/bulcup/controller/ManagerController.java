@@ -615,4 +615,10 @@ public class ManagerController {
 		return "redirect:manager_notice.html";
 	}
 
+	@GetMapping("deletenotice.do")
+	public String deletenotice(noticeVO vo) {
+		managerService.deletenotice(vo);
+		return "redirect:manager_notice.html";
+	}
+
 }

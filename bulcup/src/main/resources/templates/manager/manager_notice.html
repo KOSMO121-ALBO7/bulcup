@@ -67,10 +67,7 @@
                                 <i class="bx bx-dots-vertical-rounded"></i>
                               </button>
                               <div class="dropdown-menu">
-                                    <a class="dropdown-item" data-bs-toggle="modal"
-                                       th:data-bs-target="|#basicModal${contactStat.index}|" type="button"> <i
-                                       class="bx bx-edit-alt me-2"></i>수정하기</a>
-                                <a class="dropdown-item" th:href="@{deleteContact.do(id=${notice.id})}"><i class="bx bx-trash me-1"></i>삭제하기</a>
+                                <a class="dropdown-item" th:href="@{deletenotice.do(id=${notice.id})}"><i class="bx bx-trash me-1"></i>삭제하기</a>
                               </div>
                               
                   <!-- Modal -->

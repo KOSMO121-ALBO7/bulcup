@@ -10,7 +10,6 @@
 		INSERT INTO NOTICE(id,title,reg_date,writer,content)
 		VALUES(nextval(seq_notice_id),#{title},sysdate(),#{writer},#{content})
 	</insert>
-	
 	<!-- SELECT -->
 	<select id="selectManagerByIdAndPw" parameterType="ManagerVO" resultType="ManagerVO">
 		SELECT * FROM MANAGER 
@@ -81,7 +80,7 @@
 	<select id="completeCount" resultType="int">
 		SELECT count(*) FROM CONTACT
 	</select>
-		<select id="getListnotice"  parameterType="PaginationVO" resultType="noticeVO">
+	<select id="getListnotice" parameterType="PaginationVO" resultType="noticeVO">
 		SELECT id,title,writer,reg_date FROM notice
 		ORDER BY reg_date DESC
 		limit
@@ -92,7 +91,6 @@
 	<select id="countnotice" resultType="int">
 		SELECT COUNT(*) FROM notice
 	</select>
-	
 	<!-- UPDATE -->
 	<update id="updateManager" parameterType="ManagerVO">
 		UPDATE MANAGER 
@@ -116,7 +114,6 @@
 		set category_id=#{category_id},functional_food_name=#{functional_food_name},functionalities=#{functionalities},raw_materials=#{raw_materials},caution=#{caution},formulation=#{formulation},intake_method=#{intake_method},image_path=#{image_path}
 		where id=#{id}   
 	</update>
-		
 	<!--DELETE -->
 	<delete id="deleteManagerById" parameterType="ManagerVO">
 		DELETE FROM MANAGER 
@@ -134,5 +131,7 @@
 	<delete id="deleteFuctionalFood" parameterType="FunctionalFoodVO">
 		delete from functional_food where id=#{id}
 	</delete>
-	
+	<delete id="deletenotice" parameterType="noticeVO">
+		delete from NOTICE where id=#{id}
+	</delete>
 </mapper>

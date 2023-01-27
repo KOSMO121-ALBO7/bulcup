@@ -243,8 +243,13 @@ public class ManagerServiceImpl implements ManagerService {
 	public int countnotice() {
 		return managerdao.countnotice();
 	}
+
 	public void insertnotice(noticeVO vo) {
 		managerdao.insertnotice(vo);
+	}
+
+	public void deletenotice(noticeVO vo) {
+		managerdao.deletenotice(vo);
 	}
 
 }
