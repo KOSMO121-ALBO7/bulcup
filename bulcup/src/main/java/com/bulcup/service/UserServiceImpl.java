@@ -34,7 +34,7 @@ public class UserServiceImpl implements UserService {
 		List<BlogVO> list = new ArrayList<BlogVO>();
 		Scanner sc = null;
 		try {
-			sc = new Scanner(new FileInputStream("src/main/java/com/bulcup/service/crawling/text.txt"), "UTF-8");
+			sc = new Scanner(new FileInputStream("crawling/text.txt"), "UTF-8");
 			String line = sc.nextLine();// header 읽기
 
 			int lineEnd = pageNo * pageSize;

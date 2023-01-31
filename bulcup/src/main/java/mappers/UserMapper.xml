@@ -5,7 +5,7 @@
 <mapper namespace="com.bulcup.dao.UserDao">	
 	<!-- INSERT -->
 	<insert id="insertContact" parameterType="ContactVO">
-		INSERT INTO Contact(id, email, question, contact_date)
+		INSERT INTO contact(id, email, question, contact_date)
 		 VALUES(nextval(contact_id_seq), #{email}, #{question}, SYSDATE())
 	</insert>
 	<insert id="insertSubscriber" parameterType="SubscribeVO">

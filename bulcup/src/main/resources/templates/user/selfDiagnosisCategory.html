@@ -2,10 +2,10 @@
 <html lang="en" txmlns:th="http://www.thymeleaf.org">
 <!-- Basic -->
 
-<head th:replace="/user/header.html :: head"></head>
+<head th:replace="user/header.html :: head"></head>
 
 <body>
-	<header th:replace="/user/header.html :: header"></header>
+	<header th:replace="user/header.html :: header"></header>
 	<!-- Start Contact -->
 	<div class="contact-box">
 		<div class="container">
@@ -48,7 +48,7 @@
 										th:text="${list.category}"><label></br>
 							</div>
 						</div>
-						<div>
+						<div style="width: 550px;">
 							<span class="submit-button text" style="float: left;">
 								<a th:href="@{selfDiagnosisStart.html}"><button class="btn btn-common" type="button">이전</button></a>
 							</span>

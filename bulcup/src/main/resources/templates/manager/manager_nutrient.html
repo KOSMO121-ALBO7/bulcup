@@ -16,13 +16,13 @@
    data-theme="theme-default" data-assets-path="/manager/assets/"
    data-template="vertical-menu-template-free"
    txmlns:th="http://www.thymeleaf.org">
-<head th:replace="/manager/manager_header :: head"></head>
+<head th:replace="manager/manager_header :: head"></head>
 
 <body>
    <!-- Layout container -->
    <div class="layout-page">
    <a th:if="${session.loginAuthority != emp}">
-      <div th:replace="/manager/manager_header :: navbar"></div>
+      <div th:replace="manager/manager_header :: navbar"></div>
       <!-- Content wrapper -->
       <div class="content-wrapper">
          <!-- Content -->
@@ -203,7 +203,7 @@
          <!-- / Content -->
 
          <!-- Footer -->
-         <footer th:replace="/manager/manager_footer :: footer"></footer>
+         <footer th:replace="manager/manager_footer :: footer"></footer>
 
          <div class="content-backdrop fade"></div>
        </div>
@@ -225,6 +225,6 @@
    <!-- Main JS -->
    <!-- Page JS -->
    <!-- Place this tag in your head or just before your close body tag. -->
-   <footer th:replace="/manager/manager_footer :: javascript"></footer>
+   <footer th:replace="manager/manager_footer :: javascript"></footer>
 </body>
 </html>

@@ -6,9 +6,7 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
 import org.thymeleaf.context.Context;
@@ -39,10 +37,10 @@ public class EmailSender {
 			helper = new MimeMessageHelper(message, true);
 			// 발신자 설정
 			helper.setFrom("gt-choe@naver.com");
-			//메일 제목 설정
-			helper.setSubject(title);
 			//수신자 설정
 			helper.setTo(to);
+			//메일 제목 설정
+			helper.setSubject(title);
 
 			//템플릿에 전달할 데이터 설정
 			Context context = new Context();

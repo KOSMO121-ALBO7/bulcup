@@ -11,6 +11,7 @@ def raw_material_preprocessing(data_list):
     return_list = []
     for data in data_list:
         if data['PRDCT_NM'] != '':
+            print(data['PRIMARY_FNCLTY'])
             # 제품명 전처리
             # 인정번호 제거
             data['PRDCT_NM'] = re.sub(r'\(제\d*-\d*호\)', '', data['PRDCT_NM'])
@@ -145,4 +146,4 @@ if __name__ == '__main__':
         temp_list = json_data['I2710']['row']
 
     preprocessing_data = raw_material_preprocessing(temp_list)
-    insert_raw_material_data(preprocessing_data)
+    # insert_raw_material_data(preprocessing_data)

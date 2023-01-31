@@ -8,7 +8,7 @@ import com.bulcup.domain.FunctionalFoodVO;
 import com.bulcup.domain.ManagerVO;
 import com.bulcup.domain.PaginationVO;
 import com.bulcup.domain.QuestionVO;
-import com.bulcup.domain.noticeVO;
+import com.bulcup.domain.NoticeVO;
 
 public interface ManagerService {
 
@@ -42,10 +42,10 @@ public interface ManagerService {
 	public int waitCount();
 	public int completeCount();
 	// 공지사항 리스트 출력
-	public List<noticeVO> getListnotice(PaginationVO pageVO);
+	public List<NoticeVO> getListnotice(PaginationVO pageVO);
 	// 공지사항 리스트 총 갯수
 	public int countnotice();
-	public void insertnotice(noticeVO vo);
-	public void deletenotice(noticeVO vo);
+	public void insertnotice(NoticeVO vo);
+	public void deletenotice(NoticeVO vo);
 
 }

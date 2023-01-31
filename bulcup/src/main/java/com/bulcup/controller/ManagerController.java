@@ -30,7 +30,7 @@ import com.bulcup.domain.FunctionalFoodVO;
 import com.bulcup.domain.ManagerVO;
 import com.bulcup.domain.PaginationVO;
 import com.bulcup.domain.QuestionVO;
-import com.bulcup.domain.noticeVO;
+import com.bulcup.domain.NoticeVO;
 import com.bulcup.service.ManagerService;
 
 @Controller
@@ -212,6 +212,8 @@ public class ManagerController {
 		contactVO.setManager_id(String.valueOf(session.getAttribute("loginId")));
 		int result = managerService.updateContact(contactVO);
 		if (result != 0) {
+			String question = contactVO.getQuestion();
+			contactVO.setQuestion(question.substring(question.indexOf(",") + 1));
 			HashMap<String, String> values = new HashMap<String, String>();
 			values.put("contact", contactVO.getQuestion());
 			values.put("answer", contactVO.getAnswer());
@@ -584,7 +586,7 @@ public class ManagerController {
 
 		try {
 			System.out.println("pythonbuilder ");
-			ProcessBuilder pb = new ProcessBuilder("python", "D:\\ALLBO7\\Bulcup\\src\\main\\java\\com\\bulcup\\service\\crawling\\blog.py");
+			ProcessBuilder pb = new ProcessBuilder("python", "crawling/blog.py");
 			pb.redirectErrorStream(true);
 			Process p = pb.start();
 			// int exitval = p.waitFor();
@@ -603,20 +605,20 @@ public class ManagerController {
 		if(pageNo==null) pageNo = "1";
 		Integer totalRecord = managerService.countnotice();
 		PaginationVO pageVO = new PaginationVO(Integer.parseInt(pageNo), totalRecord, 10, 5);
-		List<noticeVO> list = managerService.getListnotice(pageVO);
+		List<NoticeVO> list = managerService.getListnotice(pageVO);
 		m.addAttribute("pageVO",pageVO);
 		m.addAttribute("noticelist", list);
 
 	}
 	// 공지사항 등록
 	@PostMapping("insertnotice.do")
-	public String insertnotice(noticeVO vo) {
+	public String insertnotice(NoticeVO vo) {
 		managerService.insertnotice(vo);
 		return "redirect:manager_notice.html";
 	}
 
 	@GetMapping("deletenotice.do")
-	public String deletenotice(noticeVO vo) {
+	public String deletenotice(NoticeVO vo) {
 		managerService.deletenotice(vo);
 		return "redirect:manager_notice.html";
 	}

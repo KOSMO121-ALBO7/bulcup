@@ -2,7 +2,7 @@
 <html lang="en" txmlns:th="http://www.thymeleaf.org">
 <!-- Basic -->
 
-<head th:replace="/user/header.html :: head"></head>
+<head th:replace="user/header.html :: head"></head>
 
 <style>
 	html,
@@ -23,12 +23,12 @@
 
 <body>
 	<block th:fragment="index">
-		<header th:replace="/user/header.html :: header"></header>
+		<header th:replace="user/header.html :: header"></header>
 		<!-- Start slides -->
 		<div id="slides" class="cover-slides">
 			<ul class="slides-container">
 				<li class="text-left">
-					<img src="/user/images/slider-01.jpg" alt="">
+					<img src="/user/images/진단.jpg" alt="">
 					<div class="container">
 						<div class="row">
 							<div class="col-md-12">
@@ -41,7 +41,7 @@
 					</div>
 				</li>
 				<li class="text-left">
-					<img src="/user/images/slider-02.jpg" alt="">
+					<img src="/user/images/영양제.jpg" alt="">
 					<div class="container">
 						<div class="row">
 							<div class="col-md-12">
@@ -54,7 +54,7 @@
 					</div>
 				</li>
 				<li class="text-left">
-					<img src="/user/images/slider-03.jpg" alt="">
+					<img src="/user/images/광고.jpg" alt="">
 					<div class="container">
 						<div class="row">
 							<div class="col-md-12">
@@ -65,7 +65,7 @@
 						</div>
 					</div>
 				</li>
-			</ul>s
+			</ul>
 			<div class="slides-navigation">
 				<a href="#" class="next"><i class="fa fa-angle-right" aria-hidden="true"></i></a>
 				<a href="#" class="prev"><i class="fa fa-angle-left" aria-hidden="true"></i></a>
@@ -84,22 +84,22 @@
 						</div>
 					</div>
 					<div class="col-lg-2 col-md-2 col-sm-2">
-						<img src="/user/images/eye.png" alt="" class="img-fluid">
+						<a th:href="@{search.html(category=1)}"><img src="/user/images/eye.png" alt="" class="img-fluid" style="border: 2px solid #335E4A;"></a>
 					</div>
 					<div class="col-lg-2 col-md-2 col-sm-2">
-						<img src="/user/images/diet.png" alt="" class="img-fluid">
+						<a th:href="@{search.html(category=2)}"><img src="/user/images/diet.png" alt="" class="img-fluid" style="border: 2px solid #335E4A;"></a>
 					</div>
 					<div class="col-lg-2 col-md-2 col-sm-2">
-						<img src="/user/images/bone.png" alt="" class="img-fluid">
+						<a th:href="@{search.html(category=3)}"><img src="/user/images/bone.png" alt="" class="img-fluid" style="border: 2px solid #335E4A;"></a>
 					</div>
 					<div class="col-lg-2 col-md-2 col-sm-2">
-						<img src="/user/images/liver.png" alt="" class="img-fluid">
+						<a th:href="@{search.html(category=4)}"><img src="/user/images/liver.png" alt="" class="img-fluid" style="border: 2px solid #335E4A;"></a>
 					</div>
 					<div class="col-lg-2 col-md-2 col-sm-2">
-						<img src="/user/images/digestive.png" alt="" class="img-fluid">
+						<a th:href="@{search.html(category=5)}"><img src="/user/images/digestive.png" alt="" class="img-fluid" style="border: 2px solid #335E4A;"></a>
 					</div>
 					<div class="col-lg-2 col-md-2 col-sm-2">
-						<img src="/user/images/energy.png" alt="" class="img-fluid">
+						<a th:href="@{search.html(category=6)}"><img src="/user/images/energy.png" alt="" class="img-fluid" style="border: 2px solid #335E4A;"></a>
 					</div>
 				</div>
 			</div>
@@ -112,7 +112,7 @@
 					<div class="col-lg-12">
 						<div class="heading-title text-center">
 							<h2>BulCup의 생활 영양</h2>
-							<p>오늘의 영양을 만나보세요!</p>
+							<p style="color: white;">오늘의 영양을 만나보세요!</p>
 						</div>
 					</div>
 				</div>
@@ -194,7 +194,7 @@
 		</div>
 		<!-- End Contact info -->
 		<!--Footer-->
-		<footer class="footer-area bg-f" th:replace="/user/footer.html :: footer"></footer>
+		<footer class="footer-area bg-f" th:replace="user/footer.html :: footer"></footer>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/heatmap.js/2.0.2/heatmap.js"></script>
 		<script>
 			document.onclick = function (ev) {
@@ -209,7 +209,7 @@
 		</script>
 		<!-- ALL JS FILES -->
 		<!-- ALL PLUGINS -->
-		<div th:replace="/user/footer.html :: javascript"></div>
+		<div th:replace="user/footer.html :: javascript"></div>
 	</block>
 
 </body>

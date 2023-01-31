@@ -61,7 +61,7 @@ public class UserController {
 		logFavoritePages(step.replace(".html", ""));
 		logTime(step.replace(".html", ""));
 		logger.log("User page: " + step);
-		return "/user/" + step;
+		return "user/" + step;
 	} // viewPage
 
 	@GetMapping(value = "index.html")
@@ -73,7 +73,7 @@ public class UserController {
 		logger.log("User page: " + "index.html");
 		List<BlogVO> list = userService.getBlogList(1, 3);
 		m.addAttribute("getBlogList", list);
-		return "/user/index.html";
+		return "user/index.html";
 	}
 
 	@RequestMapping("insertContact.do")
@@ -101,7 +101,7 @@ public class UserController {
 		m.addAttribute("pageNo", paging.pageNo);
 		List<BlogVO> list = userService.getBlogList(paging.pageNo, paging.pageSize);
 		m.addAttribute("getBlogList", list);
-		return "/user/blog.html";
+		return "user/blog.html";
 	}
 
 	// name: logUser
@@ -223,7 +223,7 @@ public class UserController {
 		logFavoritePages("search");
 		logTime("search");
 		logger.log("User page: " + "search.html");
-		return "/user/search.html";
+		return "user/search.html";
 	}
 
 	@PostMapping(value = "saveCoordinates")
@@ -263,13 +263,13 @@ public class UserController {
 		if(vo.getName() != null) session.setAttribute("result", vo);
 
 		Object obj = session.getAttribute("result");
-		if(obj == null) return "/user/selfDiagnosisStart.html";
+		if(obj == null) return "user/selfDiagnosisStart.html";
 
 		List<CategoryVO> categoryList = userService.category();
 		categoryList.remove(0);
 		m.addAttribute("categoryList", categoryList);
 		m.addAttribute("title", "관심있는 분야를 선택해주세요. (최대 3개)");
-		return "/user/selfDiagnosisCategory.html";
+		return "user/selfDiagnosisCategory.html";
 	}
 
 
@@ -279,7 +279,7 @@ public class UserController {
 		System.out.println("selfDiagnosisSympthom");
 
 		Object obj = session.getAttribute("result");
-		if(obj == null) return "/user/selfDiagnosisStart.html";
+		if(obj == null) return "user/selfDiagnosisStart.html";
 
 		// 증상문항 첫 시작
 		if(page == null) {
@@ -312,7 +312,7 @@ public class UserController {
 			int currIndex = (int) session.getAttribute("sqCurrIndex");
 
 			// 첫 증상문항일 때 모델에 관심사항문항 담아 관심사항문항으로 리턴
-			if (currIndex == 0) return "redirect:/user/selfDiagnosisCategory.html";
+			if (currIndex == 0) return "redirect:selfDiagnosisCategory.html";
 
 			currIndex--;
 			session.setAttribute("sqCurrIndex", currIndex);
@@ -322,9 +322,6 @@ public class UserController {
 			// 리스트에서 마지막 증상 삭제 후 세션에 저장
 			sympthom.remove(lastIndex);
 			session.setAttribute("sympthom", sympthom);
-
-			System.out.println(sympthom);
-
 			// 이전 증상문항 모델에 담아 리턴
 			List<String> category = (List<String>) session.getAttribute("category");
 			m.addAttribute("category", category.get(currIndex));
@@ -348,7 +345,7 @@ public class UserController {
 			int lastIndex = (int) session.getAttribute("sqLastIndex");
 
 			// 마지막 페이지 비교
-			if(currIndex == lastIndex) return "redirect:/user/selfDiagnosisLifestyle.html";
+			if(currIndex == lastIndex) return "redirect:selfDiagnosisLifestyle.html";
 
 			currIndex++;
 			session.setAttribute("sqCurrIndex", currIndex);
@@ -359,7 +356,7 @@ public class UserController {
 			m.addAttribute("title", "해당하는 문항을 선택해주세요.");
 		}
 
-		return "/user/selfDiagnosisSympthom.html";
+		return "user/selfDiagnosisSympthom.html";
 
 	}
 
@@ -369,7 +366,7 @@ public class UserController {
 		System.out.println("selfDiagnosisLifestyle");
 
 		Object obj = session.getAttribute("result");
-		if(obj == null) return "/user/selfDiagnosisStart.html";
+		if(obj == null) return "user/selfDiagnosisStart.html";
 
 		// 생활습관문항 첫 시작
 		if(page == null) {
@@ -392,7 +389,7 @@ public class UserController {
 			m.addAttribute("title", "해당하는 문항을 선택해주세요.");
 			m.addAttribute("group", lifestyleList.get(currIndex).get(0).getLifestyle_group());
 
-			// 이전버튼 눌렀을 때
+		// 이전버튼 눌렀을 때
 		} else if(page.equals("prev")) {
 			System.out.println("selfDiagnosisLifestylePrev");
 			int currIndex = (int) session.getAttribute("lqCurrIndex");
@@ -409,7 +406,7 @@ public class UserController {
 
 				m.addAttribute("questionList", sympthomList.get(lastIndex));
 				m.addAttribute("title", "해당하는 문항을 선택해주세요.");
-				return "/user/selfDiagnosisSympthom.html";
+				return "user/selfDiagnosisSympthom.html";
 			}
 
 			currIndex--;
@@ -446,7 +443,6 @@ public class UserController {
 
 			// 마지막 페이지일 때
 			if(currIndex == lastIndex) {
-				////////////////// 결과값 result
 				ArrayList<String> category = (ArrayList<String>) session.getAttribute("category");
 				ArrayList<String[]> sympthom = (ArrayList<String[]>) session.getAttribute("sympthom");
 
@@ -479,7 +475,7 @@ public class UserController {
 					result.add(resultMap);
 				};
 				m.addAttribute("result", result);
-				return "/user/selfDiagnosisEnd.html";
+				return "user/selfDiagnosisEnd.html";
 			}
 
 			currIndex++;
@@ -490,7 +486,7 @@ public class UserController {
 			m.addAttribute("group", lifestyleList.get(currIndex).get(0).getLifestyle_group());
 		}
 
-		return "/user/selfDiagnosisLifestyle.html";
+		return "user/selfDiagnosisLifestyle.html";
 
 	}
 

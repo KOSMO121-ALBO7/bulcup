@@ -22,7 +22,7 @@ import com.bulcup.domain.ManagerVO;
 import com.bulcup.domain.PaginationVO;
 import com.bulcup.domain.QuestionVO;
 import com.bulcup.domain.SubscribeVO;
-import com.bulcup.domain.noticeVO;
+import com.bulcup.domain.NoticeVO;
 
 @Service
 public class ManagerServiceImpl implements ManagerService {
@@ -77,7 +77,7 @@ public class ManagerServiceImpl implements ManagerService {
 		List<BlogVO> list = new ArrayList<BlogVO>();
 		Scanner sc = null;
 		try {
-			sc = new Scanner(new FileInputStream("src/main/java/com/bulcup/service/crawling/text.txt"), "UTF-8");
+			sc = new Scanner(new FileInputStream("crawling/text.txt"), "UTF-8");
 			String line = sc.nextLine();// header 읽기
 			int lineEnd = paging.pageNo * paging.pageSize;
 			int linePrint = 1;
@@ -237,18 +237,18 @@ public class ManagerServiceImpl implements ManagerService {
 		return managerdao.completeCount();
 	}
 	// 공지사항 리스트 출력
-	public List<noticeVO> getListnotice(PaginationVO pageVO) {
+	public List<NoticeVO> getListnotice(PaginationVO pageVO) {
 		return managerdao.getListnotice(pageVO);
 	}
 	public int countnotice() {
 		return managerdao.countnotice();
 	}
 
-	public void insertnotice(noticeVO vo) {
+	public void insertnotice(NoticeVO vo) {
 		managerdao.insertnotice(vo);
 	}
 
-	public void deletenotice(noticeVO vo) {
+	public void deletenotice(NoticeVO vo) {
 		managerdao.deletenotice(vo);
 	}
 

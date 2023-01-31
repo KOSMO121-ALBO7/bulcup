@@ -3,24 +3,24 @@
 <mapper namespace="com.bulcup.dao.ManagerDao">
 	<!-- INSERT -->
 	<insert id="insertManager" parameterType="ManagerVO">
-		INSERT INTO MANAGER(id, password, tel, email, authority)
+		INSERT INTO manager(id, password, tel, email, authority)
 		 VALUES(#{id}, #{password}, #{tel}, #{email}, 'emp')
 	</insert>
 	<insert id="insertnotice" parameterType="noticeVO">
-		INSERT INTO NOTICE(id,title,reg_date,writer,content)
+		INSERT INTO notice(id,title,reg_date,writer,content)
 		VALUES(nextval(seq_notice_id),#{title},sysdate(),#{writer},#{content})
 	</insert>
 	<!-- SELECT -->
 	<select id="selectManagerByIdAndPw" parameterType="ManagerVO" resultType="ManagerVO">
-		SELECT * FROM MANAGER 
+		SELECT * FROM manager 
 		WHERE id = #{id}
 	</select>
 	<select id="getManagerList" resultType="ManagerVO">
-		SELECT * FROM MANAGER
+		SELECT * FROM manager
 	</select>
 	<select id="getContactList" resultType="ContactVO">
-		SELECT * FROM CONTACT
-		WHERE ANSWER IS NULL
+		SELECT * FROM contact
+		WHERE answer IS NULL
 		limit
 		#{pageSize}
 		offset
@@ -30,8 +30,8 @@
 		SELECT * FROM subscribe
 	</select>
 	<select id="getFinishedContactList" resultType="ContactVO">
-		SELECT * FROM CONTACT
-		WHERE ANSWER IS NOT NULL
+		SELECT * FROM contact
+		WHERE answer IS NOT NULL
 		limit
 		#{pageSize}
 		offset
@@ -47,7 +47,7 @@
 		#{startRow};
 	</select>
 	<select id="getManagerListPg" parameterType="PaginationVO" resultType="ManagerVO">
-		SELECT * FROM MANAGER 
+		SELECT * FROM manager 
 		ORDER BY authority
 		limit
 		#{pageSize}
@@ -75,10 +75,10 @@
 		SELECT count(*) FROM functional_food
 	</select>
 	<select id="waitCount" resultType="int">
-		SELECT count(*) FROM CONTACT
+		SELECT count(*) FROM contact
 	</select>
 	<select id="completeCount" resultType="int">
-		SELECT count(*) FROM CONTACT
+		SELECT count(*) FROM contact
 	</select>
 	<select id="getListnotice" parameterType="PaginationVO" resultType="noticeVO">
 		SELECT id,title,writer,reg_date FROM notice
@@ -93,12 +93,12 @@
 	</select>
 	<!-- UPDATE -->
 	<update id="updateManager" parameterType="ManagerVO">
-		UPDATE MANAGER 
+		UPDATE manager 
 		SET password=#{password}, tel=#{tel}, email=#{email}, authority=#{authority}
 		WHERE id = #{id}
 	</update>
 	<update id="updateContact" parameterType="ContactVO">
-		UPDATE CONTACT
+		UPDATE contact
 		SET answer = #{answer}, answer_date=sysdate(), manager_id=#{manager_id}
 		WHERE id = #{id}
 	</update>
@@ -110,28 +110,27 @@
 		WHERE id = #{id}
 	</update>
 	<update id="updateFunctionalFood" parameterType="FunctionalFoodVO">
-		update functional_food
-		set category_id=#{category_id},functional_food_name=#{functional_food_name},functionalities=#{functionalities},raw_materials=#{raw_materials},caution=#{caution},formulation=#{formulation},intake_method=#{intake_method},image_path=#{image_path}
+		UPDATE functional_food
+		SET category_id=#{category_id},functional_food_name=#{functional_food_name},functionalities=#{functionalities},raw_materials=#{raw_materials},caution=#{caution},formulation=#{formulation},intake_method=#{intake_method},image_path=#{image_path}
 		where id=#{id}   
 	</update>
 	<!--DELETE -->
 	<delete id="deleteManagerById" parameterType="ManagerVO">
-		DELETE FROM MANAGER 
+		DELETE FROM manager 
 		WHERE id = #{id}
 	</delete>
 	<delete id="deleteContact" parameterType="ContactVO">
-		DELETE FROM CONTACT 
+		DELETE FROM contact 
 		WHERE id = #{id}
 	</delete>
 	<delete id="deleteQuestion" parameterType="QuestionVO">
-		DELETE FROM
-		sympthom_question
+		DELETE FROM sympthom_question
 		WHERE id = #{id}
 	</delete>
 	<delete id="deleteFuctionalFood" parameterType="FunctionalFoodVO">
 		delete from functional_food where id=#{id}
 	</delete>
 	<delete id="deletenotice" parameterType="noticeVO">
-		delete from NOTICE where id=#{id}
+		delete from notice where id=#{id}
 	</delete>
 </mapper>

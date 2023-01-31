@@ -2,11 +2,11 @@
 <html lang="en" txmlns:th="http://www.thymeleaf.org">
 <!-- Basic -->
 
-<head th:replace="/user/header.html :: head"></head>
+<head th:replace="user/header.html :: head"></head>
 
 <body>
 	<!-- Start header -->
-	<header th:replace="/user/header.html :: header"></header>
+	<header th:replace="user/header.html :: header"></header>
 	<!-- Start Contact -->
 	<div class="contact-box">
 		<div class="container">
@@ -71,7 +71,7 @@
 										required data-error="나이를 입력해주세요">
 									<div class="help-block with-errors"></div>
 								</div>
-								<div>
+								<div style="width: 550px;">
 									<span class="submit-button text" style="float: right;">
 										<button class="btn btn-common" id="next" type="submit">다음</button>
 									</span>
@@ -91,7 +91,7 @@
 	<script src="/user/js/jquery-3.2.1.min.js"></script>
 	<script src="/user/js/selfDiagnosisStart.js"></script>
 	<!-- ALL PLUGINS -->
-	<div th:replace="/user/footer.html :: javascript"></div>
+	<div th:replace="user/footer.html :: javascript"></div>
 
 
 </body>

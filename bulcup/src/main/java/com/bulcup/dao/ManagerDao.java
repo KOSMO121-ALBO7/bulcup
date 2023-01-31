@@ -10,7 +10,7 @@ import com.bulcup.domain.ManagerVO;
 import com.bulcup.domain.PaginationVO;
 import com.bulcup.domain.QuestionVO;
 import com.bulcup.domain.SubscribeVO;
-import com.bulcup.domain.noticeVO;
+import com.bulcup.domain.NoticeVO;
 
 @Mapper
 public interface ManagerDao {
@@ -42,11 +42,11 @@ public interface ManagerDao {
 	public int managerCount();
 	public int waitCount();
 	public int completeCount();
-	public List<noticeVO> getListnotice(PaginationVO pageVO);
+	public List<NoticeVO> getListnotice(PaginationVO pageVO);
 	// 공지사항 리스트 총 갯수
 	public int countnotice();
 	// 공지사항 입력
-	public void insertnotice(noticeVO vo);
-	public void deletenotice(noticeVO vo);
+	public void insertnotice(NoticeVO vo);
+	public void deletenotice(NoticeVO vo);
 
 }

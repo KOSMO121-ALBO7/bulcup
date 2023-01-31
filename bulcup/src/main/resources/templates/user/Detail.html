@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" txmlns:th="http://www.thymeleaf.org"><!-- Basic -->
 
-<head th:replace="/user/header.html :: head"></head>
+<head th:replace="user/header.html :: head"></head>
 
 <body>
 	<!-- Start header -->
-	<header th:replace="/user/header.html :: header"></header>
+	<header th:replace="user/header.html :: header"></header>
 	<!-- Start blog -->
 	<div class="blog-box">
 		<div class="container">
@@ -76,11 +76,11 @@
 
 	<!-- End Contact info -->
 	<!--Footer-->
-    <footer class="footer-area bg-f" th:replace="/user/footer.html :: footer"></footer>
+    <footer class="footer-area bg-f" th:replace="user/footer.html :: footer"></footer>
 	
 	<!-- ALL JS FILES -->
     <!-- ALL PLUGINS -->
-    <div th:replace="/user/footer.html :: javascript"></div>
+    <div th:replace="user/footer.html :: javascript"></div>
     
 </body>
 </html>
